@@ -1,3 +1,5 @@
-import log from './log';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app';
 
-log("Hello")
+ReactDOM.render(<App />, document.getElementById('root'));
