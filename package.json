@@ -6,7 +6,7 @@
   "scripts": {
     "start": " webpack-dev-server",
     "build": "webpack",
-    "lint": "eslint ./src",
+    "pre-commit": "eslint ./src",
     "lint-fix": "eslint ./src --fix"
   },
   "devDependencies": {
