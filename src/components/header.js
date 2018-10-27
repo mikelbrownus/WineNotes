@@ -4,9 +4,9 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  InputBase
+  InputBase,
 } from '@material-ui/core';
-import {Search, MoreVert} from '@material-ui/icons';
+import { Search, MoreVert } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
@@ -73,30 +73,30 @@ const styles = theme => ({
 const Header = (props) => {
   const { classes } = props;
   return (
-  <AppBar position="static">
-  <Toolbar>
-    <Typography variant="title" color="inherit">
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="title" color="inherit">
       Wine Notes
-    </Typography>
-    <div className={classes.grow} />
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <Search />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
+        </Typography>
+        <div className={classes.grow} />
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <Search />
           </div>
-          <IconButton color="inherit">
-            <MoreVert />
-          </IconButton>
-  </Toolbar>
-</AppBar>
-  )
-}
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+          />
+        </div>
+        <IconButton color="inherit">
+          <MoreVert />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
 export default withStyles(styles)(Header);
