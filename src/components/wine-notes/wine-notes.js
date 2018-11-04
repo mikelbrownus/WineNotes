@@ -1,32 +1,52 @@
 import React from 'react';
-import { Grid, Paper } from '@material-ui/core';
+import { Button, Grid, Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Add } from '@material-ui/icons';
 
-const WineNotes = () => (
-  <Grid
-    container
-    direction="row"
-    justify="center"
-    alignItems="center"
-  >
-    <Grid item xs={12} sm={6} md={4}>
-      <Paper>One</Paper>
-    </Grid>
-    <Grid item xs={12} sm={6} md={4}>
-      <Paper>Two</Paper>
-    </Grid>
-    <Grid item xs={12} sm={6} md={4}>
-      <Paper>Three</Paper>
-    </Grid>
-    <Grid item xs={12} sm={6} md={4}>
-      <Paper>Four</Paper>
-    </Grid>
-    <Grid item xs={12} sm={6} md={4}>
-      <Paper>Five</Paper>
-    </Grid>
-    <Grid item xs={12} sm={6} md={4}>
-      <Paper>Six</Paper>
-    </Grid>
-  </Grid>
+const styles = () => ({
+  gridSize: {
+    minHeight: '450px',
+  },
+}
 );
+const WineNotes = (props) => {
+  const { classes } = props;
+  return (
+    <div className={classes.gridSize}>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper>One</Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper>Two</Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper>Three</Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper>Four</Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper>Five</Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper>Six</Paper>
+        </Grid>
+      </Grid>
+      <Button
+        variant="fab"
+        mini
+        color="secondary"
+      >
+        <Add />
+      </Button>
+    </div>
+  );
+};
 
-export default WineNotes;
+export default withStyles(styles)(WineNotes);
