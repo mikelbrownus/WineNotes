@@ -47,7 +47,7 @@ const WineNotes = (props) => {
       <Button
         variant="fab"
         mini
-        color="secondary"
+        color="primary"
         className={classes.fab}
       >
         <Add />
