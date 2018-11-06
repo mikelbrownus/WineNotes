@@ -7,6 +7,12 @@ const styles = () => ({
   gridSize: {
     height: 'calc(100% - 108px)',
   },
+  fab: {
+    position: 'absolute',
+    bottom: '44px',
+    right: '20px',
+
+  },
 }
 );
 const WineNotes = (props) => {
@@ -42,6 +48,7 @@ const WineNotes = (props) => {
         variant="fab"
         mini
         color="secondary"
+        className={classes.fab}
       >
         <Add />
       </Button>
