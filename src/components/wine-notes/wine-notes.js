@@ -5,7 +5,7 @@ import { Add } from '@material-ui/icons';
 
 const styles = () => ({
   gridSize: {
-    minHeight: '450px',
+    height: 'calc(100% - 108px)',
   },
 }
 );
