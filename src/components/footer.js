@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paper, Tabs, Tab } from '@material-ui/core';
-import withWidth from "@material-ui/core/withWidth";
+import withWidth from '@material-ui/core/withWidth';
 
 const sections = ['Wine Notes', 'Collections', 'Settings', 'Help'];
 class Footer extends React.Component {
@@ -20,9 +20,9 @@ class Footer extends React.Component {
     const isSmallScreen = /xs|sm/.test(width);
     const tabStyle = {
       fullWidth: isSmallScreen,
-      centered: !isSmallScreen
+      centered: !isSmallScreen,
     };
-    
+
     return (
       <Paper square>
         <Tabs

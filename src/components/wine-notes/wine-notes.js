@@ -9,7 +9,7 @@ const styles = () => ({
   },
   fab: {
     position: 'absolute',
-    bottom: '44px',
+    bottom: '64px',
     right: '20px',
 
   },
