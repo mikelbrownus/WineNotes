@@ -1,5 +1,6 @@
 import React from 'react';
 import { Paper, Tabs, Tab } from '@material-ui/core';
+import withWidth from "@material-ui/core/withWidth";
 
 const sections = ['Wine Notes', 'Collections', 'Settings', 'Help'];
 class Footer extends React.Component {
@@ -15,6 +16,13 @@ class Footer extends React.Component {
 
   render() {
     const { index } = this.state;
+    const { width } = this.props;
+    const isSmallScreen = /xs|sm/.test(width);
+    const tabStyle = {
+      fullWidth: isSmallScreen,
+      centered: !isSmallScreen
+    };
+    
     return (
       <Paper square>
         <Tabs
@@ -24,7 +32,7 @@ class Footer extends React.Component {
           }}
           indicatorColor="primary"
           textColor="primary"
-          centered
+          {...tabStyle}
         >
           {sections.map(section => (
             <Tab label={section} key={section} />
@@ -35,4 +43,4 @@ class Footer extends React.Component {
   }
 }
 
-export default Footer;
+export default withWidth()(Footer);
