@@ -3,7 +3,7 @@ import { Button, Grid, Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Add } from '@material-ui/icons';
 
-const styles = () => ({
+const styles = theme => ({
   gridSize: {
     height: 'calc(100% - 108px)',
   },
