@@ -5,7 +5,11 @@ import { Add } from '@material-ui/icons';
 
 const styles = theme => ({
   gridSize: {
-    height: 'calc(100% - 108px)',
+    height: 'calc(100% - 116px)',
+    margin: '8px 4px',
+    [theme.breakpoints.up('sm')]: {
+      margin: '8px 16px',
+    },
   },
   fab: {
     position: 'absolute',
