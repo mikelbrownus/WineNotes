@@ -22,9 +22,9 @@ const styles = theme => ({
     marginRight: 20,
   },
   title: {
-    display: 'none',
+    'font-size': '.90rem',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
+      'font-size': '1.5rem',
     },
   },
   search: {
@@ -35,7 +35,7 @@ const styles = theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    width: '100%',
+    width: '60%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing.unit,
       width: 'auto',
@@ -75,8 +75,8 @@ const Header = (props) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="title" color="inherit">
-      Wine Notes
+        <Typography variant="title" color="inherit" className={classes.title}>
+          Wine Notes
         </Typography>
         <div className={classes.grow} />
         <div className={classes.search}>
