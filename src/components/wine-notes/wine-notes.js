@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Grid, Paper } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Add } from '@material-ui/icons';
+import WineNoteCard from './wine-note-card';
 
 const styles = theme => ({
   gridSize: {
@@ -30,22 +31,22 @@ const WineNotes = (props) => {
         alignItems="center"
       >
         <Grid item xs={12} sm={6} md={4}>
-          <Paper>One</Paper>
+          <WineNoteCard />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper>Two</Paper>
+          <WineNoteCard />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper>Three</Paper>
+          <WineNoteCard />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper>Four</Paper>
+          <WineNoteCard />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper>Five</Paper>
+          <WineNoteCard />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper>Six</Paper>
+          <WineNoteCard />
         </Grid>
       </Grid>
       <Button
