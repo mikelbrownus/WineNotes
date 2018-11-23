@@ -1,0 +1,33 @@
+{
+    "WineNotes": [
+        {
+            "id": 1,
+            "name": "2015 Bodega Norton Privada Family Blend Red Mendoza",
+            "date": "10/7/18",
+            "collection": null,
+            "tasting_notes": "",
+            "technical_notes": "",
+            "image": null
+        },
+        {
+            "id": 2,
+            "name": "2014 Robert Mondavi Fumé Blanc Oakville",
+            "date": "10/7/18",
+            "collection": null,
+            "tasting_notes": "",
+            "technical_notes": "",
+            "image": null
+        },
+        {
+            "id": 3,
+            "name": "2016 Drouhin Oregon Roserock Chardonnay Eola-Amity Hills",
+            "date": "10/7/18",
+            "collection": null,
+            "tasting_notes": "",
+            "technical_notes": "",
+            "image": null
+        }
+        
+    ],
+    "collections": []
+}

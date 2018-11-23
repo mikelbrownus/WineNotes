@@ -25,23 +25,16 @@ const styles = {
 };
 
 function WineNoteCard(props) {
-  const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
+  const { classes, note } = props;
 
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
+          Wine Note
         </Typography>
-        <Typography variant="h5" component="h2">
-          be
-          {bull}
-          nev
-          {bull}
-o
-          {bull}
-          lent
+        <Typography variant="title" component="h2">
+          {note.name}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           adjective

@@ -21,7 +21,7 @@ const styles = theme => ({
 }
 );
 const WineNotes = (props) => {
-  const { classes } = props;
+  const { classes, notes } = props;
   return (
     <div className={classes.gridSize}>
       <Grid
@@ -30,24 +30,11 @@ const WineNotes = (props) => {
         justify="center"
         alignItems="center"
       >
-        <Grid item xs={12} sm={6} md={4}>
-          <WineNoteCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <WineNoteCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <WineNoteCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <WineNoteCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <WineNoteCard />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <WineNoteCard />
-        </Grid>
+        {notes.map(note => (
+          <Grid item xs={12} sm={6} md={4} key={note.id}>
+            <WineNoteCard note={note} />
+          </Grid>
+        ))}
       </Grid>
       <Button
         variant="fab"
