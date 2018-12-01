@@ -23,6 +23,8 @@ const styles = {
     alignContent: 'center',
     padding: 4,
     height: '100%',
+    width: '40px',
+    marginLeft: '18px',
   },
   pos: {
     marginBottom: 12,
@@ -31,9 +33,10 @@ const styles = {
     width: '80%',
   },
   actions: {
-    alignContent: 'center',
-    width: '15%',
-
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '10%',
   },
   nameLength: {
     overflow: 'hidden',
