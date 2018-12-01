@@ -6,7 +6,7 @@ import {
   CardActionArea,
   CardContent,
   Typography,
-  withStyles
+  withStyles,
 } from '@material-ui/core';
 import { MoreVert, LocalDrink } from '@material-ui/icons';
 
