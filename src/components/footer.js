@@ -1,5 +1,6 @@
 import React from 'react';
 import { Paper, Tabs, Tab } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import withWidth from '@material-ui/core/withWidth';
 
 const sections = ['Wine Notes', 'Collections', 'Settings', 'Help'];
@@ -35,7 +36,11 @@ class Footer extends React.Component {
           {...tabStyle}
         >
           {sections.map(section => (
-            <Tab label={section} key={section} />
+            <Tab label={section} key={section}
+            component={Link} 
+            to={(section === "Wine Notes") ? "/" : "/"+ section.toLowerCase()} 
+            />
+            
           ))}
         </Tabs>
       </Paper>

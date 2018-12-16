@@ -22,7 +22,9 @@ const styles = theme => ({
 }
 );
 const WineNotes = (props) => {
-  const { classes, notes } = props;
+  const { classes } = props;
+  const notes = props.notes || [];
+  
   return (
     <div className={classes.gridSize}>
       <Grid
