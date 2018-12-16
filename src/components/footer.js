@@ -1,17 +1,18 @@
 import React from 'react';
 import { Paper, Tabs, Tab } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import withWidth from '@material-ui/core/withWidth';
 
 const sections = ['Wine Notes', 'Collections', 'Settings', 'Help'];
 class Footer extends React.Component {
   constructor(props) {
     super(props);
+    const { pathname } = this.props;
     this.state = {
-      index:  0
-    }
+      index: pathname === '/' ? 0 : sections.findIndex(item => pathname.substring(1).toLowerCase() === item.toLowerCase()),
+    };
   }
-  
+
 
   changeIndex = (i) => {
     this.setState({
@@ -53,5 +54,5 @@ class Footer extends React.Component {
     );
   }
 }
-
-export default withWidth()(Footer);
+const it = withWidth()(Footer);
+export default withRouter(it);
