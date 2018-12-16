@@ -6,7 +6,7 @@ import WineNoteCard from './wine-note-card';
 
 const styles = theme => ({
   gridSize: {
-    height: 'calc(100% - 116px)',
+    height: 'calc(100% - 132px)',
     margin: '8px 4px',
     [theme.breakpoints.up('sm')]: {
       margin: '8px 16px',
