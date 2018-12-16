@@ -36,11 +36,13 @@ class Footer extends React.Component {
           {...tabStyle}
         >
           {sections.map(section => (
-            <Tab label={section} key={section}
-            component={Link} 
-            to={(section === "Wine Notes") ? "/" : "/"+ section.toLowerCase()} 
+            <Tab
+              label={section}
+              key={section}
+              component={Link}
+              to={(section === 'Wine Notes') ? '/' : `/${section.toLowerCase()}`}
             />
-            
+
           ))}
         </Tabs>
       </Paper>
