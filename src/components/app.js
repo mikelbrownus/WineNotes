@@ -19,7 +19,7 @@ const App = () => (
       <Route path="/settings" component={Settings} />
       <Route path="/help" component={Help} />
       <Route path="/collections" component={Collections} />
-      <Footer notes={initialState.WineNotes} />
+      <Footer />
     </Fragment>
   </BrowserRouter>
 );

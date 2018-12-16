@@ -5,9 +5,13 @@ import withWidth from '@material-ui/core/withWidth';
 
 const sections = ['Wine Notes', 'Collections', 'Settings', 'Help'];
 class Footer extends React.Component {
-  state = {
-    index: 0,
+  constructor(props) {
+    super(props);
+    this.state = {
+      index:  0
+    }
   }
+  
 
   changeIndex = (i) => {
     this.setState({
