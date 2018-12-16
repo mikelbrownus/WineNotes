@@ -7,9 +7,9 @@ const sections = ['Wine Notes', 'Collections', 'Settings', 'Help'];
 class Footer extends React.Component {
   constructor(props) {
     super(props);
-    const { pathname } = this.props;
+    const { location } = this.props;
     this.state = {
-      index: pathname === '/' ? 0 : sections.findIndex(item => pathname.substring(1).toLowerCase() === item.toLowerCase()),
+      index: location.pathname === '/' || !location.pathname ? 0 : sections.findIndex(item => location.pathname.substring(1).toLowerCase() === item.toLowerCase()),
     };
   }
 
