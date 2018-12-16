@@ -4,9 +4,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './header';
 import Footer from './footer';
 import WineNotes from './wine-notes/wine-notes';
-import Help from './help';
-import Collections from './collections';
-import Settings from './settings';
+import Help from './help/help';
+import Collections from './collections/collections';
+import Settings from './settings/settings';
 import initialState from '../initialState.json';
 
 
