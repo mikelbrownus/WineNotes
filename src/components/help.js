@@ -3,7 +3,7 @@ import React from 'react';
 const divStyle = {
   height: 'calc(100% - 116px)',
   overflowY: 'scroll',
-}
+};
 
 const Help = () => (
   <div style={divStyle}>
