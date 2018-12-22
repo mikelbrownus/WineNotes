@@ -10,6 +10,19 @@ import {
 } from '@material-ui/core';
 import { MoreVert, LocalDrink } from '@material-ui/icons';
 
+const isIEorFF = navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('MSIE') !== -1 || document.documentMode;
+const nameLength = isIEorFF ? {
+  overflow: 'hidden',
+  lineHeight: '1em',
+  maxHeight: '2em',
+  textOverflow: 'ellipsis',
+}
+  : {
+    overflow: 'hidden',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '3',
+    '-webkit-box-orient': 'vertical',
+  };
 
 const styles = {
   card: {
@@ -38,12 +51,7 @@ const styles = {
     alignItems: 'center',
     width: '10%',
   },
-  nameLength: {
-    overflow: 'hidden',
-    lineHeight: '1em',
-    maxHeight: '2em',
-    textOverflow: 'ellipsis',
-  },
+  nameLength,
 };
 
 function WineNoteCard(props) {
