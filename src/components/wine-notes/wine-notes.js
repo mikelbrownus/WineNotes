@@ -3,6 +3,7 @@ import { Button, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Add } from '@material-ui/icons';
 import WineNoteCard from './wine-note-card';
+import WineNoteDialog from './wine-note-dialog';
 
 const styles = theme => ({
   gridSize: {
@@ -21,33 +22,52 @@ const styles = theme => ({
   },
 }
 );
-const WineNotes = (props) => {
-  const { classes, notes } = props;
+class WineNotes extends React.Component {
+  state = {
+    open: false,
+  };
 
-  return (
-    <div className={classes.gridSize}>
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-        {notes.map(note => (
-          <Grid item xs={12} sm={6} md={4} key={note.id}>
-            <WineNoteCard note={note} />
-          </Grid>
-        ))}
-      </Grid>
-      <Button
-        variant="fab"
-        mini
-        color="primary"
-        className={classes.fab}
-      >
-        <Add />
-      </Button>
-    </div>
-  );
-};
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  render() {
+    const { classes, notes } = this.props;
+    const { open } = this.state;
+    return (
+      <div className={classes.gridSize}>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
+          {notes.map(note => (
+            <Grid item xs={12} sm={6} md={4} key={note.id}>
+              <WineNoteCard note={note} />
+            </Grid>
+          ))}
+        </Grid>
+        <Button
+          variant="fab"
+          mini
+          color="primary"
+          onClick={this.handleOpen}
+          className={classes.fab}
+        >
+          <Add />
+        </Button>
+        <WineNoteDialog
+          handleClose={this.handleClose}
+          open={open}
+        />
+      </div>
+    );
+  }
+}
 
 export default withStyles(styles)(WineNotes);
