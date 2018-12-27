@@ -23,10 +23,9 @@ const varietals = [
   'Pinot Grigio', 'Pinot Gris', 'Pinot Blanc', 'Moscato',
   'Sémillon', 'Grüner Veltliner', 'Müller-Thurgau',
 ].sort();
-const dateMinusX = y => x => y - x;
-const fromThisYear = dateMinusX(new Date().getFullYear());
-const toString = x => `${x}`;
-const vintages = [...Array(100).keys()].map(fromThisYear).map(toString);
+const yMinusX = y => x => y - x;
+const thisYearMinusX = yMinusX(new Date().getFullYear());
+const vintages = [...Array(100).keys()].map(thisYearMinusX).map(x => `${x}`);
 
 const styles = theme => ({
   formControl: {
