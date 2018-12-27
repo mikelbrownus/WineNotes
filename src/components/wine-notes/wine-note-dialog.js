@@ -26,7 +26,7 @@ const varietals = [
 const dateMinusX = y => x => y - x;
 const fromThisYear = dateMinusX(new Date().getFullYear());
 const toString = x => `${x}`;
-const vintages = Array.from(Array(100).keys()).map(fromThisYear).map(toString);
+const vintages = [...Array(100).keys()].map(fromThisYear).map(toString);
 
 const styles = theme => ({
   formControl: {
