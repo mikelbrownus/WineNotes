@@ -29,12 +29,11 @@ const yMinusX = y => x => y - x;
 const thisYearMinusX = yMinusX(new Date().getFullYear());
 const vintages = [...Array(100).keys()].map(thisYearMinusX).map(x => `${x}`);
 
-const styles = theme => ({
+const styles = {
   formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 200,
+    margin: '8px 0',
   },
-});
+};
 
 class WineNoteDialog extends React.Component {
   state = {
@@ -80,7 +79,7 @@ class WineNoteDialog extends React.Component {
             type="text"
             fullWidth
           />
-          <FormControl variant="filled" className={classes.formControl}>
+          <FormControl variant="filled" className={classes.formControl} fullWidth>
             <InputLabel htmlFor="varietal">Varietal</InputLabel>
             <Select
               value={varietal}
@@ -95,7 +94,7 @@ class WineNoteDialog extends React.Component {
             }
             </Select>
           </FormControl>
-          <FormControl variant="filled" className={classes.formControl} disabled={nonvintage}>
+          <FormControl variant="filled" className={classes.formControl} disabled={nonvintage} fullWidth>
             <InputLabel htmlFor="vintage">Vintage</InputLabel>
             <Select
               value={vintage}
