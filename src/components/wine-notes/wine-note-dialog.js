@@ -12,6 +12,8 @@ import {
   FormControl,
   InputLabel,
   FilledInput,
+  FormControlLabel,
+  Checkbox,
 } from '@material-ui/core';
 
 const varietals = [
@@ -38,18 +40,25 @@ class WineNoteDialog extends React.Component {
   state = {
     varietal: 'Blend',
     vintage: new Date().getFullYear().toString(),
+    nonvintage: false,
   };
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handleChangeCB = (event) => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
   render() {
     const { open, handleClose, classes } = this.props;
-    const { vintage, varietal } = this.state;
+    const { vintage, varietal, nonvintage } = this.state;
 
     return (
       <Dialog
+        disableBackdropClick
+        disableEscapeKeyDown
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -86,7 +95,7 @@ class WineNoteDialog extends React.Component {
             }
             </Select>
           </FormControl>
-          <FormControl variant="filled" className={classes.formControl}>
+          <FormControl variant="filled" className={classes.formControl} disabled={nonvintage}>
             <InputLabel htmlFor="vintage">Vintage</InputLabel>
             <Select
               value={vintage}
@@ -100,7 +109,17 @@ class WineNoteDialog extends React.Component {
             }
             </Select>
           </FormControl>
-
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={nonvintage}
+                onChange={this.handleChangeCB}
+                name="nonvintage"
+                value="nonvintage"
+              />
+)}
+            label="Non Vintage Wine"
+          />
           <TextField
             margin="dense"
             id="region"
