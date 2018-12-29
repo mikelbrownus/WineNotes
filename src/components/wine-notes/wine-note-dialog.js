@@ -65,7 +65,6 @@ class WineNoteDialog extends React.Component {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="name"
             label="Wine Name (or other designation)"
@@ -103,7 +102,6 @@ class WineNoteDialog extends React.Component {
           </FormControl>
 
           <TextField
-            autoFocus
             margin="dense"
             id="region"
             label="Region/terroir"
