@@ -40,14 +40,25 @@ class WineNoteDialog extends React.Component {
     varietal: 'Blend',
     vintage: new Date().getFullYear().toString(),
     nonvintage: false,
+    maker: '',
+    region: '',
+    wineName: '',
+    tastingNote: '',
+    technicalNote: '',
   };
 
   handleChange = (event) => {
+    console.log(event.target.name, event.target.value)
     this.setState({ [event.target.name]: event.target.value });
   };
 
   handleChangeCB = (event) => {
     this.setState({ [event.target.name]: event.target.checked });
+  };
+
+  handleSubmit = (event) => {
+    console.log(this.state)
+    this.props.handleClose();
   };
 
   render() {
@@ -68,15 +79,19 @@ class WineNoteDialog extends React.Component {
             autoFocus
             margin="dense"
             id="maker"
+            name="maker"
             label="Wine Maker"
             type="text"
+            onChange={this.handleChange}
             fullWidth
           />
           <TextField
             margin="dense"
             id="name"
+            name="wineName"
             label="Wine Name (or other designation)"
             type="text"
+            onChange={this.handleChange}
             fullWidth
           />
           <FormControl variant="filled" className={classes.formControl} fullWidth>
@@ -122,28 +137,34 @@ class WineNoteDialog extends React.Component {
           <TextField
             margin="dense"
             id="region"
+            name="region"
             label="Region/terroir"
             type="text"
+            onChange={this.handleChange}
             fullWidth
           />
 
           <TextField
             id="tastingNote"
+            name="tastingNote"
             label="Wine Notes"
             multiline
             rowsMax="4"
             margin="normal"
+            onChange={this.handleChange}
             variant="outlined"
             fullWidth
           />
 
           <TextField
             id="technicalNote"
+            name="technicalNote"
             label="Technical Notes"
             multiline
             rowsMax="4"
             margin="normal"
             variant="outlined"
+            onChange={this.handleChange}
             fullWidth
           />
         </DialogContent>
@@ -151,7 +172,7 @@ class WineNoteDialog extends React.Component {
           <Button onClick={handleClose} color="primary">
           Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={this.handleSubmit} color="primary">
           Add
           </Button>
         </DialogActions>
