@@ -48,7 +48,6 @@ class WineNoteDialog extends React.Component {
   };
 
   handleChange = (event) => {
-    console.log(event.target.name, event.target.value)
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -56,14 +55,23 @@ class WineNoteDialog extends React.Component {
     this.setState({ [event.target.name]: event.target.checked });
   };
 
-  handleSubmit = (event) => {
-    console.log(this.state)
-    this.props.handleClose();
+  handleSubmit = () => {
+    const { handleClose } = this.props;
+    handleClose();
   };
 
   render() {
     const { open, handleClose, classes } = this.props;
-    const { vintage, varietal, nonvintage } = this.state;
+    const {
+      vintage,
+      varietal,
+      nonvintage,
+      maker,
+      region,
+      wineName,
+      tastingNote,
+      technicalNote,
+    } = this.state;
 
     return (
       <Dialog
@@ -80,6 +88,7 @@ class WineNoteDialog extends React.Component {
             margin="dense"
             id="maker"
             name="maker"
+            value={maker}
             label="Wine Maker"
             type="text"
             onChange={this.handleChange}
@@ -89,6 +98,7 @@ class WineNoteDialog extends React.Component {
             margin="dense"
             id="name"
             name="wineName"
+            value={wineName}
             label="Wine Name (or other designation)"
             type="text"
             onChange={this.handleChange}
@@ -138,6 +148,7 @@ class WineNoteDialog extends React.Component {
             margin="dense"
             id="region"
             name="region"
+            value={region}
             label="Region/terroir"
             type="text"
             onChange={this.handleChange}
@@ -148,6 +159,7 @@ class WineNoteDialog extends React.Component {
             id="tastingNote"
             name="tastingNote"
             label="Wine Notes"
+            value={tastingNote}
             multiline
             rowsMax="4"
             margin="normal"
@@ -160,6 +172,7 @@ class WineNoteDialog extends React.Component {
             id="technicalNote"
             name="technicalNote"
             label="Technical Notes"
+            value={technicalNote}
             multiline
             rowsMax="4"
             margin="normal"
@@ -172,7 +185,10 @@ class WineNoteDialog extends React.Component {
           <Button onClick={handleClose} color="primary">
           Cancel
           </Button>
-          <Button onClick={this.handleSubmit} color="primary">
+          <Button
+            onClick={this.handleSubmit}
+            color="primary"
+          >
           Add
           </Button>
         </DialogActions>
