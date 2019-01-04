@@ -7,7 +7,6 @@ import {
   InputBase,
 } from '@material-ui/core';
 import { MdSearch, MdMoreVert } from 'react-icons/md';
-//import { Search, MoreVert } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
