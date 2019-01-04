@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { Add } from '@material-ui/icons';
+import { MdAdd } from 'react-icons/md';
 import WineNoteCard from './wine-note-card';
 import WineNoteDialog from './wine-note-dialog';
 
@@ -59,7 +59,7 @@ class WineNotes extends React.Component {
           onClick={this.handleOpen}
           className={classes.fab}
         >
-          <Add />
+          <MdAdd />
         </Button>
         <WineNoteDialog
           handleClose={this.handleClose}

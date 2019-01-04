@@ -6,7 +6,8 @@ import {
   Typography,
   InputBase,
 } from '@material-ui/core';
-import { Search, MoreVert } from '@material-ui/icons';
+import { MdSearch, MdMoreVert } from 'react-icons/md';
+//import { Search, MoreVert } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
@@ -81,7 +82,7 @@ const Header = (props) => {
         <div className={classes.grow} />
         <div className={classes.search}>
           <div className={classes.searchIcon}>
-            <Search />
+            <MdSearch />
           </div>
           <InputBase
             placeholder="Search…"
@@ -92,7 +93,7 @@ const Header = (props) => {
           />
         </div>
         <IconButton color="inherit">
-          <MoreVert />
+          <MdMoreVert />
         </IconButton>
       </Toolbar>
     </AppBar>

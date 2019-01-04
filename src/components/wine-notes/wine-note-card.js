@@ -8,7 +8,8 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
-import { MoreVert, LocalDrink } from '@material-ui/icons';
+import { MdMoreVert } from 'react-icons/md';
+import { TiWine } from 'react-icons/ti';
 
 const isIEorFF = navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('MSIE') !== -1 || document.documentMode;
 const nameLength = isIEorFF ? {
@@ -59,7 +60,7 @@ function WineNoteCard(props) {
 
   return (
     <Card className={classes.card}>
-      <LocalDrink className={classes.photo} />
+      <TiWine className={classes.photo} />
       <CardActionArea className={classes.actionArea}>
         <CardContent>
           <Typography variant="subheading" component="p" className={classes.nameLength}>
@@ -74,7 +75,7 @@ function WineNoteCard(props) {
       </CardActionArea>
       <CardActions className={classes.actions}>
         <IconButton color="inherit">
-          <MoreVert />
+          <MdMoreVert />
         </IconButton>
       </CardActions>
     </Card>
