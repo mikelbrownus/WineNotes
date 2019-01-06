@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import {
   Card,
   IconButton,
@@ -61,7 +62,10 @@ function WineNoteCard(props) {
   return (
     <Card className={classes.card}>
       <TiWine className={classes.photo} />
-      <CardActionArea className={classes.actionArea}>
+      <CardActionArea
+        className={classes.actionArea}
+        onClick={() => props.history.push('/view')}
+      >
         <CardContent>
           <Typography variant="subheading" component="p" className={classes.nameLength}>
             {note.name}
@@ -82,4 +86,5 @@ function WineNoteCard(props) {
   );
 }
 
-export default withStyles(styles)(WineNoteCard);
+const it = withStyles(styles)(WineNoteCard);
+export default withRouter(it);
