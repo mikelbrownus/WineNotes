@@ -5,8 +5,14 @@
             "name": "2015 Bodega Norton Privada Family Blend Red Mendoza",
             "date": "10/7/18",
             "collection": null,
-            "tasting_notes": "",
-            "technical_notes": "",
+            "varietal": "Blend",
+            "vintage": "2015",
+            "nonvintage": false,
+            "maker": "Bodega Norton",
+            "region": "Mendoza",
+            "wineName": "Privada Family Blend Red",
+            "tastingNote": "",
+            "technicalNote": "",
             "image": null
         },
         {
@@ -14,8 +20,14 @@
             "name": "2014 Robert Mondavi Fumé Blanc Oakville",
             "date": "10/7/18",
             "collection": null,
-            "tasting_notes": "",
-            "technical_notes": "",
+            "varietal": "Blend",
+            "vintage": "2014",
+            "nonvintage": false,
+            "maker": "Robert Mondavi",
+            "region": "Oakville",
+            "wineName": "Fumé Blanc",
+            "tastingNote": "",
+            "technicalNote": "",
             "image": null
         },
         {
@@ -23,17 +35,14 @@
             "name": "2016 Drouhin Oregon Roserock Chardonnay Eola-Amity Hills",
             "date": "10/7/18",
             "collection": null,
-            "tasting_notes": "",
-            "technical_notes": "",
-            "image": null
-        },
-        {
-            "id": 4,
-            "name": "2006 Gutsverwaltung Niederhausen Schlossböckelheim Schloßböckelheimer Kupfergrube Riesling Trockenbeerenauslese",
-            "date": "10/7/18",
-            "collection": null,
-            "tasting_notes": "",
-            "technical_notes": "",
+            "varietal": "Chardonnay",
+            "vintage": "2016",
+            "nonvintage": false,
+            "maker": "Drouhin",
+            "region": "Eola-Amity Hills",
+            "wineName": "Roserock",
+            "tastingNote": "",
+            "technicalNote": "",
             "image": null
         }
         
