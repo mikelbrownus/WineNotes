@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { MdMoreVert } from 'react-icons/md';
 import { TiWine } from 'react-icons/ti';
+import WineNoteMapper from '../../model/wine-note-mapper';
 
 const isIEorFF = navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('MSIE') !== -1 || document.documentMode;
 const nameLength = isIEorFF ? {
@@ -58,6 +59,7 @@ const styles = {
 
 function WineNoteCard(props) {
   const { classes, note } = props;
+  const mapper = WineNoteMapper(note);
 
   return (
     <Card className={classes.card}>
@@ -68,12 +70,12 @@ function WineNoteCard(props) {
       >
         <CardContent>
           <Typography variant="subheading" component="p" className={classes.nameLength}>
-            {note.name}
+            {mapper.getName()}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
           Date:
             {' '}
-            {note.date}
+            {mapper.getDate()}
           </Typography>
         </CardContent>
       </CardActionArea>
