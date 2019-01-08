@@ -16,4 +16,9 @@ describe('Note mapper tests', () => {
     const noteMapper = NoteMapper(initialState.WineNotes[1]);
     expect(noteMapper.getName()).toEqual('Robert Mondavi Fumé Blanc Oakville 2014');
   });
+
+  it('Mapper.getName should not include vintage if nonvintage is true', () => {
+    const noteMapper = NoteMapper(initialState.WineNotes[3]);
+    expect(noteMapper.getName()).toEqual('Thierry Triolet Brut Champagne ');
+  });
 });

@@ -2,7 +2,6 @@
     "WineNotes": [
         {
             "id": 1,
-            "name": "2015 Bodega Norton Privada Family Blend Red Mendoza",
             "date": "10/7/18",
             "collection": null,
             "varietal": "Blend",
@@ -17,7 +16,6 @@
         },
         {
             "id": 2,
-            "name": "2014 Robert Mondavi Fumé Blanc Oakville",
             "date": "10/7/18",
             "collection": null,
             "varietal": "Blend",
@@ -32,7 +30,6 @@
         },
         {
             "id": 3,
-            "name": "2016 Drouhin Oregon Roserock Chardonnay Eola-Amity Hills",
             "date": "10/7/18",
             "collection": null,
             "varietal": "Chardonnay",
@@ -41,6 +38,20 @@
             "maker": "Drouhin",
             "region": "Eola-Amity Hills",
             "wineName": "Roserock",
+            "tastingNote": "",
+            "technicalNote": "",
+            "image": null
+        },
+        {
+            "id": 4,
+            "date": "1/7/19",
+            "collection": null,
+            "varietal": "",
+            "vintage": "2019",
+            "nonvintage": true,
+            "maker": "Thierry",
+            "region": "",
+            "wineName": "Triolet Brut Champagne",
             "tastingNote": "",
             "technicalNote": "",
             "image": null
