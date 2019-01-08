@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid } from '@material-ui/core';
+import { Fab, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { MdAdd } from 'react-icons/md';
 import WineNoteCard from './wine-note-card';
@@ -52,15 +52,15 @@ class WineNotes extends React.Component {
             </Grid>
           ))}
         </Grid>
-        <Button
-          variant="fab"
-          mini
+        <Fab
+          aria-label="Add"
           color="primary"
+          size="small"
           onClick={this.handleOpen}
           className={classes.fab}
         >
           <MdAdd />
-        </Button>
+        </Fab>
         <WineNoteDialog
           handleClose={this.handleClose}
           open={open}
