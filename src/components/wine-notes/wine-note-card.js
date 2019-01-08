@@ -69,7 +69,7 @@ function WineNoteCard(props) {
         onClick={() => props.history.push('/view')}
       >
         <CardContent>
-          <Typography variant="subheading" component="p" className={classes.nameLength}>
+          <Typography variant="subtitle1" component="p" className={classes.nameLength}>
             {mapper.getName()}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">

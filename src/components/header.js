@@ -75,7 +75,7 @@ const Header = (props) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="title" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit" className={classes.title}>
           Wine Notes
         </Typography>
         <div className={classes.grow} />
