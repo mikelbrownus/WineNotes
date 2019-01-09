@@ -25,14 +25,14 @@ class Footer extends React.Component {
     const { width } = this.props;
     const isSmallScreen = /xs|sm/.test(width);
     const tabStyle = {
-      fullWidth: isSmallScreen,
+      variant: isSmallScreen ? 'fullWidth' : '',
       centered: !isSmallScreen,
     };
 
     return (
       <Paper square>
         <Tabs
-          value={index}
+          value={index < 0 ? 0 : index}
           onChange={(e, i) => {
             this.changeIndex(i);
           }}
