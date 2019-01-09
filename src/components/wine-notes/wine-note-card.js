@@ -66,7 +66,7 @@ function WineNoteCard(props) {
       <TiWine className={classes.photo} />
       <CardActionArea
         className={classes.actionArea}
-        onClick={() => props.history.push('/view')}
+        onClick={() => props.history.push('/view', { wineNote: note })}
       >
         <CardContent>
           <Typography variant="subtitle1" component="p" className={classes.nameLength}>

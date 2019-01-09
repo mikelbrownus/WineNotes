@@ -5,10 +5,14 @@ const divStyle = {
   overflowY: 'scroll',
 };
 
-const WineNoteView = () => (
-  <div style={divStyle}>
-    <h1>View for individual note</h1>
-  </div>
-);
+const WineNoteView = ({ location }) => {
+  const { wineNote } = location.state;
+  return (
+    <div style={divStyle}>
+      <p>{JSON.stringify(wineNote)}</p>
+    </div>
+  );
+};
+
 
 export default WineNoteView;
