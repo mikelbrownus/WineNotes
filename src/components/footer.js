@@ -25,7 +25,7 @@ class Footer extends React.Component {
     const { width } = this.props;
     const isSmallScreen = /xs|sm/.test(width);
     const tabStyle = {
-      variant: isSmallScreen ? 'fullWidth' : '',
+      variant: isSmallScreen ? 'fullWidth' : null,
       centered: !isSmallScreen,
     };
 
