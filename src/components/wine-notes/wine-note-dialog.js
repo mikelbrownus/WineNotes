@@ -15,19 +15,11 @@ import {
   FormControlLabel,
   Checkbox,
 } from '@material-ui/core';
+import Varietals from '../../model/varietals';
+import Vintages from '../../model/vintages';
 
-const varietals = [
-  'Cabernet Sauvignon', 'Pinot Noir', 'Merlot',
-  'Syrah', 'Shiraz', 'Malbec', 'Zinfandel', 'Tempranillo',
-  'Sangiovese', 'Nebbiolo', 'Cabernet Franc', 'Petit Verdot',
-  'Petite Sirah', 'Mourvèdre', 'Chardonnay', 'Sauvignon Blanc',
-  'Chenin Blanc', 'Riesling', 'Viognier', 'Gewürztraminer',
-  'Pinot Grigio', 'Pinot Gris', 'Pinot Blanc', 'Moscato',
-  'Sémillon', 'Grüner Veltliner', 'Müller-Thurgau',
-].sort();
-const yMinusX = y => x => y - x;
-const thisYearMinusX = yMinusX(new Date().getFullYear());
-const vintages = [...Array(100).keys()].map(thisYearMinusX).map(x => `${x}`);
+const varietals = Varietals().getVarietals();
+const vintages = Vintages().getVintages();
 
 const styles = {
   formControl: {
