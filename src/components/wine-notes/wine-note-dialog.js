@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 import Varietals from '../../model/varietals';
 import Vintages from '../../model/vintages';
+import IntegrationAutosuggest from '../widgets/integration-autosuggest';
 
 const varietals = Varietals().getVarietals();
 const vintages = Vintages().getVintages();
@@ -96,6 +97,8 @@ class WineNoteDialog extends React.Component {
             onChange={this.handleChange}
             fullWidth
           />
+          <IntegrationAutosuggest />
+
           <FormControl variant="filled" className={classes.formControl} fullWidth>
             <InputLabel htmlFor="varietal">Varietal</InputLabel>
             <Select
