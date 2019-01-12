@@ -107,7 +107,7 @@ const styles = theme => ({
 
 class VarietalsAutosuggest extends React.Component {
     state = {
-      single: '',
+      varietal: '',
       popper: '',
       suggestions: [],
     };
@@ -125,14 +125,18 @@ class VarietalsAutosuggest extends React.Component {
     };
 
     handleChange = name => (event, { newValue }) => {
+      const { changeParentState } = this.props;
       this.setState({
         [name]: newValue,
       });
+      if (name === 'varietal') {
+        changeParentState(newValue);
+      }
     };
 
     render() {
       const { classes } = this.props;
-      const { single, suggestions } = this.state;
+      const { varietal, suggestions } = this.state;
       const autosuggestProps = {
         renderInputComponent,
         suggestions,
@@ -149,8 +153,8 @@ class VarietalsAutosuggest extends React.Component {
             inputProps={{
               classes,
               placeholder: 'Varietal (start typing and we\'ll try to help)',
-              value: single,
-              onChange: this.handleChange('single'),
+              value: varietal,
+              onChange: this.handleChange('varietal'),
             }}
             theme={{
               container: classes.container,

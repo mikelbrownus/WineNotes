@@ -28,7 +28,7 @@ const styles = {
 
 class WineNoteDialog extends React.Component {
   state = {
-    varietal: 'Blend',
+    varietal: '',
     vintage: new Date().getFullYear().toString(),
     nonvintage: false,
     maker: '',
@@ -41,6 +41,10 @@ class WineNoteDialog extends React.Component {
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
+  changeVarietalState = (value) => {
+    this.setState({ varietal: value });
+  }
 
   handleChangeCB = (event) => {
     this.setState({ [event.target.name]: event.target.checked });
@@ -95,7 +99,10 @@ class WineNoteDialog extends React.Component {
             onChange={this.handleChange}
             fullWidth
           />
-          <VarietalsAutosuggest varietal={varietal} />
+          <VarietalsAutosuggest
+            varietal={varietal}
+            changeParentState={this.changeVarietalState}
+          />
           <FormControl variant="filled" className={classes.formControl} disabled={nonvintage} fullWidth>
             <InputLabel htmlFor="vintage">Vintage</InputLabel>
             <Select
