@@ -15,11 +15,9 @@ import {
   FormControlLabel,
   Checkbox,
 } from '@material-ui/core';
-import Varietals from '../../model/varietals';
 import Vintages from '../../model/vintages';
-import IntegrationAutosuggest from '../widgets/integration-autosuggest';
+import VarietalsAutosuggest from './varietals-autosuggest';
 
-const varietals = Varietals().getVarietals();
 const vintages = Vintages().getVintages();
 
 const styles = {
@@ -97,23 +95,7 @@ class WineNoteDialog extends React.Component {
             onChange={this.handleChange}
             fullWidth
           />
-          <IntegrationAutosuggest />
-
-          <FormControl variant="filled" className={classes.formControl} fullWidth>
-            <InputLabel htmlFor="varietal">Varietal</InputLabel>
-            <Select
-              value={varietal}
-              onChange={this.handleChange}
-              input={<FilledInput name="varietal" id="varietal" />}
-            >
-              <MenuItem value="Blend">Blend/Non varietal</MenuItem>
-              {
-                varietals.map(v => (
-                  <MenuItem value={v} key={v}>{v}</MenuItem>
-                ))
-            }
-            </Select>
-          </FormControl>
+          <VarietalsAutosuggest varietal={varietal} />
           <FormControl variant="filled" className={classes.formControl} disabled={nonvintage} fullWidth>
             <InputLabel htmlFor="vintage">Vintage</InputLabel>
             <Select

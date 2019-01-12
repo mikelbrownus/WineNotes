@@ -105,7 +105,7 @@ const styles = theme => ({
 });
 
 
-class IntegrationAutosuggest extends React.Component {
+class VarietalsAutosuggest extends React.Component {
     state = {
       single: '',
       popper: '',
@@ -170,4 +170,4 @@ class IntegrationAutosuggest extends React.Component {
 }
 
 
-export default withStyles(styles)(IntegrationAutosuggest);
+export default withStyles(styles)(VarietalsAutosuggest);
