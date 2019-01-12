@@ -18,6 +18,7 @@ function renderInputComponent(inputProps) {
   return (
     <TextField
       fullWidth
+      label="Varietal"
       InputProps={{
         inputRef: (node) => {
           ref(node);
