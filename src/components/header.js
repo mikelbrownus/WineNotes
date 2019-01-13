@@ -7,7 +7,9 @@ import {
   Typography,
   InputBase,
 } from '@material-ui/core';
-import { MdSearch, MdMoreVert } from 'react-icons/md';
+import {
+  MdSearch, MdMoreVert, MdEdit, MdDeleteForever,
+} from 'react-icons/md';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
@@ -74,6 +76,7 @@ const styles = theme => ({
 const Header = (props) => {
   const { classes, location } = props;
   const hasSearch = (location.pathname === '/' || location.pathname === '/collections');
+  const isView = (location.pathname === '/view');
   return (
     <AppBar position="static">
       <Toolbar>
@@ -102,7 +105,20 @@ const Header = (props) => {
         </Fragment>
         )
         }
+        {isView
+        && (
+          <Fragment>
+            <div className={classes.grow} />
+            <IconButton color="inherit">
+              <MdEdit />
+            </IconButton>
+            <IconButton color="inherit">
+              <MdDeleteForever />
+            </IconButton>
+          </Fragment>
 
+        )
+        }
       </Toolbar>
     </AppBar>
   );
