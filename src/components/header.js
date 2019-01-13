@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -71,32 +72,41 @@ const styles = theme => ({
 });
 
 const Header = (props) => {
-  const { classes } = props;
+  const { classes, location } = props;
+  const hasSearch = !!((location.pathname === '/' || location.pathname === '/collections'));
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" color="inherit" className={classes.title}>
           Wine Notes
         </Typography>
-        <div className={classes.grow} />
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <MdSearch />
+        {hasSearch
+        && (
+        <Fragment>
+          <div className={classes.grow} />
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <MdSearch />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+            />
           </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-          />
-        </div>
-        <IconButton color="inherit">
-          <MdMoreVert />
-        </IconButton>
+          <IconButton color="inherit">
+            <MdMoreVert />
+          </IconButton>
+        </Fragment>
+        )
+        }
+
       </Toolbar>
     </AppBar>
   );
 };
 
-export default withStyles(styles)(Header);
+const it = withStyles(styles)(Header);
+export default withRouter(it);
