@@ -73,7 +73,7 @@ const styles = theme => ({
 
 const Header = (props) => {
   const { classes, location } = props;
-  const hasSearch = !!((location.pathname === '/' || location.pathname === '/collections'));
+  const hasSearch = (location.pathname === '/' || location.pathname === '/collections');
   return (
     <AppBar position="static">
       <Toolbar>
