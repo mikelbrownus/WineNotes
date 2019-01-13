@@ -11,7 +11,7 @@ const divStyle = {
 };
 
 const WineNoteView = ({ location }) => {
-  const { wineNote } = location.state;
+  const wineNote = (location && location.state) ? location.state.wineNote : {};
   return (
     <div style={divStyle}>
       <p>{JSON.stringify(wineNote)}</p>
