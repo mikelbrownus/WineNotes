@@ -7,7 +7,6 @@ import WineNotes from './wine-notes/wine-notes';
 import Help from './help/help';
 import Collections from './collections/collections';
 import Settings from './settings/settings';
-import initialState from '../initialState.json';
 import WineNoteView from './wine-notes/wine-note-view';
 
 
@@ -16,7 +15,7 @@ const App = () => (
     <Fragment>
       <CssBaseline />
       <Header />
-      <Route exact path="/" render={() => <WineNotes notes={initialState.WineNotes} />} />
+      <Route exact path="/" render={() => <WineNotes />} />
       <Route exact path="/view" component={WineNoteView} />
       <Route path="/settings" component={Settings} />
       <Route path="/help" component={Help} />

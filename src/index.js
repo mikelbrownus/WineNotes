@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import App from './components/app';
+import WineNotesProvider from './components/wine-notes-provider';
 
 const theme = createMuiTheme({
   palette: {
@@ -20,6 +21,8 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <App />
+    <WineNotesProvider>
+      <App />
+    </WineNotesProvider>
   </MuiThemeProvider>, document.getElementById('root'),
 );
