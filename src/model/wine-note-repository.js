@@ -1,7 +1,7 @@
 import uuidv1 from 'uuid/v1';
 
 const WineNoteRepository = () => {
-  const wineNotes = [];
+  let wineNotes = [];
   const setNotes = (notes) => {
     notes.forEach((note) => {
       const newNote = note;
@@ -18,11 +18,17 @@ const WineNoteRepository = () => {
 
   const getNote = id => wineNotes.filter(note => id === note.id)[0];
 
+  const update = (id, newProperties) => {
+    const updatedNote = Object.assign(getNote(id), newProperties);
+    wineNotes = wineNotes.map(note => ((note.id === updatedNote.id) ? updatedNote : note));
+  };
+
   return {
     getNotes: () => wineNotes,
     insert,
     setNotes,
     getNote,
+    update,
   };
 };
 

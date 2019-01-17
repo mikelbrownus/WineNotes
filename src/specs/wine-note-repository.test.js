@@ -38,4 +38,23 @@ describe('WineNoteRepository tests', () => {
     expect(repository.getNote(note.id).maker).toEqual(note.maker);
     expect(repository.getNote(note.id).id).toEqual(note.id);
   });
+
+  it('repository update should change properties of note', () => {
+    const wineNoteUpdateFields = {
+      date: '1/7/19',
+      collection: null,
+      varietal: '',
+      vintage: '2019',
+      nonvintage: false,
+      maker: 'Thierry',
+      region: '',
+      wineName: '',
+      tastingNote: '',
+      technicalNote: '',
+    };
+    const note = repository.getNotes()[0];
+    repository.update(note.id, wineNoteUpdateFields);
+    expect(repository.getNote(note.id).maker).toEqual(wineNoteUpdateFields.maker);
+    expect(repository.getNote(note.id).id).toEqual(note.id);
+  });
 });
