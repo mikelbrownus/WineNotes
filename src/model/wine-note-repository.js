@@ -23,12 +23,17 @@ const WineNoteRepository = () => {
     wineNotes = wineNotes.map(note => ((note.id === updatedNote.id) ? updatedNote : note));
   };
 
+  const deleteNote = (id) => {
+    wineNotes = wineNotes.filter(note => note.id !== id);
+  };
+
   return {
     getNotes: () => wineNotes,
     insert,
     setNotes,
     getNote,
     update,
+    deleteNote,
   };
 };
 

@@ -57,4 +57,10 @@ describe('WineNoteRepository tests', () => {
     expect(repository.getNote(note.id).maker).toEqual(wineNoteUpdateFields.maker);
     expect(repository.getNote(note.id).id).toEqual(note.id);
   });
+
+  it('repository should delete a note', () => {
+    const note = repository.getNotes()[0];
+    repository.deleteNote(note.id);
+    expect(repository.getNote(note.id)).toBeUndefined();
+  });
 });
