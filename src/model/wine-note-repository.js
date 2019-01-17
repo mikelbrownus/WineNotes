@@ -16,10 +16,13 @@ const WineNoteRepository = () => {
     wineNotes.push(note);
   };
 
+  const getNote = id => wineNotes.filter(note => id === note.id)[0];
+
   return {
     getNotes: () => wineNotes,
     insert,
     setNotes,
+    getNote,
   };
 };
 

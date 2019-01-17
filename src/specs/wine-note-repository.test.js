@@ -32,4 +32,10 @@ describe('WineNoteRepository tests', () => {
     expect(repository.getNotes()[4].maker).toMatch(wineNote.maker);
     expect(repository.getNotes()[4].id).toMatch(uuidPattern);
   });
+
+  it('repository should get correct note from id', () => {
+    const note = repository.getNotes()[3];
+    expect(repository.getNote(note.id).maker).toEqual(note.maker);
+    expect(repository.getNote(note.id).id).toEqual(note.id);
+  });
 });
