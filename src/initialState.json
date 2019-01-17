@@ -1,7 +1,7 @@
 {
     "WineNotes": [
         {
-            "id": 1,
+            "id": "1",
             "date": "10/7/18",
             "collection": null,
             "varietal": "Blend",
@@ -15,7 +15,7 @@
             "image": null
         },
         {
-            "id": 2,
+            "id": "2",
             "date": "10/7/18",
             "collection": null,
             "varietal": "Blend",
@@ -29,7 +29,7 @@
             "image": null
         },
         {
-            "id": 3,
+            "id": "3",
             "date": "10/7/18",
             "collection": null,
             "varietal": "Chardonnay",
@@ -43,7 +43,7 @@
             "image": null
         },
         {
-            "id": 4,
+            "id": "4",
             "date": "1/7/19",
             "collection": null,
             "varietal": "",
