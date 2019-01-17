@@ -9,8 +9,16 @@ const WineNoteRepository = () => {
       wineNotes.push(newNote);
     });
   };
+
+  const insert = (note) => {
+    const newNote = note;
+    newNote.id = uuidv1();
+    wineNotes.push(note);
+  };
+
   return {
     getNotes: () => wineNotes,
+    insert,
     setNotes,
   };
 };

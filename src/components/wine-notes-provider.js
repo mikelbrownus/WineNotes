@@ -3,7 +3,6 @@ import WineNoteRepository from '../model/wine-note-repository';
 import Context from '../app-context';
 import initialState from '../initialState.json';
 
-// const Context = React.createContext();
 const repository = WineNoteRepository();
 repository.setNotes(initialState.WineNotes);
 

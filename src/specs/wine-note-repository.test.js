@@ -5,12 +5,31 @@ const repository = WineNoteRepository();
 repository.setNotes(initialState.WineNotes);
 
 describe('WineNoteRepository tests', () => {
+  const uuidPattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[1][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
+
   it('repository.getNotes().length should be 4', () => {
     expect(repository.getNotes().length).toEqual(4);
   });
 
   it('wine note ID should be UUID', () => {
-    const uuidPattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[1][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
     expect(repository.getNotes()[0].id).toMatch(uuidPattern);
+  });
+
+  it('insert should return note with correct maker and a uuid for id', () => {
+    const wineNote = {
+      date: '1/7/19',
+      collection: null,
+      varietal: '',
+      vintage: '2019',
+      nonvintage: false,
+      maker: 'Thierry',
+      region: '',
+      wineName: '',
+      tastingNote: '',
+      technicalNote: '',
+    };
+    repository.insert(wineNote);
+    expect(repository.getNotes()[4].maker).toMatch(wineNote.maker);
+    expect(repository.getNotes()[4].id).toMatch(uuidPattern);
   });
 });
