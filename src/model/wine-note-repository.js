@@ -12,6 +12,7 @@ const WineNoteRepository = () => {
 
   const insert = (note) => {
     const newNote = note;
+    newNote.date = new Date();
     newNote.id = uuidv1();
     wineNotes.push(note);
   };

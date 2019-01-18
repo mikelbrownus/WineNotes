@@ -17,7 +17,6 @@ describe('WineNoteRepository tests', () => {
 
   it('insert should return note with correct maker and a uuid for id', () => {
     const wineNote = {
-      date: '1/7/19',
       collection: null,
       varietal: '',
       vintage: '2019',
@@ -31,6 +30,24 @@ describe('WineNoteRepository tests', () => {
     repository.insert(wineNote);
     expect(repository.getNotes()[4].maker).toMatch(wineNote.maker);
     expect(repository.getNotes()[4].id).toMatch(uuidPattern);
+  });
+
+
+  it('insert should create a date object with current date', () => {
+    const wineNote = {
+      collection: null,
+      varietal: '',
+      vintage: '2019',
+      nonvintage: false,
+      maker: 'Thierry',
+      region: '',
+      wineName: '',
+      tastingNote: '',
+      technicalNote: '',
+    };
+    repository.insert(wineNote);
+    expect(repository.getNotes()[5].date).not.toBeUndefined();
+    expect(repository.getNotes()[5].date.toLocaleString()).toEqual(new Date().toLocaleString());
   });
 
   it('repository should get correct note from id', () => {
