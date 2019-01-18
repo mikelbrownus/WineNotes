@@ -8,7 +8,7 @@ const NoteMapper = (note) => {
     return m + n + va + r + vi;
   };
   return {
-    getDate: () => note.date,
+    getDate: () => new Date(note.date).toLocaleDateString(),
     getName,
   };
 };
