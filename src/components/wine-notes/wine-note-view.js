@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import {
@@ -23,12 +23,28 @@ const WineNoteView = ({ location }) => {
           <Typography gutterBottom variant="h5" component="h2">
             {mapper.getName()}
           </Typography>
-          <Typography component="p">
-            {wineNote.tastingNote}
-          </Typography>
-          <Typography component="p">
-            {wineNote.technicalNote}
-          </Typography>
+          {wineNote.tastingNote && (
+            <Fragment>
+              <Typography variant="h6" component="h3">
+            Tasting Notes
+              </Typography>
+              <Typography component="p">
+                {wineNote.tastingNote}
+              </Typography>
+            </Fragment>
+          )
+          }
+          {wineNote.technicalNote && (
+            <Fragment>
+              <Typography variant="h6" component="h3">
+            Technical Notes
+              </Typography>
+              <Typography component="p">
+                {wineNote.technicalNote}
+              </Typography>
+            </Fragment>
+          )
+          }
         </CardContent>
         <CardActions>
           <Link to="/">
