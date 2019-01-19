@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fab, Grid } from '@material-ui/core';
+import { Fab, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { MdAdd } from 'react-icons/md';
 import WineNoteCard from './wine-note-card';
@@ -20,6 +20,12 @@ const styles = theme => ({
     bottom: '64px',
     right: '20px',
 
+  },
+  noNoteMessage: {
+    margin: 'calc(20%) auto',
+    display: 'block',
+    position: 'position',
+    height: '25px',
   },
 }
 );
@@ -49,11 +55,18 @@ class WineNotes extends React.Component {
               justify="center"
               alignItems="center"
             >
-              {context.state.WineNotes.map(note => (
+              {context.state.WineNotes.length > 0 && context.state.WineNotes.map(note => (
                 <Grid item xs={12} sm={6} md={4} key={note.id}>
                   <WineNoteCard note={note} />
                 </Grid>
               ))}
+              {context.state.WineNotes.length < 1
+                && (
+                <Typography variant="h4" component="p" className={classes.noNoteMessage}>
+                Press + to add a note
+                </Typography>
+                )
+              }
             </Grid>
             <Fab
               aria-label="Add"
