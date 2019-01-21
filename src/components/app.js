@@ -15,7 +15,7 @@ const App = () => (
     <Fragment>
       <CssBaseline />
       <Header />
-      <Route exact path="/" render={() => <WineNotes />} />
+      <Route exact path="/" component={WineNotes} />
       <Route exact path="/view" component={WineNoteView} />
       <Route path="/settings" component={Settings} />
       <Route path="/help" component={Help} />
