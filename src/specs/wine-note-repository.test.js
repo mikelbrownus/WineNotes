@@ -80,4 +80,8 @@ describe('WineNoteRepository tests', () => {
     repository.deleteNote(note.id);
     expect(repository.getNote(note.id)).toBeUndefined();
   });
+
+  it('repository delete a note with bad ID no error thrown', () => {
+    expect(() => { repository.deleteNote('bad-id'); }).not.toThrowError();
+  });
 });
