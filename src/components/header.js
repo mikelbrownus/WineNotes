@@ -76,9 +76,10 @@ const styles = theme => ({
 });
 
 const Header = (props) => {
-  const { classes, location } = props;
+  const { classes, location, history } = props;
   const hasSearch = (location.pathname === '/' || location.pathname === '/collections');
   const isView = (location.pathname === '/view');
+  const wineNote = (location && location.state) ? location.state.wineNote : {};
   return (
     <Context.Consumer>
       { context => (
@@ -120,7 +121,14 @@ const Header = (props) => {
                 <MdEdit />
               </IconButton>
               <IconButton color="inherit">
-                <MdDeleteForever />
+                <MdDeleteForever
+                  onClick={
+                    () => {
+                      context.state.deleteNote(wineNote.id);
+                      history.push('/');
+                    }
+                  }
+                />
               </IconButton>
             </Fragment>
 

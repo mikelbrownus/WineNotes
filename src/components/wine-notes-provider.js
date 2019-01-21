@@ -22,9 +22,17 @@ class WineNotesProvider extends React.Component {
       }));
     };
 
+    this.deleteNote = (id) => {
+      repository.deleteNote(id);
+      this.setState(() => ({
+        WineNotes: repository.getNotes(),
+      }));
+    };
+
     this.state = {
       WineNotes: repository.getNotes(),
       addTestData: this.addTestData,
+      deleteNote: this.deleteNote,
     };
   }
 
