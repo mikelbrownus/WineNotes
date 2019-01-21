@@ -35,6 +35,7 @@ const WineNoteRepository = () => {
     getNote,
     update,
     deleteNote,
+    deleteAll: () => { wineNotes = []; },
   };
 };
 

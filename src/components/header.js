@@ -4,14 +4,16 @@ import {
   AppBar,
   Toolbar,
   IconButton,
+  Button,
   Typography,
   InputBase,
 } from '@material-ui/core';
 import {
-  MdSearch, MdMoreVert, MdEdit, MdDeleteForever,
+  MdSearch, MdEdit, MdDeleteForever,
 } from 'react-icons/md';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import Context from '../app-context';
 
 const styles = theme => ({
   root: {
@@ -78,49 +80,56 @@ const Header = (props) => {
   const hasSearch = (location.pathname === '/' || location.pathname === '/collections');
   const isView = (location.pathname === '/view');
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" color="inherit" className={classes.title}>
-          Wine Notes
-        </Typography>
-        {hasSearch
-        && (
-        <Fragment>
-          <div className={classes.grow} />
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <MdSearch />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
-          </div>
-          <IconButton color="inherit">
-            <MdMoreVert />
-          </IconButton>
-        </Fragment>
-        )
-        }
-        {isView
-        && (
+    <Context.Consumer>
+      { context => (
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" color="inherit" className={classes.title}>
+            Wine Notes
+            </Typography>
+            {hasSearch
+          && (
           <Fragment>
             <div className={classes.grow} />
-            <IconButton color="inherit">
-              <MdEdit />
-            </IconButton>
-            <IconButton color="inherit">
-              <MdDeleteForever />
-            </IconButton>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <MdSearch />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+              />
+            </div>
+            <Button
+              color="inherit"
+              onClick={context.state.addTestData}
+            >
+              Reset Test Data
+            </Button>
           </Fragment>
+          )
+          }
+            {isView
+          && (
+            <Fragment>
+              <div className={classes.grow} />
+              <IconButton color="inherit">
+                <MdEdit />
+              </IconButton>
+              <IconButton color="inherit">
+                <MdDeleteForever />
+              </IconButton>
+            </Fragment>
 
-        )
-        }
-      </Toolbar>
-    </AppBar>
+          )
+          }
+          </Toolbar>
+        </AppBar>
+      )}
+    </Context.Consumer>
   );
 };
 

@@ -4,23 +4,41 @@ import Context from '../app-context';
 import initialState from '../initialState.json';
 
 const repository = WineNoteRepository();
-repository.setNotes(initialState.WineNotes);
+
 
 class WineNotesProvider extends React.Component {
-state = {
-  WineNotes: repository.getNotes(),
-}
+  constructor(props) {
+    super(props);
+    this.addTestData = () => {
+      if (repository.getNotes().length === 0) {
+        repository.setNotes(initialState.WineNotes);
+      } else {
+        repository.deleteAll();
+        repository.setNotes(initialState.WineNotes);
+      }
 
-render() {
-  const { children } = this.props;
-  return (
-    <Context.Provider value={{
-      state: this.state,
-    }}
-    >
-      {children}
-    </Context.Provider>
-  );
-}
+      this.setState(() => ({
+        WineNotes: repository.getNotes(),
+      }));
+    };
+
+    this.state = {
+      WineNotes: repository.getNotes(),
+      addTestData: this.addTestData,
+    };
+  }
+
+
+  render() {
+    const { children } = this.props;
+    return (
+      <Context.Provider value={{
+        state: this.state,
+      }}
+      >
+        {children}
+      </Context.Provider>
+    );
+  }
 }
 export default WineNotesProvider;
