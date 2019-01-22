@@ -1,10 +1,15 @@
 import WineNoteRepository from '../model/wine-note-repository';
 import initialState from '../initialState.json';
 
-const repository = WineNoteRepository();
-repository.setNotes(initialState.WineNotes);
-
+// const repository = WineNoteRepository();
+// repository.setNotes(initialState.WineNotes);
+let repository;
 describe('WineNoteRepository tests', () => {
+  beforeEach(() => {
+    repository = WineNoteRepository();
+    repository.setNotes(initialState.WineNotes);
+  });
+
   const uuidPattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[1][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 
   it('repository.getNotes().length should be 4', () => {
@@ -46,8 +51,8 @@ describe('WineNoteRepository tests', () => {
       technicalNote: '',
     };
     repository.insert(wineNote);
-    expect(repository.getNotes()[5].date).not.toBeUndefined();
-    expect(repository.getNotes()[5].date.toLocaleString()).toEqual(new Date().toLocaleString());
+    expect(repository.getNotes()[4].date).not.toBeUndefined();
+    expect(repository.getNotes()[4].date.toLocaleString()).toEqual(new Date().toLocaleString());
   });
 
   it('repository should get correct note from id', () => {
@@ -83,5 +88,11 @@ describe('WineNoteRepository tests', () => {
 
   it('repository delete a note with bad ID no error thrown', () => {
     expect(() => { repository.deleteNote('bad-id'); }).not.toThrowError();
+  });
+
+  it('list should have one note when 2015 is filter', () => {
+    repository.deleteAll();
+    repository.setNotes(initialState.WineNotes);
+    expect(repository.filterNotes('2015').length).toEqual(1);
   });
 });
