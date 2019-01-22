@@ -91,8 +91,6 @@ describe('WineNoteRepository tests', () => {
   });
 
   it('list should have one note when 2015 is filter', () => {
-    repository.deleteAll();
-    repository.setNotes(initialState.WineNotes);
     expect(repository.filterNotes('2015').length).toEqual(1);
   });
 });
