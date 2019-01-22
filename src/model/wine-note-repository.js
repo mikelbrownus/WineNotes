@@ -29,9 +29,9 @@ const WineNoteRepository = () => {
   };
 
   const filterNotes = filter => wineNotes.filter(note => (
-    note.varietal === filter || note.vintage === filter
-             || note.wineName === filter || note.region === filter
-             || note.maker === filter));
+    note.varietal.startsWith(filter) || (note.vintage.startsWith(filter) && !note.nonvintage)
+             || note.wineName.startsWith(filter) || note.region.startsWith(filter)
+             || note.maker.startsWith(filter)));
 
   return {
     getNotes: () => wineNotes,
