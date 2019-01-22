@@ -28,10 +28,16 @@ const WineNoteRepository = () => {
     wineNotes = wineNotes.filter(note => note.id !== id);
   };
 
-  const filterNotes = filter => wineNotes.filter(note => (
-    note.varietal.startsWith(filter) || (note.vintage.startsWith(filter) && !note.nonvintage)
-             || note.wineName.startsWith(filter) || note.region.startsWith(filter)
-             || note.maker.startsWith(filter)));
+  const filteredNotes = filter => wineNotes.filter((note) => {
+    if (filter) {
+      return (
+        note.varietal.startsWith(filter) || (note.vintage.startsWith(filter) && !note.nonvintage)
+      || note.wineName.startsWith(filter) || note.region.startsWith(filter)
+      || note.maker.startsWith(filter)
+      );
+    }
+    return wineNotes;
+  });
 
   return {
     getNotes: () => wineNotes,
@@ -41,7 +47,7 @@ const WineNoteRepository = () => {
     update,
     deleteNote,
     deleteAll: () => { wineNotes = []; },
-    filterNotes,
+    filteredNotes,
   };
 };
 

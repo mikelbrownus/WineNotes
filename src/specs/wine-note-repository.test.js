@@ -91,10 +91,14 @@ describe('WineNoteRepository tests', () => {
   });
 
   it('list should have one note when 2015 is filter', () => {
-    expect(repository.filterNotes('2015').length).toEqual(1);
+    expect(repository.filteredNotes('2015').length).toEqual(1);
   });
 
   it('list should have three notes when 201 is filter', () => {
-    expect(repository.filterNotes('201').length).toEqual(3);
+    expect(repository.filteredNotes('201').length).toEqual(3);
+  });
+
+  it('list should return all notes if filter empty', () => {
+    expect(repository.filteredNotes().length).toEqual(4);
   });
 });
