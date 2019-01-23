@@ -18,19 +18,19 @@ class WineNotesProvider extends React.Component {
       }
 
       this.setState(() => ({
-        WineNotes: repository.getNotes(),
+        WineNotes: repository.filteredNotes(),
       }));
     };
 
     this.deleteNote = (id) => {
       repository.deleteNote(id);
       this.setState(() => ({
-        WineNotes: repository.getNotes(),
+        WineNotes: repository.filteredNotes(),
       }));
     };
 
     this.state = {
-      WineNotes: repository.getNotes(),
+      WineNotes: repository.filteredNotes(),
       addTestData: this.addTestData,
       deleteNote: this.deleteNote,
     };

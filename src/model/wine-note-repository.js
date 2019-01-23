@@ -5,10 +5,11 @@ const WineNoteRepository = () => {
   // this is for testing purposes only
   const setNotes = (notes) => {
     notes.forEach((note) => {
+      const randomDaysOld = Math.floor(Math.random() * 6) + 1;
       const dayOffSet = 24 * 60 * 60 * 1000;
       const newNote = JSON.parse(JSON.stringify(note));
       newNote.id = uuidv1();
-      newNote.date = new Date(Date.now() - dayOffSet);
+      newNote.date = new Date(Date.now() - (dayOffSet * randomDaysOld));
       wineNotes.push(newNote);
     });
   };
