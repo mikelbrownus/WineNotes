@@ -101,4 +101,16 @@ describe('WineNoteRepository tests', () => {
   it('list should return all notes if filter empty', () => {
     expect(repository.filteredNotes().length).toEqual(4);
   });
+
+  it('list should return newest note first', () => {
+    const lastItem = repository.getNotes()[repository.getNotes().length - 1];
+    lastItem.date = new Date();
+    expect(repository.filteredNotes()[0].id).toEqual(lastItem.id);
+  });
+
+  it('list should return newest note first with filter', () => {
+    const secondItem = repository.getNotes()[1];
+    secondItem.date = new Date();
+    expect(repository.filteredNotes('201')[0].id).toEqual(secondItem.id);
+  });
 });

@@ -2,10 +2,13 @@ import uuidv1 from 'uuid/v1';
 
 const WineNoteRepository = () => {
   let wineNotes = [];
+  // this is for testing purposes only
   const setNotes = (notes) => {
     notes.forEach((note) => {
+      const dayOffSet = 24 * 60 * 60 * 1000;
       const newNote = JSON.parse(JSON.stringify(note));
       newNote.id = uuidv1();
+      newNote.date = new Date(Date.now() - dayOffSet);
       wineNotes.push(newNote);
     });
   };
@@ -27,17 +30,19 @@ const WineNoteRepository = () => {
   const deleteNote = (id) => {
     wineNotes = wineNotes.filter(note => note.id !== id);
   };
+  const laterDate = (note1, note2) => note2.date - note1.date;
 
-  const filteredNotes = filter => wineNotes.filter((note) => {
+  const filteredNotes = (filter) => {
+    const notes = wineNotes;
     if (filter) {
-      return (
+      return notes.filter(note => (
         note.varietal.startsWith(filter) || (note.vintage.startsWith(filter) && !note.nonvintage)
-      || note.wineName.startsWith(filter) || note.region.startsWith(filter)
-      || note.maker.startsWith(filter)
-      );
+        || note.wineName.startsWith(filter) || note.region.startsWith(filter)
+        || note.maker.startsWith(filter)
+      )).sort(laterDate);
     }
-    return wineNotes;
-  });
+    return notes.sort(laterDate);
+  };
 
   return {
     getNotes: () => wineNotes,
