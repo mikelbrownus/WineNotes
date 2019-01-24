@@ -75,72 +75,88 @@ const styles = theme => ({
   },
 });
 
-const Header = (props) => {
-  const { classes, location, history } = props;
-  const hasSearch = (location.pathname === '/' || location.pathname === '/collections');
-  const isView = (location.pathname === '/view');
-  const wineNote = (location && location.state) ? location.state.wineNote : {};
-  return (
-    <Context.Consumer>
-      { context => (
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.title}>
-            Wine Notes
-            </Typography>
-            {hasSearch
-          && (
-          <Fragment>
-            <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <MdSearch />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                onChange={(event) => { context.state.filterNotes(event.target.value); }}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
-            </div>
-            <Button
-              color="inherit"
-              onClick={context.state.addTestData}
-            >
-              Reset Test Data
-            </Button>
-          </Fragment>
-          )
-          }
-            {isView
-          && (
+class Header extends React.Component {
+  state = {
+    filter: '',
+  }
+
+  changeFilter = (filter) => {
+    this.setState({ filter });
+  }
+
+  render() {
+    const { classes, location, history } = this.props;
+    const { filter } = this.state;
+    const hasSearch = (location.pathname === '/' || location.pathname === '/collections');
+    const isView = (location.pathname === '/view');
+    const wineNote = (location && location.state) ? location.state.wineNote : {};
+    return (
+      <Context.Consumer>
+        { context => (
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" color="inherit" className={classes.title}>
+              Wine Notes
+              </Typography>
+              {hasSearch
+            && (
             <Fragment>
               <div className={classes.grow} />
-              <IconButton color="inherit">
-                <MdEdit />
-              </IconButton>
-              <IconButton color="inherit">
-                <MdDeleteForever
-                  onClick={
-                    () => {
-                      context.state.deleteNote(wineNote.id);
-                      history.push('/');
-                    }
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <MdSearch />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  value={filter}
+                  onChange={(event) => {
+                    this.changeFilter(event.target.value);
+                    context.state.filterNotes(event.target.value);
                   }
+                  }
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
                 />
-              </IconButton>
+              </div>
+              <Button
+                color="inherit"
+                onClick={context.state.addTestData}
+              >
+                Reset Test Data
+              </Button>
             </Fragment>
+            )
+            }
+              {isView
+            && (
+              <Fragment>
+                <div className={classes.grow} />
+                <IconButton color="inherit">
+                  <MdEdit />
+                </IconButton>
+                <IconButton color="inherit">
+                  <MdDeleteForever
+                    onClick={
+                      () => {
+                        context.state.deleteNote(wineNote.id);
+                        history.push('/');
+                      }
+                    }
+                  />
+                </IconButton>
+              </Fragment>
 
-          )
-          }
-          </Toolbar>
-        </AppBar>
-      )}
-    </Context.Consumer>
-  );
-};
+            )
+            }
+            </Toolbar>
+          </AppBar>
+        )}
+      </Context.Consumer>
+    );
+  }
+}
 
 const it = withStyles(styles)(Header);
 export default withRouter(it);
