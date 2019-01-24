@@ -98,6 +98,7 @@ const Header = (props) => {
               </div>
               <InputBase
                 placeholder="Search…"
+                onChange={(event) => { context.state.filterNotes(event.target.value); }}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,

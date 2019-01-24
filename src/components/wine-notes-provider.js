@@ -29,10 +29,17 @@ class WineNotesProvider extends React.Component {
       }));
     };
 
+    this.filterNotes = (filter) => {
+      this.setState(() => ({
+        WineNotes: repository.filteredNotes(filter),
+      }));
+    };
+
     this.state = {
       WineNotes: repository.filteredNotes(),
       addTestData: this.addTestData,
       deleteNote: this.deleteNote,
+      filterNotes: this.filterNotes,
     };
   }
 
