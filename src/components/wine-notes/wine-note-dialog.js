@@ -30,6 +30,7 @@ class WineNoteDialog extends React.Component {
   constructor(props) {
     super(props);
     const { wineNote } = this.props;
+    this.wineNote = wineNote;
     if (wineNote) {
       const {
         varietal, vintage, nonvintage, maker, wineName, region, tastingNote, technicalNote,
@@ -195,7 +196,7 @@ class WineNoteDialog extends React.Component {
             onClick={this.handleSubmit}
             color="primary"
           >
-          Add
+            {this.wineNote ? 'Update' : 'Add'}
           </Button>
         </DialogActions>
       </Dialog>
