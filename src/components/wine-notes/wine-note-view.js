@@ -5,6 +5,7 @@ import {
   Button, Card, CardContent, Typography, CardActions,
 } from '@material-ui/core';
 import NoteMapper from '../../model/note-mapper';
+import WineNoteDialog from './wine-note-dialog';
 
 const divStyle = {
   height: 'calc(100% - 116px)',
@@ -13,50 +14,71 @@ const divStyle = {
   maxWidth: '650px',
 };
 
-const WineNoteView = ({ location }) => {
-  const wineNote = (location && location.state) ? location.state.wineNote : {};
-  const mapper = NoteMapper(wineNote);
-  return (
-    <div style={divStyle}>
-      <Card>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {mapper.getName()}
-          </Typography>
-          {wineNote.tastingNote && (
-            <Fragment>
-              <Typography variant="h6" component="h3">
-            Tasting Notes
-              </Typography>
-              <Typography component="p">
-                {wineNote.tastingNote}
-              </Typography>
-            </Fragment>
-          )
-          }
-          {wineNote.technicalNote && (
-            <Fragment>
-              <Typography variant="h6" component="h3">
-            Technical Notes
-              </Typography>
-              <Typography component="p">
-                {wineNote.technicalNote}
-              </Typography>
-            </Fragment>
-          )
-          }
-        </CardContent>
-        <CardActions>
-          <Link to="/">
-            <Button variant="contained" color="primary">
-              <MdKeyboardBackspace />
-            </Button>
-          </Link>
-        </CardActions>
-      </Card>
-    </div>
-  );
-};
+class WineNoteView extends React.Component {
+  state = {
+    open: false,
+  };
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  render() {
+    const { location } = this.props;
+    const { open } = this.state;
+    const wineNote = (location && location.state) ? location.state.wineNote : {};
+    const mapper = NoteMapper(wineNote);
+    return (
+      <div style={divStyle}>
+        <Card>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {mapper.getName()}
+            </Typography>
+            {wineNote.tastingNote && (
+              <Fragment>
+                <Typography variant="h6" component="h3">
+              Tasting Notes
+                </Typography>
+                <Typography component="p">
+                  {wineNote.tastingNote}
+                </Typography>
+              </Fragment>
+            )
+            }
+            {wineNote.technicalNote && (
+              <Fragment>
+                <Typography variant="h6" component="h3">
+              Technical Notes
+                </Typography>
+                <Typography component="p">
+                  {wineNote.technicalNote}
+                </Typography>
+              </Fragment>
+            )
+            }
+          </CardContent>
+          <CardActions>
+            <Link to="/">
+              <Button variant="contained" color="primary">
+                <MdKeyboardBackspace />
+              </Button>
+            </Link>
+          </CardActions>
+        </Card>
+        <WineNoteDialog
+          handleClose={this.handleClose}
+          open={open}
+          wineNote={wineNote}
+        />
+      </div>
+    );
+  }
+}
 
 
 export default WineNoteView;

@@ -27,16 +27,37 @@ const styles = {
 };
 
 class WineNoteDialog extends React.Component {
-  state = {
-    varietal: '',
-    vintage: new Date().getFullYear().toString(),
-    nonvintage: false,
-    maker: '',
-    region: '',
-    wineName: '',
-    tastingNote: '',
-    technicalNote: '',
-  };
+  constructor(props) {
+    super(props);
+    const { wineNote } = this.props;
+    if (wineNote) {
+      const {
+        varietal, vintage, nonvintage, maker, wineName, region, tastingNote, technicalNote,
+      } = wineNote;
+      this.state = {
+        varietal,
+        maker,
+        vintage,
+        nonvintage,
+        wineName,
+        region,
+        tastingNote,
+        technicalNote,
+      };
+    } else {
+      this.state = {
+        varietal: '',
+        vintage: new Date().getFullYear().toString(),
+        nonvintage: false,
+        maker: '',
+        region: '',
+        wineName: '',
+        tastingNote: '',
+        technicalNote: '',
+      };
+    }
+  }
+
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -57,6 +78,7 @@ class WineNoteDialog extends React.Component {
 
   render() {
     const { open, handleClose, classes } = this.props;
+    // console.log(wineNote);
     const {
       vintage,
       varietal,
