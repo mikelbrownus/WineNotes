@@ -109,7 +109,7 @@ const styles = theme => ({
 class VarietalsAutosuggest extends React.Component {
   constructor(props) {
     super(props);
-    const varietal = this.props;
+    const { varietal } = this.props;
     this.state = {
       varietal: varietal || '',
       popper: '',
