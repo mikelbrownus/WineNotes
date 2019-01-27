@@ -1,4 +1,5 @@
 import React from 'react';
+import { version } from '../../../package.json';
 
 const divStyle = {
   height: 'calc(100% - 116px)',
@@ -9,6 +10,11 @@ const divStyle = {
 
 const Help = () => (
   <div style={divStyle}>
+    <h1>
+      Wine Notes -- Version
+      {' '}
+      {version}
+    </h1>
     <h2>Warning!</h2>
     <p>
       This app is an experiemental app aiming towards a full fledged
