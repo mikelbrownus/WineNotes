@@ -47,6 +47,20 @@ class WineNotesProvider extends React.Component {
       }));
     };
 
+    this.updateNote = (id, changes) => {
+      repository.update(id, changes);
+      this.setState(() => ({
+        WineNotes: repository.filteredNotes(),
+      }));
+    };
+
+    this.addNote = (note) => {
+      repository.insert(note);
+      this.setState(() => ({
+        WineNotes: repository.filteredNotes(),
+      }));
+    };
+
     this.state = {
       WineNotes: repository.filteredNotes(),
       editDialogOpen: false,
@@ -55,6 +69,8 @@ class WineNotesProvider extends React.Component {
       filterNotes: this.filterNotes,
       editNoteDialogToggle: this.editNoteDialogToggle,
       setNoteDialog: this.setNoteDialog,
+      updateNote: this.updateNote,
+      addNote: this.addNote,
     };
   }
 
