@@ -11,7 +11,7 @@ import Context from '../../app-context';
 const divStyle = {
   height: 'calc(100% - 116px)',
   overflowY: 'scroll',
-  margin: '0 auto',
+  margin: '20px auto 0  auto',
   maxWidth: '650px',
 };
 
