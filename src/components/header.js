@@ -134,7 +134,9 @@ class Header extends React.Component {
               <Fragment>
                 <div className={classes.grow} />
                 <IconButton color="inherit">
-                  <MdEdit />
+                  <MdEdit
+                    onClick={() => { context.state.editNoteDialogToggle(); }}
+                  />
                 </IconButton>
                 <IconButton color="inherit">
                   <MdDeleteForever

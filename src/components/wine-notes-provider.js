@@ -35,11 +35,26 @@ class WineNotesProvider extends React.Component {
       }));
     };
 
+    this.editNoteDialogToggle = () => {
+      this.setState(prevState => ({
+        editDialogOpen: !prevState.editDialogOpen,
+      }));
+    };
+
+    this.setNoteDialog = (open) => {
+      this.setState(() => ({
+        editDialogOpen: open,
+      }));
+    };
+
     this.state = {
       WineNotes: repository.filteredNotes(),
+      editDialogOpen: false,
       addTestData: this.addTestData,
       deleteNote: this.deleteNote,
       filterNotes: this.filterNotes,
+      editNoteDialogToggle: this.editNoteDialogToggle,
+      setNoteDialog: this.setNoteDialog,
     };
   }
 
