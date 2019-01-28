@@ -60,6 +60,18 @@ class WineNoteDialog extends React.Component {
     }
   }
 
+  clearForm = () => {
+    this.setState({
+      varietal: '',
+      vintage: new Date().getFullYear().toString(),
+      nonvintage: false,
+      maker: '',
+      region: '',
+      wineName: '',
+      tastingNote: '',
+      technicalNote: '',
+    });
+  }
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -72,11 +84,6 @@ class WineNoteDialog extends React.Component {
   handleChangeCB = (event) => {
     this.setState({ [event.target.name]: event.target.checked });
   };
-
-  // handleSubmit = () => {
-  //   const { handleClose } = this.props;
-  //   handleClose();
-  // };
 
   render() {
     const { open, handleClose, classes } = this.props;
@@ -198,7 +205,7 @@ class WineNoteDialog extends React.Component {
               <Button
                 onClick={this.wineNote
                   ? () => { context.state.updateNote(id, this.state); handleClose(); }
-                  : () => { context.state.addNote(this.state); handleClose(); }}
+                  : () => { context.state.addNote(this.state); this.clearForm(); handleClose(); }}
                 color="primary"
               >
                 {this.wineNote ? 'Update' : 'Add'}
