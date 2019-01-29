@@ -15,63 +15,78 @@ const divStyle = {
   maxWidth: '650px',
 };
 
-const WineNoteView = (props) => {
-  const { location } = props;
+class WineNoteView extends React.Component {
+  constructor(props) {
+    super(props);
+    const { location } = props;
+    this.state = (location && location.state) ? location.state.wineNote : {};
+  }
+
+  getMapper = () => NoteMapper(this.state)
+
+  changeNote = (note) => {
+    this.setState(note);
+  }
+
+
   // const { open } = this.state;
-  const wineNote = (location && location.state) ? location.state.wineNote : {};
-  const mapper = NoteMapper(wineNote);
-  return (
-    <div style={divStyle}>
-      <Context.Consumer>
-        { context => (
-          <Fragment>
-            <Card>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {mapper.getName()}
-                </Typography>
-                {wineNote.tastingNote && (
+
+  render() {
+    const { tastingNote, technicalNote } = this.state;
+    return (
+      <div style={divStyle}>
+        <Context.Consumer>
+          { context => (
+            <Fragment>
+              <Card>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {this.getMapper().getName()}
+                  </Typography>
+                  {tastingNote && (
                   <Fragment>
                     <Typography variant="h6" component="h3">
               Tasting Notes
                     </Typography>
                     <Typography component="p">
-                      {wineNote.tastingNote}
+                      {tastingNote}
                     </Typography>
                   </Fragment>
-                )
+                  )
             }
-                {wineNote.technicalNote && (
+                  {technicalNote && (
                   <Fragment>
                     <Typography variant="h6" component="h3">
               Technical Notes
                     </Typography>
                     <Typography component="p">
-                      {wineNote.technicalNote}
+                      {technicalNote}
                     </Typography>
                   </Fragment>
-                )
+                  )
             }
-              </CardContent>
-              <CardActions>
-                <Link to="/">
-                  <Button variant="contained" color="primary">
-                    <MdKeyboardBackspace />
-                  </Button>
-                </Link>
-              </CardActions>
-            </Card>
-            <WineNoteDialog
-              handleClose={() => { context.state.setNoteDialog(false); }}
-              open={context.state.editDialogOpen}
-              wineNote={wineNote}
-            />
-          </Fragment>
-        )}
-      </Context.Consumer>
-    </div>
-  );
-};
+                </CardContent>
+                <CardActions>
+                  <Link to="/">
+                    <Button variant="contained" color="primary">
+                      <MdKeyboardBackspace />
+                    </Button>
+                  </Link>
+                </CardActions>
+              </Card>
+              <WineNoteDialog
+                handleClose={() => { context.state.setNoteDialog(false); }}
+                open={context.state.editDialogOpen}
+                wineNote={this.state}
+                updateNote={this.changeNote}
+              />
+            </Fragment>
+          )}
+        </Context.Consumer>
+      </div>
+    );
+  }
+}
 
 
 export default WineNoteView;
