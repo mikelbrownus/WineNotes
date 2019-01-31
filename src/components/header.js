@@ -9,7 +9,7 @@ import {
   InputBase,
 } from '@material-ui/core';
 import {
-  MdSearch, MdEdit, MdDeleteForever,
+  MdSearch, MdEdit, MdDeleteForever, MdKeyboardBackspace, MdHome,
 } from 'react-icons/md';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -95,6 +95,22 @@ class Header extends React.Component {
         { context => (
           <AppBar position="static">
             <Toolbar>
+              {
+                 isView
+                   ? (
+                     <IconButton color="inherit" aria-label="Back">
+                       <MdKeyboardBackspace />
+                     </IconButton>
+                   )
+                   : (
+                     <IconButton color="inherit" aria-label="Home">
+                       <MdHome />
+                     </IconButton>
+                   )
+
+
+              }
+
               <Typography variant="h6" color="inherit" className={classes.title}>
               Wine Notes
               </Typography>
