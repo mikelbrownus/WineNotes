@@ -7,7 +7,7 @@ import WineNoteDialog from './wine-note-dialog';
 import Context from '../../app-context';
 
 const divStyle = {
-  height: 'calc(100% - 116px)',
+  height: 'calc(100% - 136px)',
   overflowY: 'scroll',
   margin: '20px auto 0  auto',
   maxWidth: '650px',
