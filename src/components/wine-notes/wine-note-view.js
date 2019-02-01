@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { MdKeyboardBackspace } from 'react-icons/md';
 import {
-  Button, Card, CardContent, Typography, CardActions,
+  Card, CardContent, Typography,
 } from '@material-ui/core';
 import NoteMapper from '../../model/note-mapper';
 import WineNoteDialog from './wine-note-dialog';
@@ -27,9 +25,6 @@ class WineNoteView extends React.Component {
   changeNote = (note) => {
     this.setState(note);
   }
-
-
-  // const { open } = this.state;
 
   render() {
     const { tastingNote, technicalNote } = this.state;
@@ -66,13 +61,6 @@ class WineNoteView extends React.Component {
                   )
             }
                 </CardContent>
-                <CardActions>
-                  <Link to="/">
-                    <Button variant="contained" color="primary">
-                      <MdKeyboardBackspace />
-                    </Button>
-                  </Link>
-                </CardActions>
               </Card>
               <WineNoteDialog
                 handleClose={() => { context.state.setNoteDialog(false); }}

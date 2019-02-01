@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -21,6 +21,9 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  home: {
+    width: '80px',
   },
   menuButton: {
     marginLeft: -12,
@@ -98,17 +101,22 @@ class Header extends React.Component {
               {
                  isView
                    ? (
-                     <IconButton color="inherit" aria-label="Back">
-                       <MdKeyboardBackspace />
-                     </IconButton>
+                     <Link to="/">
+                       <Button
+                         variant="contained"
+                         color="primary"
+                         aria-label="back"
+                         className={classes.home}
+                       >
+                         <MdKeyboardBackspace fontSize="x-large" />
+                       </Button>
+                     </Link>
                    )
                    : (
-                     <IconButton color="inherit" aria-label="Home">
+                     <IconButton color="inherit" aria-label="Home" className={classes.home}>
                        <MdHome />
                      </IconButton>
                    )
-
-
               }
 
               <Typography variant="h6" color="inherit" className={classes.title}>
