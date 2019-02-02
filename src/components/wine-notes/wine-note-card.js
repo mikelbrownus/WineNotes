@@ -35,6 +35,12 @@ const styles = {
     margin: '2px 0',
     height: 125,
   },
+  externalImage: {
+    objectFit: 'contain',
+    padding: 4,
+    width: '40px',
+    marginLeft: '18px',
+  },
   photo: {
     alignContent: 'center',
     padding: 4,
@@ -63,7 +69,17 @@ function WineNoteCard(props) {
 
   return (
     <Card className={classes.card}>
-      <TiWine className={classes.photo} />
+      {
+      note.image ? (
+        <img
+          src={note.image}
+          alt={mapper.getName()}
+          className={classes.externalImage}
+        />
+      )
+        : (<TiWine className={classes.photo} />)
+    }
+
       <CardActionArea
         className={classes.actionArea}
         onClick={() => props.history.push('/view', { wineNote: note })}
