@@ -34,7 +34,7 @@ class WineNoteDialog extends React.Component {
     this.wineNote = wineNote;
     if (wineNote) {
       const {
-        varietal, vintage, nonvintage, maker, wineName, region, tastingNote, technicalNote,
+        varietal, vintage, nonvintage, maker, wineName, image, region, tastingNote, technicalNote,
       } = wineNote;
       this.state = {
         varietal,
@@ -42,6 +42,7 @@ class WineNoteDialog extends React.Component {
         vintage,
         nonvintage,
         wineName,
+        image,
         region,
         tastingNote,
         technicalNote,
@@ -52,6 +53,7 @@ class WineNoteDialog extends React.Component {
         vintage: new Date().getFullYear().toString(),
         nonvintage: false,
         maker: '',
+        image: '',
         region: '',
         wineName: '',
         tastingNote: '',
@@ -66,6 +68,7 @@ class WineNoteDialog extends React.Component {
       vintage: new Date().getFullYear().toString(),
       nonvintage: false,
       maker: '',
+      image: '',
       region: '',
       wineName: '',
       tastingNote: '',
@@ -95,6 +98,7 @@ class WineNoteDialog extends React.Component {
       varietal,
       nonvintage,
       maker,
+      image,
       region,
       wineName,
       tastingNote,
@@ -130,6 +134,16 @@ class WineNoteDialog extends React.Component {
                 name="wineName"
                 value={wineName}
                 label="Wine Name (or other designation)"
+                type="text"
+                onChange={this.handleChange}
+                fullWidth
+              />
+              <TextField
+                margin="dense"
+                id="image"
+                name="image"
+                value={image}
+                label="URL to image"
                 type="text"
                 onChange={this.handleChange}
                 fullWidth
