@@ -1,4 +1,5 @@
 import uuidv1 from 'uuid/v1';
+import { clone } from 'ramda';
 
 const WineNoteRepository = () => {
   let wineNotes = [];
@@ -7,7 +8,7 @@ const WineNoteRepository = () => {
     notes.forEach((note) => {
       const randomDaysOld = Math.floor(Math.random() * 6) + 1;
       const dayOffSet = 24 * 60 * 60 * 1000;
-      const newNote = JSON.parse(JSON.stringify(note));
+      const newNote = clone(note);
       newNote.id = uuidv1();
       newNote.date = new Date(Date.now() - (dayOffSet * randomDaysOld));
       wineNotes.push(newNote);
@@ -15,7 +16,7 @@ const WineNoteRepository = () => {
   };
 
   const insert = (note) => {
-    const newNote = JSON.parse(JSON.stringify(note));
+    const newNote = clone(note);
     newNote.date = new Date();
     newNote.id = uuidv1();
     wineNotes.push(newNote);
@@ -24,7 +25,7 @@ const WineNoteRepository = () => {
   const getNote = id => wineNotes.filter(note => id === note.id)[0];
 
   const update = (id, newProperties) => {
-    const updatedNote = Object.assign(JSON.parse(JSON.stringify(getNote(id))), newProperties);
+    const updatedNote = Object.assign(clone(getNote(id)), newProperties);
     wineNotes = wineNotes.map(note => ((note.id === updatedNote.id) ? updatedNote : note));
   };
 
