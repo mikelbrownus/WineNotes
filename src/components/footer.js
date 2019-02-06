@@ -13,6 +13,26 @@ class Footer extends React.Component {
     };
   }
 
+  componentWillReceiveProps(newProps) {
+    const { location } = newProps;
+    const foundIndex = sections.findIndex(
+      item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
+    );
+    const { index } = this.state;
+    const shouldUpdate = index !== foundIndex;
+    if (shouldUpdate) {
+      this.setState({ index: foundIndex });
+    }
+  }
+
+  shouldComponentUpdate(newProps) {
+    const { location } = newProps;
+    const foundIndex = sections.findIndex(
+      item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
+    );
+    const { index } = this.state;
+    return index !== foundIndex;
+  }
 
   changeIndex = (i) => {
     this.setState({
