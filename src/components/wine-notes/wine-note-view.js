@@ -15,7 +15,7 @@ const styles = {
   },
   media: {
     margin: 'auto 0 auto 0',
-    width: '200px',
+    maxWidth: '200px',
     height: '100%',
   },
   card: {
