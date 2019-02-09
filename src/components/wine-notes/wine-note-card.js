@@ -38,7 +38,7 @@ const styles = {
   externalImage: {
     objectFit: 'contain',
     padding: 4,
-    width: '40px',
+    width: '30%',
     marginLeft: '18px',
   },
   photo: {
