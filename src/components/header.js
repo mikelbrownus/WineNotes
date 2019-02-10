@@ -24,6 +24,7 @@ const styles = theme => ({
   },
   home: {
     width: '80px',
+    color: 'white',
   },
   menuButton: {
     marginLeft: -12,
@@ -113,9 +114,15 @@ class Header extends React.Component {
                      </Link>
                    )
                    : (
-                     <IconButton color="inherit" aria-label="Home" className={classes.home}>
-                       <MdHome />
-                     </IconButton>
+                     <Link to="/help">
+                       <IconButton
+                         variant="contained"
+                         aria-label="home"
+                         className={classes.home}
+                       >
+                         <MdHome />
+                       </IconButton>
+                     </Link>
                    )
               }
 
