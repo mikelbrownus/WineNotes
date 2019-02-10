@@ -2,9 +2,11 @@ import React, { Fragment } from 'react';
 import {
   Card, CardContent, Typography, CardMedia, withStyles,
 } from '@material-ui/core';
+import uuidv1 from 'uuid/v1';
 import NoteMapper from '../../model/note-mapper';
 import WineNoteDialog from './wine-note-dialog';
 import Context from '../../app-context';
+
 
 const styles = {
   body: {
@@ -75,8 +77,8 @@ class WineNoteView extends React.Component {
                       <Typography variant="h6" component="h3">
               Tasting Notes
                       </Typography>
-                      <Typography component="p">
-                        {tastingNote}
+                      <Typography component="div">
+                        {tastingNote.split('\n').map(i => <div key={uuidv1()}>{i}</div>)}
                       </Typography>
                     </Fragment>
                     )
@@ -86,8 +88,8 @@ class WineNoteView extends React.Component {
                       <Typography variant="h6" component="h3">
               Technical Notes
                       </Typography>
-                      <Typography component="p">
-                        {technicalNote}
+                      <Typography component="div">
+                        {technicalNote.split('\n').map(i => <div key={uuidv1()}>{i}</div>)}
                       </Typography>
                     </Fragment>
                     )
