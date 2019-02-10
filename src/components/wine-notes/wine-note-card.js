@@ -2,14 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
   Card,
-  IconButton,
-  CardActions,
   CardActionArea,
   CardContent,
   Typography,
   withStyles,
 } from '@material-ui/core';
-import { MdMoreVert } from 'react-icons/md';
 import { TiWine } from 'react-icons/ti';
 import NoteMapper from '../../model/note-mapper';
 
@@ -52,13 +49,7 @@ const styles = {
     marginBottom: 12,
   },
   actionArea: {
-    width: '80%',
-  },
-  actions: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '10%',
+    width: '100%',
   },
   nameLength,
 };
@@ -79,11 +70,12 @@ function WineNoteCard(props) {
       )
         : (<TiWine className={classes.photo} />)
     }
-
       <CardActionArea
         className={classes.actionArea}
         onClick={() => props.history.push('/view', { wineNote: note })}
       >
+
+
         <CardContent>
           <Typography variant="subtitle1" component="p" className={classes.nameLength}>
             {mapper.getName()}
@@ -95,11 +87,6 @@ function WineNoteCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions className={classes.actions}>
-        <IconButton color="inherit">
-          <MdMoreVert />
-        </IconButton>
-      </CardActions>
     </Card>
   );
 }
