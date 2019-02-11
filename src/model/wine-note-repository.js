@@ -53,6 +53,7 @@ const WineNoteRepository = () => {
     getNotes: () => wineNotes,
     insert,
     setNotes,
+    setWineNotes: (notes) => { wineNotes = notes; },
     getNote,
     update,
     deleteNote,

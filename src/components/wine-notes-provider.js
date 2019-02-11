@@ -1,10 +1,10 @@
 import React from 'react';
+import localForage from 'localforage';
 import WineNoteRepository from '../model/wine-note-repository';
 import Context from '../app-context';
 import initialState from '../initialState.json';
 
 const repository = WineNoteRepository();
-
 
 class WineNotesProvider extends React.Component {
   constructor(props) {
@@ -21,6 +21,18 @@ class WineNotesProvider extends React.Component {
       updateNote: this.updateNote,
       addNote: this.addNote,
     };
+  }
+
+  componentDidMount() {
+    localForage.getItem('wineNotes').then((value) => {
+      if (value) {
+        const notes = JSON.parse(value);
+        repository.setWineNotes(notes);
+        this.setState({
+          WineNotes: repository.filteredNotes(),
+        });
+      }
+    });
   }
 
   addTestData = () => {
@@ -41,6 +53,7 @@ class WineNotesProvider extends React.Component {
     this.setState(() => ({
       WineNotes: repository.filteredNotes(),
     }));
+    localForage.setItem('wineNotes', JSON.stringify(repository.getNotes()));
   };
 
   filterNotes = (filter) => {
@@ -66,6 +79,7 @@ class WineNotesProvider extends React.Component {
     this.setState(() => ({
       WineNotes: repository.filteredNotes(),
     }));
+    localForage.setItem('wineNotes', JSON.stringify(repository.getNotes()));
   };
 
   addNote = (note) => {
@@ -73,6 +87,7 @@ class WineNotesProvider extends React.Component {
     this.setState(() => ({
       WineNotes: repository.filteredNotes(),
     }));
+    localForage.setItem('wineNotes', JSON.stringify(repository.getNotes()));
   };
 
   render() {
