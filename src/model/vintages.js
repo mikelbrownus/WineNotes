@@ -1,7 +1,9 @@
+import { range } from 'ramda';
+
 const Vintages = () => {
   const yMinusX = y => x => y - x;
   const thisYearMinusX = yMinusX(new Date().getFullYear());
-  const vintages = [...Array(100).keys()].map(thisYearMinusX).map(x => `${x}`);
+  const vintages = range(0, 100).map(thisYearMinusX).map(x => `${x}`);
   return {
     getVintages: () => vintages,
   };
