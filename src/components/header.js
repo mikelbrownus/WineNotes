@@ -7,6 +7,11 @@ import {
   Button,
   Typography,
   InputBase,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from '@material-ui/core';
 import {
   MdSearch, MdEdit, MdDeleteForever, MdKeyboardBackspace, MdHome,
@@ -82,15 +87,21 @@ const styles = theme => ({
 class Header extends React.Component {
   state = {
     filter: '',
+    alert: false,
   }
 
   changeFilter = (filter) => {
     this.setState({ filter });
   }
 
+  toggleAlert = (on) => {
+    this.setState({ alert: on });
+  }
+
+
   render() {
     const { classes, location, history } = this.props;
-    const { filter } = this.state;
+    const { filter, alert } = this.state;
     const hasSearch = (location.pathname === '/' || location.pathname === '/collections');
     const isView = (location.pathname === '/view');
     const wineNote = (location && location.state) ? location.state.wineNote : {};
@@ -98,6 +109,33 @@ class Header extends React.Component {
       <Context.Consumer>
         { context => (
           <AppBar position="static">
+            <Dialog
+              open={alert}
+              onClose={this.handleClose}
+              aria-labelledby="responsive-dialog-title"
+            >
+              <DialogTitle id="responsive-dialog-title">Delete wine note?</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+              No going back after this. Shall I delete?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  onClick={() => {
+                    this.toggleAlert(false);
+                    context.state.deleteNote(wineNote.id);
+                    history.push('/');
+                  }}
+                  color="primary"
+                >
+              Delete
+                </Button>
+                <Button onClick={() => { this.toggleAlert(false); }} color="primary" autoFocus>
+              Cancel
+                </Button>
+              </DialogActions>
+            </Dialog>
             <Toolbar>
               {
                  isView
@@ -173,8 +211,9 @@ class Header extends React.Component {
                   <MdDeleteForever
                     onClick={
                       () => {
-                        context.state.deleteNote(wineNote.id);
-                        history.push('/');
+                        this.toggleAlert(true);
+                        // context.state.deleteNote(wineNote.id);
+                        // history.push('/');
                       }
                     }
                   />
