@@ -1,12 +1,15 @@
 const Varietals = () => {
   const varietals = [
-    'Cabernet Sauvignon', 'Pinot Noir', 'Merlot',
-    'Syrah', 'Shiraz', 'Malbec', 'Zinfandel', 'Tempranillo',
-    'Sangiovese', 'Nebbiolo', 'Cabernet Franc', 'Petit Verdot',
-    'Petite Sirah', 'Mourvèdre', 'Chardonnay', 'Sauvignon Blanc',
-    'Chenin Blanc', 'Riesling', 'Viognier', 'Gewürztraminer',
-    'Pinot Grigio', 'Pinot Gris', 'Pinot Blanc', 'Moscato',
-    'Sémillon', 'Grüner Veltliner', 'Müller-Thurgau',
+    'Arneis', 'Barbera', 'Brunello', 'Cabernet Franc',
+    'Cabernet Sauvignon', 'Carignan', 'Charbono',
+    'Chardonnay', 'Chenin Blanc', 'Dolcetto', 'Gamay',
+    'Gewürztraminer', 'Grenache', 'Grüner Veltliner', 'Malbec',
+    'Marsanne', 'Merlot', 'Moscato', 'Mourvèdre', 'Muscat',
+    'Müller-Thurgau', 'Nebbiolo', 'Petit Verdot', 'Petite Sirah',
+    'Pinot Blanc', 'Pinot Grigio', 'Pinot Gris', 'Pinot Noir',
+    'Primitivo', 'Riesling', 'Sangiovese', 'Sauvignon Blanc',
+    'Shiraz', 'Syrah', 'Sémillon', 'Tempranillo', 'Trebbiano',
+    'Ugni Blanc', 'Viognier', 'Zinfandel',
   ].sort();
   return {
     getVarietals: () => varietals,
