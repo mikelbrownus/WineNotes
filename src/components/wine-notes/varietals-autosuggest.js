@@ -63,7 +63,8 @@ function getSuggestions(value) {
   return inputLength === 0
     ? []
     : varietalSuggestions.filter((suggestion) => {
-      const keep = count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
+      const keep = count < 10
+                   && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
 
       if (keep) {
         count += 1;
@@ -158,7 +159,7 @@ class VarietalsAutosuggest extends React.Component {
             {...autosuggestProps}
             inputProps={{
               classes,
-              placeholder: 'Varietal (start typing and we\'ll try to help)',
+              placeholder: 'Start typing and we\'ll try to help.',
               value: varietal,
               onChange: this.handleChange('varietal'),
             }}
