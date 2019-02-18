@@ -1,9 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
-const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
     context: path.join(__dirname, 'src'),
     entry: './index.js',
     output: {
@@ -19,10 +18,8 @@ module.exports = {
             } 
         ]
     },
-    devServer: {
-      historyApiFallback: true,
-    },
     plugins: [
+      new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({template: './index.html'})
     ]
 }
