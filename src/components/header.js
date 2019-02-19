@@ -98,7 +98,6 @@ class Header extends React.Component {
     this.setState({ alert: on });
   }
 
-
   render() {
     const { classes, location, history } = this.props;
     const { filter, alert } = this.state;
@@ -202,21 +201,21 @@ class Header extends React.Component {
             && (
               <Fragment>
                 <div className={classes.grow} />
-                <IconButton color="inherit">
-                  <MdEdit
-                    onClick={() => { context.state.editNoteDialogToggle(); }}
-                  />
+                <IconButton
+                  color="inherit"
+                  onClick={() => { context.state.editNoteDialogToggle(); }}
+                >
+                  <MdEdit />
                 </IconButton>
-                <IconButton color="inherit">
-                  <MdDeleteForever
-                    onClick={
-                      () => {
-                        this.toggleAlert(true);
-                        // context.state.deleteNote(wineNote.id);
-                        // history.push('/');
-                      }
+                <IconButton
+                  color="inherit"
+                  onClick={
+                    () => {
+                      this.toggleAlert(true);
                     }
-                  />
+                  }
+                >
+                  <MdDeleteForever />
                 </IconButton>
               </Fragment>
 
