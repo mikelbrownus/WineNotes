@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import App from './components/app';
 import WineNotesProvider from './components/wine-notes-provider';
-import * as serviceWorker from './serviceWorker';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,4 +27,11 @@ ReactDOM.render(
   </MuiThemeProvider>, document.getElementById('root'),
 );
 
-serviceWorker.unregister();
+if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
+  // production code
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js');
+    });
+  }
+}
