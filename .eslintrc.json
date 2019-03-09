@@ -12,6 +12,8 @@
     "rules": {
         "react/jsx-filename-extension": 0,
         "react/prop-types": 0,
-        "react/no-unused-state": 0
+        "react/no-unused-state": 0,
+        "no-lonely-if": 0,
+        "no-console": ["error", { "allow": ["warn", "error"] }]
     }
 }
