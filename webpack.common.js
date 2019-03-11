@@ -47,7 +47,11 @@ module.exports = {
                 handler: 'NetworkFirst'
             },
             {
-                
+                urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/,
+                handler: 'NetworkFirst',
+                options: {
+                    cacheName: 'external-images'
+                }
             }
         ]
         })
