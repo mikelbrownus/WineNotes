@@ -32,7 +32,7 @@ module.exports = {
           skipWaiting: true,
           runtimeCaching: [
             {
-                urlPattern: /images/,
+                urlPattern: /icons/,
                 handler: 'CacheFirst'
             },
             {
@@ -45,6 +45,9 @@ module.exports = {
             {
                 urlPattern: /.*/,
                 handler: 'NetworkFirst'
+            },
+            {
+                
             }
         ]
         })
