@@ -24,7 +24,8 @@ module.exports = {
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({template: './index.html'}),
       new CopyWebpackPlugin([
-        { from: 'icons' }
+        { from: 'icons', to: 'icons'},
+        {from: 'manifest'}
       ]),
       new WorkboxPlugin.GenerateSW({clientsClaim: true, skipWaiting: true})
     ]
