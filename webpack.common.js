@@ -27,6 +27,26 @@ module.exports = {
         { from: 'icons', to: 'icons'},
         {from: 'manifest'}
       ]),
-      new WorkboxPlugin.GenerateSW({clientsClaim: true, skipWaiting: true})
+      new WorkboxPlugin.GenerateSW({
+          clientsClaim: true, 
+          skipWaiting: true,
+          runtimeCaching: [
+            {
+                urlPattern: /images/,
+                handler: 'CacheFirst'
+            },
+            {
+                urlPattern: new RegExp('^https://fonts.(?:googleapis|gstatic).com/(.*)'),
+                handler: 'StaleWhileRevalidate',
+                options: {
+                    cacheName: 'google-fonts-stylesheets'
+                }
+            },
+            {
+                urlPattern: /.*/,
+                handler: 'NetworkFirst'
+            }
+        ]
+        })
     ]
 }
