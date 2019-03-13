@@ -28,7 +28,7 @@ module.exports = {
         {from: 'manifest'}
       ]),
       new WorkboxPlugin.GenerateSW({
-          clientsClaim: true, 
+          clientsClaim: false, 
           skipWaiting: false,
           runtimeCaching: [
             {
@@ -50,7 +50,11 @@ module.exports = {
                 urlPattern: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/,
                 handler: 'NetworkFirst',
                 options: {
-                    cacheName: 'external-images'
+                    cacheName: 'external-images',
+                    expiration: {
+                        maxEntries: 200,
+                        maxAgeSeconds: 60 * 60 * 24 * 14//2 weeks
+                      },
                 }
             }
         ]
