@@ -9,7 +9,15 @@
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
-    "test": "jest"
+    "test": "jest",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "pretty-quick --staged",
+      "eslint src/ --fix",
+      "git add"
+    ]
   },
   "devDependencies": {
     "babel": "^6.23.0",
