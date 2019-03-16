@@ -24,7 +24,8 @@ ReactDOM.render(
     <WineNotesProvider>
       <App />
     </WineNotesProvider>
-  </MuiThemeProvider>, document.getElementById('root'),
+  </MuiThemeProvider>,
+  document.getElementById('root'),
 );
 
 if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {

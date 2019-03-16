@@ -1,18 +1,17 @@
 {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "plugins": [
-        "jest"
-    ],
-    "env": {
-        "es6": true,
-        "browser": true,
-        "jest/globals": true
-    },
-    "rules": {
-        "react/jsx-filename-extension": 0,
-        "react/prop-types": 0,
-        "react/no-unused-state": 0,
-        "no-console": ["error", { "allow": ["warn", "error"] }]
-    }
+  "parser": "babel-eslint",
+  "extends": ["prettier", "airbnb"],
+  "plugins": ["jest"],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest/globals": true
+  },
+  "rules": {
+    "arrow-parens": 0,
+    "react/jsx-filename-extension": 0,
+    "react/prop-types": 0,
+    "react/no-unused-state": 0,
+    "no-console": ["error", { "allow": ["warn", "error"] }]
+  }
 }
