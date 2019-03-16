@@ -5,11 +5,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "start": "export NODE_ENV=development && webpack-dev-server --open --config webpack.dev.js",
+    "build": "export NODE_ENV=production && webpack --config webpack.prod.js",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
-    "test": "jest",
+    "test": "export NODE_ENV=testing && jest",
     "precommit": "lint-staged"
   },
   "lint-staged": {
