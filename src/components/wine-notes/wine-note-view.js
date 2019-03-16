@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
-import {
-  Card, CardContent, Typography, CardMedia, withStyles,
-} from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import CardMedia from '@material-ui/core/CardMedia';
+import withStyles from '@material-ui/core/styles/withStyles';
 import uuidv1 from 'uuid/v1';
 import NoteMapper from '../../model/note-mapper';
 import WineNoteDialog from './wine-note-dialog';
 import Context from '../../app-context';
-
 
 const styles = {
   body: {
@@ -27,7 +28,6 @@ const styles = {
   details: {
     display: 'flex',
     flexDirection: 'column',
-
   },
   content: {
     flex: '1 auto',
@@ -38,14 +38,14 @@ class WineNoteView extends React.Component {
   constructor(props) {
     super(props);
     const { location } = props;
-    this.state = (location && location.state) ? location.state.wineNote : {};
+    this.state = location && location.state ? location.state.wineNote : {};
   }
 
-  getMapper = () => NoteMapper(this.state)
+  getMapper = () => NoteMapper(this.state);
 
-  changeNote = (note) => {
+  changeNote = note => {
     this.setState(note);
-  }
+  };
 
   render() {
     const { tastingNote, technicalNote, image } = this.state;
@@ -53,53 +53,54 @@ class WineNoteView extends React.Component {
     return (
       <div className={classes.body}>
         <Context.Consumer>
-          { context => (
+          {context => (
             <Fragment>
               <Card className={classes.card}>
-                { image
-                    && (
-                      <CardMedia
-                        className={classes.media}
-                        image={image}
-                        title={this.getMapper().getName()}
-                        component="img"
-                      />
-
-                    )
-                }
+                {image && (
+                  <CardMedia
+                    className={classes.media}
+                    image={image}
+                    title={this.getMapper().getName()}
+                    component="img"
+                  />
+                )}
                 <div className={classes.details}>
                   <CardContent className={classes.content}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {this.getMapper().getName()}
                     </Typography>
                     {tastingNote && (
-                    <Fragment>
-                      <Typography variant="h6" component="h3">
-              Tasting Notes
-                      </Typography>
-                      <Typography component="div">
-                        {tastingNote.split('\n').map(i => <div key={uuidv1()}>{i}</div>)}
-                      </Typography>
-                    </Fragment>
-                    )
-            }
+                      <Fragment>
+                        <Typography variant="h6" component="h3">
+                          Tasting Notes
+                        </Typography>
+                        <Typography component="div">
+                          {tastingNote.split('\n').map(i => (
+                            <div key={uuidv1()}>{i}</div>
+                          ))}
+                        </Typography>
+                      </Fragment>
+                    )}
                     {technicalNote && (
-                    <Fragment>
-                      <Typography variant="h6" component="h3">
-              Technical Notes
-                      </Typography>
-                      <Typography component="div">
-                        {technicalNote.split('\n').map(i => <div key={uuidv1()}>{i}</div>)}
-                      </Typography>
-                    </Fragment>
-                    )
-            }
+                      <Fragment>
+                        <Typography variant="h6" component="h3">
+                          Technical Notes
+                        </Typography>
+                        <Typography component="div">
+                          {technicalNote.split('\n').map(i => (
+                            <div key={uuidv1()}>{i}</div>
+                          ))}
+                        </Typography>
+                      </Fragment>
+                    )}
                   </CardContent>
                 </div>
               </Card>
 
               <WineNoteDialog
-                handleClose={() => { context.state.setNoteDialog(false); }}
+                handleClose={() => {
+                  context.state.setNoteDialog(false);
+                }}
                 open={context.state.editDialogOpen}
                 wineNote={this.state}
                 updateNote={this.changeNote}
@@ -111,6 +112,5 @@ class WineNoteView extends React.Component {
     );
   }
 }
-
 
 export default withStyles(styles)(WineNoteView);

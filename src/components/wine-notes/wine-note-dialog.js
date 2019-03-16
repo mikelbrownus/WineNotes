@@ -1,20 +1,18 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import {
-  TextField,
-  MenuItem,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  Select,
-  DialogTitle,
-  FormControl,
-  InputLabel,
-  FilledInput,
-  FormControlLabel,
-  Checkbox,
-} from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import Select from '@material-ui/core/Select';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import FilledInput from '@material-ui/core/FilledInput';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import Vintages from '../../model/vintages';
 import VarietalsAutosuggest from './varietals-autosuggest';
 import Context from '../../app-context';
@@ -34,7 +32,15 @@ class WineNoteDialog extends React.Component {
     this.wineNote = wineNote;
     if (wineNote) {
       const {
-        varietal, vintage, nonvintage, maker, wineName, image, region, tastingNote, technicalNote,
+        varietal,
+        vintage,
+        nonvintage,
+        maker,
+        wineName,
+        image,
+        region,
+        tastingNote,
+        technicalNote,
       } = wineNote;
       this.state = {
         varietal,
@@ -74,24 +80,22 @@ class WineNoteDialog extends React.Component {
       tastingNote: '',
       technicalNote: '',
     });
-  }
+  };
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  changeVarietalState = (value) => {
+  changeVarietalState = value => {
     this.setState({ varietal: value });
-  }
+  };
 
-  handleChangeCB = (event) => {
+  handleChangeCB = event => {
     this.setState({ [event.target.name]: event.target.checked });
   };
 
   render() {
-    const {
-      open, handleClose, classes, updateNote,
-    } = this.props;
+    const { open, handleClose, classes, updateNote } = this.props;
     const id = this.wineNote && this.wineNote.id ? this.wineNote.id : '0';
     const {
       vintage,
@@ -152,29 +156,34 @@ class WineNoteDialog extends React.Component {
                 varietal={varietal}
                 changeParentState={this.changeVarietalState}
               />
-              <FormControl variant="filled" className={classes.formControl} disabled={nonvintage} fullWidth>
+              <FormControl
+                variant="filled"
+                className={classes.formControl}
+                disabled={nonvintage}
+                fullWidth
+              >
                 <InputLabel htmlFor="vintage">Vintage</InputLabel>
                 <Select
                   value={vintage}
                   onChange={this.handleChange}
                   input={<FilledInput name="vintage" id="vintage" />}
                 >
-                  {
-                vintages.map(v => (
-                  <MenuItem value={v} key={v}>{v}</MenuItem>
-                ))
-            }
+                  {vintages.map(v => (
+                    <MenuItem value={v} key={v}>
+                      {v}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
               <FormControlLabel
-                control={(
+                control={
                   <Checkbox
                     checked={nonvintage}
                     onChange={this.handleChangeCB}
                     name="nonvintage"
                     value="nonvintage"
                   />
-)}
+                }
                 label="Non Vintage Wine"
               />
               <TextField
@@ -216,19 +225,22 @@ class WineNoteDialog extends React.Component {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary">
-          Cancel
+                Cancel
               </Button>
               <Button
-                onClick={this.wineNote
-                  ? () => {
-                    context.state.updateNote(id, this.state);
-                    updateNote(this.state); handleClose();
-                  }
-                  : () => {
-                    context.state.addNote(this.state);
-                    this.clearForm(); handleClose();
-                  }
-                  }
+                onClick={
+                  this.wineNote
+                    ? () => {
+                        context.state.updateNote(id, this.state);
+                        updateNote(this.state);
+                        handleClose();
+                      }
+                    : () => {
+                        context.state.addNote(this.state);
+                        this.clearForm();
+                        handleClose();
+                      }
+                }
                 color="primary"
               >
                 {this.wineNote ? 'Update' : 'Add'}
@@ -240,6 +252,5 @@ class WineNoteDialog extends React.Component {
     );
   }
 }
-
 
 export default withStyles(styles)(WineNoteDialog);

@@ -1,6 +1,9 @@
 import React from 'react';
-import { Paper, Tabs, Tab } from '@material-ui/core';
-import { Link, withRouter } from 'react-router-dom';
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Link from 'react-router-dom/Link';
+import withRouter from 'react-router-dom/withRouter';
 import withWidth from '@material-ui/core/withWidth';
 
 const sections = ['Wine Notes', 'Collections', 'Settings', 'Help'];
@@ -9,14 +12,22 @@ class Footer extends React.Component {
     super(props);
     const { location } = this.props;
     this.state = {
-      index: location.pathname === '/' || !location.pathname ? 0 : sections.findIndex(item => location.pathname.substring(1).toLowerCase() === item.toLowerCase()),
+      index:
+        location.pathname === '/' || !location.pathname
+          ? 0
+          : sections.findIndex(
+              item =>
+                location.pathname.substring(1).toLowerCase() ===
+                item.toLowerCase(),
+            ),
     };
   }
 
   componentWillReceiveProps(newProps) {
     const { location } = newProps;
     const foundIndex = sections.findIndex(
-      item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
+      item =>
+        location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
     );
     const { index } = this.state;
     const shouldUpdate = index !== foundIndex;
@@ -28,17 +39,18 @@ class Footer extends React.Component {
   shouldComponentUpdate(newProps) {
     const { location } = newProps;
     const foundIndex = sections.findIndex(
-      item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
+      item =>
+        location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
     );
     const { index } = this.state;
     return index !== foundIndex;
   }
 
-  changeIndex = (i) => {
+  changeIndex = i => {
     this.setState({
       index: i,
     });
-  }
+  };
 
   render() {
     const { index } = this.state;
@@ -65,9 +77,8 @@ class Footer extends React.Component {
               label={section}
               key={section}
               component={Link}
-              to={(section === 'Wine Notes') ? '/' : `/${section.toLowerCase()}`}
+              to={section === 'Wine Notes' ? '/' : `/${section.toLowerCase()}`}
             />
-
           ))}
         </Tabs>
       </Paper>

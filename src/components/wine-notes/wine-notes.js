@@ -1,6 +1,8 @@
 import React from 'react';
-import { Fab, Grid, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
 import { MdAdd } from 'react-icons/md';
 import WineNoteCard from './wine-note-card';
 import WineNoteDialog from './wine-note-dialog';
@@ -19,7 +21,6 @@ const styles = theme => ({
     position: 'absolute',
     bottom: '64px',
     right: '20px',
-
   },
   noNoteMessage: {
     margin: 'calc(20%) auto',
@@ -27,8 +28,7 @@ const styles = theme => ({
     position: 'position',
     height: '25px',
   },
-}
-);
+});
 class WineNotes extends React.Component {
   state = {
     open: false,
@@ -55,18 +55,21 @@ class WineNotes extends React.Component {
               justify="center"
               alignItems="center"
             >
-              {context.state.WineNotes.length > 0 && context.state.WineNotes.map(note => (
-                <Grid item xs={12} sm={6} md={4} key={note.id}>
-                  <WineNoteCard note={note} />
-                </Grid>
-              ))}
-              {context.state.WineNotes.length < 1
-                && (
-                <Typography variant="h4" component="p" className={classes.noNoteMessage}>
-                Press + to add a note
+              {context.state.WineNotes.length > 0 &&
+                context.state.WineNotes.map(note => (
+                  <Grid item xs={12} sm={6} md={4} key={note.id}>
+                    <WineNoteCard note={note} />
+                  </Grid>
+                ))}
+              {context.state.WineNotes.length < 1 && (
+                <Typography
+                  variant="h4"
+                  component="p"
+                  className={classes.noNoteMessage}
+                >
+                  Press + to add a note
                 </Typography>
-                )
-              }
+              )}
             </Grid>
             <Fab
               aria-label="Add"
@@ -77,13 +80,9 @@ class WineNotes extends React.Component {
             >
               <MdAdd />
             </Fab>
-            <WineNoteDialog
-              handleClose={this.handleClose}
-              open={open}
-            />
+            <WineNoteDialog handleClose={this.handleClose} open={open} />
           </div>
         )}
-
       </Context.Consumer>
     );
   }

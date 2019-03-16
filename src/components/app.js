@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { BrowserRouter, Route } from 'react-router-dom';
+import BrowserRouter from 'react-router-dom/BrowserRouter';
+import Route from 'react-router-dom/Route';
 import Header from './header';
 import Footer from './footer';
 import WineNotes from './wine-notes/wine-notes';
@@ -8,7 +9,6 @@ import Help from './help/help';
 import Collections from './collections/collections';
 import Settings from './settings/settings';
 import WineNoteView from './wine-notes/wine-note-view';
-
 
 const App = () => (
   <BrowserRouter>

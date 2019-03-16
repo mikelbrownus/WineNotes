@@ -1,28 +1,30 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Typography,
-  withStyles,
-} from '@material-ui/core';
+import withRouter from 'react-router-dom/withRouter';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
 import { TiWine } from 'react-icons/ti';
 import NoteMapper from '../../model/note-mapper';
 
-const isIEorFF = navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('MSIE') !== -1 || document.documentMode;
-const nameLength = isIEorFF ? {
-  overflow: 'hidden',
-  lineHeight: '1em',
-  maxHeight: '2em',
-  textOverflow: 'ellipsis',
-}
+const isIEorFF =
+  navigator.userAgent.indexOf('Firefox') !== -1 ||
+  navigator.userAgent.indexOf('MSIE') !== -1 ||
+  document.documentMode;
+const nameLength = isIEorFF
+  ? {
+      overflow: 'hidden',
+      lineHeight: '1em',
+      maxHeight: '2em',
+      textOverflow: 'ellipsis',
+    }
   : {
-    overflow: 'hidden',
-    display: '-webkit-box',
-    '-webkit-line-clamp': '3',
-    '-webkit-box-orient': 'vertical',
-  };
+      overflow: 'hidden',
+      display: '-webkit-box',
+      '-webkit-line-clamp': '3',
+      '-webkit-box-orient': 'vertical',
+    };
 
 const styles = {
   card: {
@@ -60,30 +62,29 @@ function WineNoteCard(props) {
 
   return (
     <Card className={classes.card}>
-      {
-      note.image ? (
+      {note.image ? (
         <img
           src={note.image}
           alt={mapper.getName()}
           className={classes.externalImage}
         />
-      )
-        : (<TiWine className={classes.photo} />)
-    }
+      ) : (
+        <TiWine className={classes.photo} />
+      )}
       <CardActionArea
         className={classes.actionArea}
         onClick={() => props.history.push('/view', { wineNote: note })}
       >
-
-
         <CardContent>
-          <Typography variant="subtitle1" component="p" className={classes.nameLength}>
+          <Typography
+            variant="subtitle1"
+            component="p"
+            className={classes.nameLength}
+          >
             {mapper.getName()}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-          Date:
-            {' '}
-            {mapper.getDate()}
+            Date: {mapper.getDate()}
           </Typography>
         </CardContent>
       </CardActionArea>

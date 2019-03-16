@@ -1,21 +1,21 @@
 import uuidv1 from 'uuid/v1';
-import { clone } from 'ramda';
+import clone from 'ramda/src/clone';
 
 const WineNoteRepository = () => {
   let wineNotes = [];
   // this is for testing purposes only
-  const setNotes = (notes) => {
-    notes.forEach((note) => {
+  const setNotes = notes => {
+    notes.forEach(note => {
       const randomDaysOld = Math.floor(Math.random() * 6) + 1;
       const dayOffSet = 24 * 60 * 60 * 1000;
       const newNote = clone(note);
       newNote.id = uuidv1();
-      newNote.date = new Date(Date.now() - (dayOffSet * randomDaysOld));
+      newNote.date = new Date(Date.now() - dayOffSet * randomDaysOld);
       wineNotes.push(newNote);
     });
   };
 
-  const insert = (note) => {
+  const insert = note => {
     const newNote = clone(note);
     newNote.date = new Date();
     newNote.id = uuidv1();
@@ -26,25 +26,31 @@ const WineNoteRepository = () => {
 
   const update = (id, newProperties) => {
     const updatedNote = Object.assign(clone(getNote(id)), newProperties);
-    wineNotes = wineNotes.map(note => ((note.id === updatedNote.id) ? updatedNote : note));
+    wineNotes = wineNotes.map(note =>
+      note.id === updatedNote.id ? updatedNote : note,
+    );
   };
 
-  const deleteNote = (id) => {
+  const deleteNote = id => {
     wineNotes = wineNotes.filter(note => note.id !== id);
   };
   const laterDate = (note1, note2) => note2.date - note1.date;
 
-  const filteredNotes = (filter) => {
+  const filteredNotes = filter => {
     const notes = wineNotes;
     if (filter) {
       const filterLowerCase = filter.toLowerCase();
-      return notes.filter(note => (
-        note.varietal.toLowerCase().startsWith(filterLowerCase)
-        || (note.vintage.toLowerCase().startsWith(filterLowerCase) && !note.nonvintage)
-        || note.wineName.toLowerCase().startsWith(filterLowerCase)
-        || note.region.toLowerCase().startsWith(filterLowerCase)
-        || note.maker.toLowerCase().startsWith(filterLowerCase)
-      )).sort(laterDate);
+      return notes
+        .filter(
+          note =>
+            note.varietal.toLowerCase().startsWith(filterLowerCase) ||
+            (note.vintage.toLowerCase().startsWith(filterLowerCase) &&
+              !note.nonvintage) ||
+            note.wineName.toLowerCase().startsWith(filterLowerCase) ||
+            note.region.toLowerCase().startsWith(filterLowerCase) ||
+            note.maker.toLowerCase().startsWith(filterLowerCase),
+        )
+        .sort(laterDate);
     }
     return notes.sort(laterDate);
   };
@@ -53,11 +59,15 @@ const WineNoteRepository = () => {
     getNotes: () => wineNotes,
     insert,
     setNotes,
-    setWineNotes: (notes) => { wineNotes = notes; },
+    setWineNotes: notes => {
+      wineNotes = notes;
+    },
     getNote,
     update,
     deleteNote,
-    deleteAll: () => { wineNotes = []; },
+    deleteAll: () => {
+      wineNotes = [];
+    },
     filteredNotes,
   };
 };

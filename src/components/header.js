@@ -1,22 +1,25 @@
 import React, { Fragment } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import withRouter from 'react-router-dom/withRouter';
+import Link from 'react-router-dom/Link';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
 import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Button,
-  Typography,
-  InputBase,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-} from '@material-ui/core';
-import {
-  MdSearch, MdEdit, MdDeleteForever, MdKeyboardBackspace, MdHome,
+  MdSearch,
+  MdEdit,
+  MdDeleteForever,
+  MdKeyboardBackspace,
+  MdHome,
 } from 'react-icons/md';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import Context from '../app-context';
 
@@ -88,35 +91,38 @@ class Header extends React.Component {
   state = {
     filter: '',
     alert: false,
-  }
+  };
 
-  changeFilter = (filter) => {
+  changeFilter = filter => {
     this.setState({ filter });
-  }
+  };
 
-  toggleAlert = (on) => {
+  toggleAlert = on => {
     this.setState({ alert: on });
-  }
+  };
 
   render() {
     const { classes, location, history } = this.props;
     const { filter, alert } = this.state;
-    const hasSearch = (location.pathname === '/' || location.pathname === '/collections');
-    const isView = (location.pathname === '/view');
-    const wineNote = (location && location.state) ? location.state.wineNote : {};
+    const hasSearch =
+      location.pathname === '/' || location.pathname === '/collections';
+    const isView = location.pathname === '/view';
+    const wineNote = location && location.state ? location.state.wineNote : {};
     return (
       <Context.Consumer>
-        { context => (
+        {context => (
           <AppBar position="static">
             <Dialog
               open={alert}
               onClose={this.handleClose}
               aria-labelledby="responsive-dialog-title"
             >
-              <DialogTitle id="responsive-dialog-title">Delete wine note?</DialogTitle>
+              <DialogTitle id="responsive-dialog-title">
+                Delete wine note?
+              </DialogTitle>
               <DialogContent>
                 <DialogContentText>
-              No going back after this. Shall I delete?
+                  No going back after this. Shall I delete?
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
@@ -128,99 +134,96 @@ class Header extends React.Component {
                   }}
                   color="primary"
                 >
-              Delete
+                  Delete
                 </Button>
-                <Button onClick={() => { this.toggleAlert(false); }} color="primary" autoFocus>
-              Cancel
+                <Button
+                  onClick={() => {
+                    this.toggleAlert(false);
+                  }}
+                  color="primary"
+                  autoFocus
+                >
+                  Cancel
                 </Button>
               </DialogActions>
             </Dialog>
             <Toolbar>
-              {
-                 isView
-                   ? (
-                     <Link to="/">
-                       <Button
-                         variant="contained"
-                         color="primary"
-                         aria-label="back"
-                         className={classes.home}
-                       >
-                         <MdKeyboardBackspace fontSize="x-large" />
-                       </Button>
-                     </Link>
-                   )
-                   : (
-                     <Link to="/help">
-                       <IconButton
-                         variant="contained"
-                         aria-label="home"
-                         className={classes.home}
-                       >
-                         <MdHome />
-                       </IconButton>
-                     </Link>
-                   )
-              }
+              {isView ? (
+                <Link to="/">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    aria-label="back"
+                    className={classes.home}
+                  >
+                    <MdKeyboardBackspace fontSize="x-large" />
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/help">
+                  <IconButton
+                    variant="contained"
+                    aria-label="home"
+                    className={classes.home}
+                  >
+                    <MdHome />
+                  </IconButton>
+                </Link>
+              )}
 
-              <Typography variant="h6" color="inherit" className={classes.title}>
-              Wine Notes
-              </Typography>
-              {hasSearch
-            && (
-            <Fragment>
-              <div className={classes.grow} />
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <MdSearch />
-                </div>
-                <InputBase
-                  placeholder="Search…"
-                  value={filter}
-                  onChange={(event) => {
-                    this.changeFilter(event.target.value);
-                    context.state.filterNotes(event.target.value);
-                  }
-                  }
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                />
-              </div>
-              <Button
+              <Typography
+                variant="h6"
                 color="inherit"
-                onClick={context.state.addTestData}
+                className={classes.title}
               >
-                Reset Test Data
-              </Button>
-            </Fragment>
-            )
-            }
-              {isView
-            && (
-              <Fragment>
-                <div className={classes.grow} />
-                <IconButton
-                  color="inherit"
-                  onClick={() => { context.state.editNoteDialogToggle(); }}
-                >
-                  <MdEdit />
-                </IconButton>
-                <IconButton
-                  color="inherit"
-                  onClick={
-                    () => {
+                Wine Notes
+              </Typography>
+              {hasSearch && (
+                <Fragment>
+                  <div className={classes.grow} />
+                  <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                      <MdSearch />
+                    </div>
+                    <InputBase
+                      placeholder="Search…"
+                      value={filter}
+                      onChange={event => {
+                        this.changeFilter(event.target.value);
+                        context.state.filterNotes(event.target.value);
+                      }}
+                      classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
+                      }}
+                    />
+                  </div>
+                  <Button color="inherit" onClick={context.state.addTestData}>
+                    Reset Test Data
+                  </Button>
+                </Fragment>
+              )}
+              {isView && (
+                <Fragment>
+                  <div className={classes.grow} />
+                  <IconButton
+                    color="inherit"
+                    onClick={() => {
+                      context.state.editNoteDialogToggle();
+                    }}
+                  >
+                    <MdEdit />
+                  </IconButton>
+                  <IconButton
+                    color="inherit"
+                    onClick={() => {
                       this.toggleAlert(true);
-                    }
-                  }
-                >
-                  <MdDeleteForever />
-                </IconButton>
-              </Fragment>
-
-            )
-            }
+                    }}
+                  >
+                    <MdDeleteForever />
+                  </IconButton>
+                </Fragment>
+              )}
             </Toolbar>
           </AppBar>
         )}
