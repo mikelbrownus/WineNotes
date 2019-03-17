@@ -10,7 +10,8 @@
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
     "test": "export NODE_ENV=testing && jest",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "deploy": "yarn build && gh-pages -d dist"
   },
   "lint-staged": {
     "src/**/*.js": [
@@ -19,6 +20,7 @@
       "git add"
     ]
   },
+  "homepage": "https://mikelbrownus.github.io/WineNotes",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
