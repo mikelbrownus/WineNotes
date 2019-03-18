@@ -3,4 +3,5 @@ This is an experimental project for a web app using React for writing wine tasti
 As much functionality as possible will be attempted as frontend app.  The goal is to see how much can be done without a backend relying browser support for storage alone.  
 
 ## Preview here: 
-https://mikelbrownus.github.io/WineNotes
+~~https://mikelbrownus.github.io/WineNotes~~
+<br> Coming soon
