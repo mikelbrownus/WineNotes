@@ -26,9 +26,7 @@ const WineNoteRepository = () => {
 
   const update = (id, newProperties) => {
     const updatedNote = Object.assign(clone(getNote(id)), newProperties);
-    wineNotes = wineNotes.map(note =>
-      note.id === updatedNote.id ? updatedNote : note,
-    );
+    wineNotes = wineNotes.map(note => (note.id === updatedNote.id ? updatedNote : note));
   };
 
   const deleteNote = id => {
@@ -42,13 +40,12 @@ const WineNoteRepository = () => {
       const filterLowerCase = filter.toLowerCase();
       return notes
         .filter(
-          note =>
-            note.varietal.toLowerCase().startsWith(filterLowerCase) ||
-            (note.vintage.toLowerCase().startsWith(filterLowerCase) &&
-              !note.nonvintage) ||
-            note.wineName.toLowerCase().startsWith(filterLowerCase) ||
-            note.region.toLowerCase().startsWith(filterLowerCase) ||
-            note.maker.toLowerCase().startsWith(filterLowerCase),
+          note => note.varietal.toLowerCase().startsWith(filterLowerCase)
+            || (note.vintage.toLowerCase().startsWith(filterLowerCase)
+              && !note.nonvintage)
+            || note.wineName.toLowerCase().startsWith(filterLowerCase)
+            || note.region.toLowerCase().startsWith(filterLowerCase)
+            || note.maker.toLowerCase().startsWith(filterLowerCase),
         )
         .sort(laterDate);
     }

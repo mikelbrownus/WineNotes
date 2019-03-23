@@ -37,7 +37,6 @@ describe('WineNoteRepository tests', () => {
     expect(repository.getNotes()[4].id).toMatch(uuidPattern);
   });
 
-
   it('insert should create a date object with current date', () => {
     const wineNote = {
       collection: null,
@@ -52,7 +51,9 @@ describe('WineNoteRepository tests', () => {
     };
     repository.insert(wineNote);
     expect(repository.getNotes()[4].date).not.toBeUndefined();
-    expect(repository.getNotes()[4].date.toLocaleString()).toEqual(new Date().toLocaleString());
+    expect(repository.getNotes()[4].date.toLocaleString()).toEqual(
+      new Date().toLocaleString(),
+    );
   });
 
   it('repository should get correct note from id', () => {
@@ -76,7 +77,9 @@ describe('WineNoteRepository tests', () => {
     };
     const note = repository.getNotes()[0];
     repository.update(note.id, wineNoteUpdateFields);
-    expect(repository.getNote(note.id).maker).toEqual(wineNoteUpdateFields.maker);
+    expect(repository.getNote(note.id).maker).toEqual(
+      wineNoteUpdateFields.maker,
+    );
     expect(repository.getNote(note.id).id).toEqual(note.id);
   });
 
@@ -87,7 +90,9 @@ describe('WineNoteRepository tests', () => {
   });
 
   it('repository delete a note with bad ID no error thrown', () => {
-    expect(() => { repository.deleteNote('bad-id'); }).not.toThrowError();
+    expect(() => {
+      repository.deleteNote('bad-id');
+    }).not.toThrowError();
   });
 
   it('list should have one note when 2015 is filter', () => {

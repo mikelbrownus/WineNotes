@@ -16,18 +16,16 @@ class Footer extends React.Component {
         location.pathname === '/' || !location.pathname
           ? 0
           : sections.findIndex(
-              item =>
-                location.pathname.substring(1).toLowerCase() ===
-                item.toLowerCase(),
-            ),
+            item => location.pathname.substring(1).toLowerCase()
+                === item.toLowerCase(),
+          ),
     };
   }
 
   componentWillReceiveProps(newProps) {
     const { location } = newProps;
     const foundIndex = sections.findIndex(
-      item =>
-        location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
+      item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
     );
     const { index } = this.state;
     const shouldUpdate = index !== foundIndex;
@@ -39,8 +37,7 @@ class Footer extends React.Component {
   shouldComponentUpdate(newProps) {
     const { location } = newProps;
     const foundIndex = sections.findIndex(
-      item =>
-        location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
+      item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
     );
     const { index } = this.state;
     return index !== foundIndex;

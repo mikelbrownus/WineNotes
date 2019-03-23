@@ -13,7 +13,9 @@ const varietalSuggestions = Varietals()
   .map(x => ({ label: x }));
 
 function renderInputComponent(inputProps) {
-  const { classes, inputRef = () => {}, ref, ...other } = inputProps;
+  const {
+    classes, inputRef = () => {}, ref, ...other
+  } = inputProps;
 
   return (
     <TextField
@@ -40,17 +42,16 @@ function renderSuggestion(suggestion, { query, isHighlighted }) {
   return (
     <MenuItem selected={isHighlighted} component="div">
       <div>
-        {parts.map((part, index) =>
-          part.highlight ? (
-            <span key={String(index)} style={{ fontWeight: 500 }}>
-              {part.text}
-            </span>
-          ) : (
+        {parts.map((part, index) => (part.highlight ? (
+          <span key={String(index)} style={{ fontWeight: 500 }}>
+            {part.text}
+          </span>
+        )
+          : (
             <strong key={String(index)} style={{ fontWeight: 300 }}>
               {part.text}
             </strong>
-          ),
-        )}
+          )))}
       </div>
     </MenuItem>
   );
@@ -64,16 +65,15 @@ function getSuggestions(value) {
   return inputLength === 0
     ? []
     : varietalSuggestions.filter(suggestion => {
-        const keep =
-          count < 10 &&
-          suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
+      const keep = count < 10
+          && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
 
-        if (keep) {
-          count += 1;
-        }
+      if (keep) {
+        count += 1;
+      }
 
-        return keep;
-      });
+      return keep;
+    });
 }
 
 function getSuggestionValue(suggestion) {

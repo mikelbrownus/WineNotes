@@ -95,7 +95,9 @@ class WineNoteDialog extends React.Component {
   };
 
   render() {
-    const { open, handleClose, classes, updateNote } = this.props;
+    const {
+      open, handleClose, classes, updateNote,
+    } = this.props;
     const id = this.wineNote && this.wineNote.id ? this.wineNote.id : '0';
     const {
       vintage,
@@ -176,14 +178,14 @@ class WineNoteDialog extends React.Component {
                 </Select>
               </FormControl>
               <FormControlLabel
-                control={
+                control={(
                   <Checkbox
                     checked={nonvintage}
                     onChange={this.handleChangeCB}
                     name="nonvintage"
                     value="nonvintage"
                   />
-                }
+)}
                 label="Non Vintage Wine"
               />
               <TextField
@@ -231,15 +233,15 @@ class WineNoteDialog extends React.Component {
                 onClick={
                   this.wineNote
                     ? () => {
-                        context.state.updateNote(id, this.state);
-                        updateNote(this.state);
-                        handleClose();
-                      }
+                      context.state.updateNote(id, this.state);
+                      updateNote(this.state);
+                      handleClose();
+                    }
                     : () => {
-                        context.state.addNote(this.state);
-                        this.clearForm();
-                        handleClose();
-                      }
+                      context.state.addNote(this.state);
+                      this.clearForm();
+                      handleClose();
+                    }
                 }
                 color="primary"
               >

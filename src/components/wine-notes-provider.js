@@ -24,7 +24,7 @@ class WineNotesProvider extends React.Component {
   }
 
   componentDidMount() {
-    localForage.getItem('wineNotes').then((value) => {
+    localForage.getItem('wineNotes').then(value => {
       if (value) {
         const notes = JSON.parse(value);
         repository.setWineNotes(notes);
@@ -48,7 +48,7 @@ class WineNotesProvider extends React.Component {
     }));
   };
 
-  deleteNote = (id) => {
+  deleteNote = id => {
     repository.deleteNote(id);
     this.setState(() => ({
       WineNotes: repository.filteredNotes(),
@@ -56,7 +56,7 @@ class WineNotesProvider extends React.Component {
     localForage.setItem('wineNotes', JSON.stringify(repository.getNotes()));
   };
 
-  filterNotes = (filter) => {
+  filterNotes = filter => {
     this.setState(() => ({
       WineNotes: repository.filteredNotes(filter),
     }));
@@ -68,7 +68,7 @@ class WineNotesProvider extends React.Component {
     }));
   };
 
-  setNoteDialog = (open) => {
+  setNoteDialog = open => {
     this.setState(() => ({
       editDialogOpen: open,
     }));
@@ -82,7 +82,7 @@ class WineNotesProvider extends React.Component {
     localForage.setItem('wineNotes', JSON.stringify(repository.getNotes()));
   };
 
-  addNote = (note) => {
+  addNote = note => {
     repository.insert(note);
     this.setState(() => ({
       WineNotes: repository.filteredNotes(),
@@ -93,9 +93,10 @@ class WineNotesProvider extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <Context.Provider value={{
-        state: this.state,
-      }}
+      <Context.Provider
+        value={{
+          state: this.state,
+        }}
       >
         {children}
       </Context.Provider>

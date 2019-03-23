@@ -9,12 +9,16 @@ describe('Note mapper tests', () => {
 
   it('Mapper.getName should be correct', () => {
     const noteMapper = NoteMapper(initialState.WineNotes[2]);
-    expect(noteMapper.getName()).toEqual('Drouhin Roserock Chardonnay Eola-Amity Hills 2016');
+    expect(noteMapper.getName()).toEqual(
+      'Drouhin Roserock Chardonnay Eola-Amity Hills 2016',
+    );
   });
 
   it('Mapper.getName should not include "blend" in name', () => {
     const noteMapper = NoteMapper(initialState.WineNotes[1]);
-    expect(noteMapper.getName()).toEqual('Robert Mondavi Fumé Blanc Oakville 2014');
+    expect(noteMapper.getName()).toEqual(
+      'Robert Mondavi Fumé Blanc Oakville 2014',
+    );
   });
 
   it('Mapper.getName should not include vintage if nonvintage is true', () => {

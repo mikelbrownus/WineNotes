@@ -104,8 +104,7 @@ class Header extends React.Component {
   render() {
     const { classes, location, history } = this.props;
     const { filter, alert } = this.state;
-    const hasSearch =
-      location.pathname === '/' || location.pathname === '/collections';
+    const hasSearch = location.pathname === '/' || location.pathname === '/collections';
     const isView = location.pathname === '/view';
     const wineNote = location && location.state ? location.state.wineNote : {};
     return (

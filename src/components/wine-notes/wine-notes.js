@@ -55,8 +55,8 @@ class WineNotes extends React.Component {
               justify="center"
               alignItems="center"
             >
-              {context.state.WineNotes.length > 0 &&
-                context.state.WineNotes.map(note => (
+              {context.state.WineNotes.length > 0
+                && context.state.WineNotes.map(note => (
                   <Grid item xs={12} sm={6} md={4} key={note.id}>
                     <WineNoteCard note={note} />
                   </Grid>

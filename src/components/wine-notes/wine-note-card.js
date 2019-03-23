@@ -8,23 +8,22 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { TiWine } from 'react-icons/ti';
 import NoteMapper from '../../model/note-mapper';
 
-const isIEorFF =
-  navigator.userAgent.indexOf('Firefox') !== -1 ||
-  navigator.userAgent.indexOf('MSIE') !== -1 ||
-  document.documentMode;
+const isIEorFF = navigator.userAgent.indexOf('Firefox') !== -1
+  || navigator.userAgent.indexOf('MSIE') !== -1
+  || document.documentMode;
 const nameLength = isIEorFF
   ? {
-      overflow: 'hidden',
-      lineHeight: '1em',
-      maxHeight: '2em',
-      textOverflow: 'ellipsis',
-    }
+    overflow: 'hidden',
+    lineHeight: '1em',
+    maxHeight: '2em',
+    textOverflow: 'ellipsis',
+  }
   : {
-      overflow: 'hidden',
-      display: '-webkit-box',
-      '-webkit-line-clamp': '3',
-      '-webkit-box-orient': 'vertical',
-    };
+    overflow: 'hidden',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '3',
+    '-webkit-box-orient': 'vertical',
+  };
 
 const styles = {
   card: {
@@ -84,7 +83,9 @@ function WineNoteCard(props) {
             {mapper.getName()}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-            Date: {mapper.getDate()}
+            Date:
+            {' '}
+            {mapper.getDate()}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["prettier", "airbnb"],
+  "extends": ["airbnb"],
   "plugins": ["jest"],
   "env": {
     "es6": true,
