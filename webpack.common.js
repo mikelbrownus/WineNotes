@@ -22,7 +22,10 @@ module.exports = {
     },
     plugins: [
       new CleanWebpackPlugin(['dist']),
-      new HtmlWebpackPlugin({template: './index.html'}),
+      new HtmlWebpackPlugin({
+              template: './index.html',
+              baseUrl: process.env.NODE_ENV == 'development' ? '/' : 'https://mikelbrownus.github.io/WineNotes/'
+      }),
       new CopyWebpackPlugin([
         { from: 'icons', to: 'icons'},
         {from: 'manifest'}
