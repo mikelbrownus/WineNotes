@@ -11,7 +11,7 @@ import Settings from './settings/settings';
 import WineNoteView from './wine-notes/wine-note-view';
 
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter basename="/WineNotes">
     <Fragment>
       <CssBaseline />
       <Header />
