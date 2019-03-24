@@ -15,7 +15,7 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       margin: '8px 16px',
     },
-    overflowY: 'scroll',
+    overflowY: 'auto',
   },
   fab: {
     position: 'absolute',

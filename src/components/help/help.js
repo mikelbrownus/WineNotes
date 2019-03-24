@@ -3,7 +3,7 @@ import { version } from '../../../package.json';
 
 const divStyle = {
   height: 'calc(100% - 116px)',
-  overflowY: 'scroll',
+  overflowY: 'auto',
   margin: '0 auto',
   maxWidth: '650px',
 };

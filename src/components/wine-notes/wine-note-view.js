@@ -12,7 +12,7 @@ import Context from '../../app-context';
 const styles = {
   body: {
     height: 'calc(100% - 136px)',
-    overflowY: 'scroll',
+    overflowY: 'auto',
     margin: '20px auto 0  auto',
     maxWidth: '650px',
   },
