@@ -40,12 +40,12 @@ const WineNoteRepository = () => {
       const filterLowerCase = filter.toLowerCase();
       return notes
         .filter(
-          note => note.varietal.toLowerCase().startsWith(filterLowerCase)
-            || (note.vintage.toLowerCase().startsWith(filterLowerCase)
+          note => note.varietal.toLowerCase().includes(filterLowerCase)
+            || (note.vintage.toLowerCase().includes(filterLowerCase)
               && !note.nonvintage)
-            || note.wineName.toLowerCase().startsWith(filterLowerCase)
-            || note.region.toLowerCase().startsWith(filterLowerCase)
-            || note.maker.toLowerCase().startsWith(filterLowerCase),
+            || note.wineName.toLowerCase().includes(filterLowerCase)
+            || note.region.toLowerCase().includes(filterLowerCase)
+            || note.maker.toLowerCase().includes(filterLowerCase),
         )
         .sort(laterDate);
     }
