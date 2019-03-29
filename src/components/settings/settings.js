@@ -56,80 +56,95 @@ const styles = theme => ({
   },
 });
 
-const Settings = (props) => {
-  const { classes } = props;
-  return (
-    <div className={classes.divStyle}>
-      <main className={classes.main}>
-        <CssBaseline />
-        <Paper className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <MdSettings />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Settings
-          </Typography>
-          <form className={classes.form}>
-            <FormControl margin="normal" fullWidth>
-              <InputLabel htmlFor="maker">Wine Maker</InputLabel>
-              <Input type="text" id="maker" name="maker" autoFocus />
-            </FormControl>
-            <TextField
-              id="tastingNote"
-              name="tastingNote"
-              label="Wine Notes"
-              value=""
-              multiline
-              rowsMax="4"
-              margin="normal"
-                // onChange={this.handleChange}
-              variant="outlined"
-              fullWidth
-            />
+class Settings extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      autoInsert: {
+        on: false,
+        wineMaker: '',
+        wineNotes: '',
+        technicalNotes: '',
+      },
+      nameOrder: 1,
+    };
+  }
 
-            <TextField
-              id="technicalNote"
-              name="technicalNote"
-              label="Technical Notes"
-              value=""
-              multiline
-              rowsMax="4"
-              margin="normal"
-              variant="outlined"
-                // onChange={this.handleChange}
-              fullWidth
-            />
-            <FormControlLabel
-              control={<Checkbox value="auto-insert" color="primary" />}
-              label="Use auto insert"
-            />
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="demo-controlled-open-select">Order</InputLabel>
-              <Select
-            // open={this.state.open}
-            // onClose={this.handleClose}
-            // onOpen={this.handleOpen}
-                value="Default"
-            // onChange={this.handleChange}
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.divStyle}>
+        <main className={classes.main}>
+          <CssBaseline />
+          <Paper className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <MdSettings />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Settings
+            </Typography>
+            <form className={classes.form}>
+              <FormControl margin="normal" fullWidth>
+                <InputLabel htmlFor="maker">Wine Maker</InputLabel>
+                <Input type="text" id="maker" name="maker" autoFocus />
+              </FormControl>
+              <TextField
+                id="tastingNote"
+                name="tastingNote"
+                label="Wine Notes"
+                value=""
+                multiline
+                rowsMax="4"
+                margin="normal"
+                  // onChange={this.handleChange}
+                variant="outlined"
                 fullWidth
-                inputProps={{
-                  name: 'order',
-                  id: 'order',
-                }}
-              >
-                <MenuItem value="">
-                  <em>Default</em>
-                </MenuItem>
-                <MenuItem value={1}>Region/Maker/Name/Varietal/Vintage</MenuItem>
-                <MenuItem value={2}>Vintage/Maker/Name/Varietal/Region</MenuItem>
-                <MenuItem value={3}>Maker/Name/Region/Varietal/Vintage</MenuItem>
-              </Select>
-            </FormControl>
-          </form>
-        </Paper>
-      </main>
-    </div>
-  );
-};
+              />
+
+              <TextField
+                id="technicalNote"
+                name="technicalNote"
+                label="Technical Notes"
+                value=""
+                multiline
+                rowsMax="4"
+                margin="normal"
+                variant="outlined"
+                  // onChange={this.handleChange}
+                fullWidth
+              />
+              <FormControlLabel
+                control={<Checkbox value="auto-insert" color="primary" />}
+                label="Use auto insert"
+              />
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="demo-controlled-open-select">Order</InputLabel>
+                <Select
+              // open={this.state.open}
+              // onClose={this.handleClose}
+              // onOpen={this.handleOpen}
+                  value="Default"
+              // onChange={this.handleChange}
+                  fullWidth
+                  inputProps={{
+                    name: 'order',
+                    id: 'order',
+                  }}
+                >
+                  <MenuItem value="">
+                    <em>Default</em>
+                  </MenuItem>
+                  <MenuItem value={1}>Region/Maker/Name/Varietal/Vintage</MenuItem>
+                  <MenuItem value={2}>Vintage/Maker/Name/Varietal/Region</MenuItem>
+                  <MenuItem value={3}>Maker/Name/Region/Varietal/Vintage</MenuItem>
+                </Select>
+              </FormControl>
+            </form>
+          </Paper>
+        </main>
+      </div>
+    );
+  }
+}
 
 export default withStyles(styles)(Settings);
