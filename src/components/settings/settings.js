@@ -72,6 +72,11 @@ class Settings extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const {
+      nameOrder, autoInsert: {
+        on, wineMaker, wineNotes, technicalNotes,
+      },
+    } = this.state;
     return (
       <div className={classes.divStyle}>
         <main className={classes.main}>
@@ -86,13 +91,19 @@ class Settings extends React.Component {
             <form className={classes.form}>
               <FormControl margin="normal" fullWidth>
                 <InputLabel htmlFor="maker">Wine Maker</InputLabel>
-                <Input type="text" id="maker" name="maker" autoFocus />
+                <Input
+                  type="text"
+                  id="maker"
+                  name="maker"
+                  value={wineMaker}
+                  autoFocus
+                />
               </FormControl>
               <TextField
                 id="tastingNote"
                 name="tastingNote"
                 label="Wine Notes"
-                value=""
+                value={wineNotes}
                 multiline
                 rowsMax="4"
                 margin="normal"
@@ -105,7 +116,7 @@ class Settings extends React.Component {
                 id="technicalNote"
                 name="technicalNote"
                 label="Technical Notes"
-                value=""
+                value={technicalNotes}
                 multiline
                 rowsMax="4"
                 margin="normal"
@@ -114,7 +125,7 @@ class Settings extends React.Component {
                 fullWidth
               />
               <FormControlLabel
-                control={<Checkbox value="auto-insert" color="primary" />}
+                control={<Checkbox value="auto-insert" color="primary" checked={on} />}
                 label="Use auto insert"
               />
               <FormControl className={classes.formControl}>
@@ -123,7 +134,7 @@ class Settings extends React.Component {
               // open={this.state.open}
               // onClose={this.handleClose}
               // onOpen={this.handleOpen}
-                  value="Default"
+                  value={nameOrder}
               // onChange={this.handleChange}
                   fullWidth
                   inputProps={{
@@ -131,12 +142,12 @@ class Settings extends React.Component {
                     id: 'order',
                   }}
                 >
-                  <MenuItem value="">
+                  <MenuItem value={1}>
                     <em>Default</em>
                   </MenuItem>
-                  <MenuItem value={1}>Region/Maker/Name/Varietal/Vintage</MenuItem>
-                  <MenuItem value={2}>Vintage/Maker/Name/Varietal/Region</MenuItem>
-                  <MenuItem value={3}>Maker/Name/Region/Varietal/Vintage</MenuItem>
+                  <MenuItem value={2}>Region/Maker/Name/Varietal/Vintage</MenuItem>
+                  <MenuItem value={3}>Vintage/Maker/Name/Varietal/Region</MenuItem>
+                  <MenuItem value={4}>Maker/Name/Region/Varietal/Vintage</MenuItem>
                 </Select>
               </FormControl>
             </form>
