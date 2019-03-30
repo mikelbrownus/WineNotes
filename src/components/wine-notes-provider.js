@@ -12,6 +12,15 @@ class WineNotesProvider extends React.Component {
 
     this.state = {
       WineNotes: repository.filteredNotes(),
+      settings: {
+        autoInsert: {
+          on: true,
+          wineMaker: 'hey',
+          wineNotes: 'you',
+          technicalNotes: 'notes',
+        },
+        nameOrder: 2,
+      },
       editDialogOpen: false,
       addTestData: this.addTestData,
       deleteNote: this.deleteNote,

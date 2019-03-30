@@ -13,6 +13,7 @@ import { MdSettings } from 'react-icons/md';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Context from '../../app-context';
 
 
 const styles = theme => ({
@@ -56,106 +57,91 @@ const styles = theme => ({
   },
 });
 
-class Settings extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      autoInsert: {
-        on: false,
-        wineMaker: '',
-        wineNotes: '',
-        technicalNotes: '',
-      },
-      nameOrder: 1,
-    };
-  }
+const Settings = (props) => {
+  const { classes } = props;
 
-  render() {
-    const { classes } = this.props;
-    const {
-      nameOrder, autoInsert: {
-        on, wineMaker, wineNotes, technicalNotes,
-      },
-    } = this.state;
-    return (
-      <div className={classes.divStyle}>
-        <main className={classes.main}>
-          <CssBaseline />
-          <Paper className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <MdSettings />
-            </Avatar>
-            <Typography component="h1" variant="h5">
+  return (
+    <div className={classes.divStyle}>
+      <Context.Consumer>
+        {context => (
+          <main className={classes.main}>
+            <CssBaseline />
+            <Paper className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <MdSettings />
+              </Avatar>
+              <Typography component="h1" variant="h5">
               Settings
-            </Typography>
-            <form className={classes.form}>
-              <FormControl margin="normal" fullWidth>
-                <InputLabel htmlFor="maker">Wine Maker</InputLabel>
-                <Input
-                  type="text"
-                  id="maker"
-                  name="maker"
-                  value={wineMaker}
-                  autoFocus
+              </Typography>
+              <form className={classes.form}>
+                <FormControl margin="normal" fullWidth>
+                  <InputLabel htmlFor="maker">Wine Maker</InputLabel>
+                  <Input
+                    type="text"
+                    id="maker"
+                    name="maker"
+                    value={context.state.settings.autoInsert.wineMaker}
+                    autoFocus
+                  />
+                </FormControl>
+                <TextField
+                  id="tastingNote"
+                  name="tastingNote"
+                  label="Wine Notes"
+                  value={context.state.settings.autoInsert.wineNotes}
+                  multiline
+                  rowsMax="4"
+                  margin="normal"
+                  // onChange={this.handleChange}
+                  variant="outlined"
+                  fullWidth
                 />
-              </FormControl>
-              <TextField
-                id="tastingNote"
-                name="tastingNote"
-                label="Wine Notes"
-                value={wineNotes}
-                multiline
-                rowsMax="4"
-                margin="normal"
-                  // onChange={this.handleChange}
-                variant="outlined"
-                fullWidth
-              />
 
-              <TextField
-                id="technicalNote"
-                name="technicalNote"
-                label="Technical Notes"
-                value={technicalNotes}
-                multiline
-                rowsMax="4"
-                margin="normal"
-                variant="outlined"
+                <TextField
+                  id="technicalNote"
+                  name="technicalNote"
+                  label="Technical Notes"
+                  value={context.state.settings.autoInsert.technicalNotes}
+                  multiline
+                  rowsMax="4"
+                  margin="normal"
+                  variant="outlined"
                   // onChange={this.handleChange}
-                fullWidth
-              />
-              <FormControlLabel
-                control={<Checkbox value="auto-insert" color="primary" checked={on} />}
-                label="Use auto insert"
-              />
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="demo-controlled-open-select">Order</InputLabel>
-                <Select
+                  fullWidth
+                />
+                <FormControlLabel
+                  control={<Checkbox value="auto-insert" color="primary" checked={context.state.settings.autoInsert.on} />}
+                  label="Use auto insert"
+                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="demo-controlled-open-select">Order</InputLabel>
+                  <Select
               // open={this.state.open}
               // onClose={this.handleClose}
               // onOpen={this.handleOpen}
-                  value={nameOrder}
+                    value={context.state.settings.nameOrder}
               // onChange={this.handleChange}
-                  fullWidth
-                  inputProps={{
-                    name: 'order',
-                    id: 'order',
-                  }}
-                >
-                  <MenuItem value={1}>
-                    <em>Default</em>
-                  </MenuItem>
-                  <MenuItem value={2}>Region/Maker/Name/Varietal/Vintage</MenuItem>
-                  <MenuItem value={3}>Vintage/Maker/Name/Varietal/Region</MenuItem>
-                  <MenuItem value={4}>Maker/Name/Region/Varietal/Vintage</MenuItem>
-                </Select>
-              </FormControl>
-            </form>
-          </Paper>
-        </main>
-      </div>
-    );
-  }
-}
+                    fullWidth
+                    inputProps={{
+                      name: 'order',
+                      id: 'order',
+                    }}
+                  >
+                    <MenuItem value={1}>
+                      <em>Default</em>
+                    </MenuItem>
+                    <MenuItem value={2}>Region/Maker/Name/Varietal/Vintage</MenuItem>
+                    <MenuItem value={3}>Vintage/Maker/Name/Varietal/Region</MenuItem>
+                    <MenuItem value={4}>Maker/Name/Region/Varietal/Vintage</MenuItem>
+                  </Select>
+                </FormControl>
+              </form>
+            </Paper>
+          </main>
+        )}
+      </Context.Consumer>
+    </div>
+  );
+};
 
 export default withStyles(styles)(Settings);
