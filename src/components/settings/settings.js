@@ -56,6 +56,9 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
   },
 });
+const otherOrders = ['Vintage, Maker, Name, Varietal, Region',
+  'Name, Maker Varietal, Region, Vintage',
+  'Maker, Region, Name, Varietal, Vintage'];
 
 const Settings = (props) => {
   const { classes } = props;
@@ -127,12 +130,12 @@ const Settings = (props) => {
                       id: 'order',
                     }}
                   >
-                    <MenuItem value={1}>
+                    <MenuItem value={0}>
                       <em>Default</em>
                     </MenuItem>
-                    <MenuItem value={2}>Region/Maker/Name/Varietal/Vintage</MenuItem>
-                    <MenuItem value={3}>Vintage/Maker/Name/Varietal/Region</MenuItem>
-                    <MenuItem value={4}>Maker/Name/Region/Varietal/Vintage</MenuItem>
+                    {otherOrders.map((order, i) => (
+                      <MenuItem value={i + 1} key={order}>{order}</MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </form>

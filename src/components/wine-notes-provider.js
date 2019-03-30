@@ -14,12 +14,12 @@ class WineNotesProvider extends React.Component {
       WineNotes: repository.filteredNotes(),
       settings: {
         autoInsert: {
-          on: true,
-          wineMaker: 'hey',
-          wineNotes: 'you',
-          technicalNotes: 'notes',
+          on: false,
+          wineMaker: '',
+          wineNotes: '',
+          technicalNotes: '',
         },
-        nameOrder: 2,
+        nameOrder: 0,
       },
       editDialogOpen: false,
       addTestData: this.addTestData,
