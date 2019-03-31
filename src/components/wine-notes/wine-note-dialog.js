@@ -185,7 +185,7 @@ class WineNoteDialog extends React.Component {
                     name="nonvintage"
                     value="nonvintage"
                   />
-)}
+                )}
                 label="Non Vintage Wine"
               />
               <TextField

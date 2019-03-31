@@ -13,12 +13,10 @@ class WineNotesProvider extends React.Component {
     this.state = {
       WineNotes: repository.filteredNotes(),
       settings: {
-        autoInsert: {
-          on: false,
-          wineMaker: '',
-          wineNotes: '',
-          technicalNotes: '',
-        },
+        autoInsertOn: false,
+        wineMaker: '',
+        tastingNotes: '',
+        technicalNotes: '',
         nameOrder: 0,
       },
       editDialogOpen: false,
@@ -29,6 +27,9 @@ class WineNotesProvider extends React.Component {
       setNoteDialog: this.setNoteDialog,
       updateNote: this.updateNote,
       addNote: this.addNote,
+      saveSettings: this.saveSettings,
+      saveSettingsCheckbox: this.saveSettingsCheckbox,
+      saveSettingsSelect: this.saveSettingsSelect,
     };
   }
 
@@ -42,6 +43,26 @@ class WineNotesProvider extends React.Component {
         });
       }
     });
+    localForage.getItem('settings').then(value => {
+      if (value) {
+        const settings = JSON.parse(value);
+        this.setState({
+          settings,
+        });
+      }
+    });
+  }
+
+  saveSettings = (name, value) => {
+    this.setState(prevState => ({
+      ...prevState,
+      settings: {
+        ...prevState.settings,
+        [name]: value,
+      },
+    }));
+    const { settings } = this.state;
+    localForage.setItem('settings', JSON.stringify(settings));
   }
 
   addTestData = () => {

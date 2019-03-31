@@ -7,7 +7,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import { MdSettings } from 'react-icons/md';
 import Paper from '@material-ui/core/Paper';
@@ -76,59 +75,73 @@ const Settings = (props) => {
               <Typography component="h1" variant="h5">
               Settings
               </Typography>
-              <form className={classes.form}>
-                <FormControl margin="normal" fullWidth>
-                  <InputLabel htmlFor="maker">Wine Maker</InputLabel>
-                  <Input
-                    type="text"
-                    id="maker"
-                    name="maker"
-                    value={context.state.settings.autoInsert.wineMaker}
-                    autoFocus
-                  />
-                </FormControl>
+              <div className={classes.form}>
                 <TextField
-                  id="tastingNote"
-                  name="tastingNote"
+                  autoFocus
+                  margin="dense"
+                  id="wineMaker"
+                  name="wineMaker"
+                  value={context.state.settings.wineMaker}
+                  label="Wine Maker"
+                  type="text"
+                  onChange={(event) => {
+                    context.state.saveSettings(event.target.name, event.target.value);
+                  }}
+                  fullWidth
+                />
+                <TextField
+                  id="tastingNotes"
+                  name="tastingNotes"
                   label="Wine Notes"
-                  value={context.state.settings.autoInsert.wineNotes}
+                  value={context.state.settings.tastingNotes}
                   multiline
                   rowsMax="4"
                   margin="normal"
-                  // onChange={this.handleChange}
+                  onChange={(event) => {
+                    context.state.saveSettings(event.target.name, event.target.value);
+                  }}
                   variant="outlined"
                   fullWidth
                 />
 
                 <TextField
-                  id="technicalNote"
-                  name="technicalNote"
+                  id="technicalNotes"
+                  name="technicalNotes"
                   label="Technical Notes"
-                  value={context.state.settings.autoInsert.technicalNotes}
+                  value={context.state.settings.technicalNotes}
                   multiline
                   rowsMax="4"
                   margin="normal"
                   variant="outlined"
-                  // onChange={this.handleChange}
+                  onChange={(event) => {
+                    context.state.saveSettings(event.target.name, event.target.value);
+                  }}
                   fullWidth
                 />
                 <FormControlLabel
-                  control={<Checkbox value="auto-insert" color="primary" checked={context.state.settings.autoInsert.on} />}
+                  control={(
+                    <Checkbox
+                      name="autoInsertOn"
+                      value="autoInsertOn"
+                      color="primary"
+                      checked={context.state.settings.autoInsertOn}
+                      onChange={(event) => {
+                        context.state.saveSettings(event.target.name, event.target.checked);
+                      }}
+                    />
+)}
                   label="Use auto insert"
                 />
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="demo-controlled-open-select">Order</InputLabel>
+                  <InputLabel htmlFor="nameOrder">Order</InputLabel>
                   <Select
-              // open={this.state.open}
-              // onClose={this.handleClose}
-              // onOpen={this.handleOpen}
                     value={context.state.settings.nameOrder}
-              // onChange={this.handleChange}
-                    fullWidth
-                    inputProps={{
-                      name: 'order',
-                      id: 'order',
+                    onChange={(event) => {
+                      context.state.saveSettings(event.target.name, Number(event.target.value));
                     }}
+                    fullWidth
+                    name="nameOrder"
+                    id="nameOrder"
                   >
                     <MenuItem value={0}>
                       <em>Default</em>
@@ -138,7 +151,7 @@ const Settings = (props) => {
                     ))}
                   </Select>
                 </FormControl>
-              </form>
+              </div>
             </Paper>
           </main>
         )}
