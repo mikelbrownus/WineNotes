@@ -58,7 +58,7 @@ class WineNotes extends React.Component {
               {context.state.WineNotes.length > 0
                 && context.state.WineNotes.map(note => (
                   <Grid item xs={12} sm={6} md={4} key={note.id}>
-                    <WineNoteCard note={note} />
+                    <WineNoteCard note={note} order={context.state.settings.nameOrder} />
                   </Grid>
                 ))}
               {context.state.WineNotes.length < 1 && (

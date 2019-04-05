@@ -39,6 +39,7 @@ class WineNoteView extends React.Component {
     super(props);
     const { location } = props;
     this.state = location && location.state ? location.state.wineNote : {};
+    this.order = location && location.state ? location.state.order : 0;
   }
 
   getMapper = () => NoteMapper(this.state);
@@ -60,14 +61,14 @@ class WineNoteView extends React.Component {
                   <CardMedia
                     className={classes.media}
                     image={image}
-                    title={this.getMapper().getName()}
+                    title={this.getMapper().getName(this.order)}
                     component="img"
                   />
                 )}
                 <div className={classes.details}>
                   <CardContent className={classes.content}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {this.getMapper().getName()}
+                      {this.getMapper().getName(this.order)}
                     </Typography>
                     {tastingNote && (
                       <Fragment>

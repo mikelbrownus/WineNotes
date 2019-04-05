@@ -56,7 +56,7 @@ const styles = theme => ({
   },
 });
 const otherOrders = ['Vintage, Maker, Name, Varietal, Region',
-  'Name, Maker Varietal, Region, Vintage',
+  'Name, Maker, Varietal, Region, Vintage',
   'Maker, Region, Name, Varietal, Vintage'];
 
 const Settings = (props) => {

@@ -56,7 +56,7 @@ const styles = {
 };
 
 function WineNoteCard(props) {
-  const { classes, note } = props;
+  const { classes, note, order } = props;
   const mapper = NoteMapper(note);
 
   return (
@@ -64,7 +64,7 @@ function WineNoteCard(props) {
       {note.image ? (
         <img
           src={note.image}
-          alt={mapper.getName()}
+          alt={mapper.getName(order)}
           className={classes.externalImage}
         />
       ) : (
@@ -72,7 +72,7 @@ function WineNoteCard(props) {
       )}
       <CardActionArea
         className={classes.actionArea}
-        onClick={() => props.history.push('/view', { wineNote: note })}
+        onClick={() => props.history.push('/view', { wineNote: note, order })}
       >
         <CardContent>
           <Typography
@@ -80,7 +80,7 @@ function WineNoteCard(props) {
             component="p"
             className={classes.nameLength}
           >
-            {mapper.getName()}
+            {mapper.getName(order)}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             Date:
