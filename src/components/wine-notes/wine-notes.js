@@ -80,7 +80,11 @@ class WineNotes extends React.Component {
             >
               <MdAdd />
             </Fab>
-            <WineNoteDialog handleClose={this.handleClose} open={open} />
+            <WineNoteDialog
+              handleClose={this.handleClose}
+              open={open}
+              settings={context.state.settings}
+            />
           </div>
         )}
       </Context.Consumer>

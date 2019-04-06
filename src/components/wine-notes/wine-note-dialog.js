@@ -28,7 +28,7 @@ const styles = {
 class WineNoteDialog extends React.Component {
   constructor(props) {
     super(props);
-    const { wineNote } = this.props;
+    const { wineNote, settings } = this.props;
     this.wineNote = wineNote;
     if (wineNote) {
       const {
@@ -58,12 +58,12 @@ class WineNoteDialog extends React.Component {
         varietal: '',
         vintage: new Date().getFullYear().toString(),
         nonvintage: false,
-        maker: '',
+        maker: (settings.autoInsertOn) ? settings.wineMaker : '',
         image: '',
         region: '',
         wineName: '',
-        tastingNote: '',
-        technicalNote: '',
+        tastingNote: (settings.autoInsertOn) ? settings.tastingNotes : '',
+        technicalNote: (settings.autoInsertOn) ? settings.technicalNotes : '',
       };
     }
   }
