@@ -13,7 +13,7 @@ const NoteMapper = note => {
       case 2:
         return n + m + va + r + vi;
       case 3:
-        return m + n + va + r + vi;
+        return m + r + n + va + vi;
       default:
         return m + n + va + r + vi;
     }
