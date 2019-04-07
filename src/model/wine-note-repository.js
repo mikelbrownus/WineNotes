@@ -39,6 +39,7 @@ const WineNoteRepository = () => {
     if (filter) {
       const filterLowerCase = filter.toLowerCase();
       return notes
+        .filter(note => !note.collection === true)
         .filter(
           note => note.varietal.toLowerCase().includes(filterLowerCase)
             || (note.vintage.toLowerCase().includes(filterLowerCase)
