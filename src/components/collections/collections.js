@@ -4,6 +4,7 @@ import Fab from '@material-ui/core/Fab';
 import { MdAdd } from 'react-icons/md';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CollectionDialog from './collection-dialog';
+import CollectionCard from './collection-card';
 
 const styles = theme => ({
   gridStyle: {
@@ -46,10 +47,10 @@ class Collections extends React.Component {
           alignItems="center"
         >
           <Grid item xs={12} sm={6} md={4}>
-            <h3>Item 1</h3>
+            <CollectionCard collection={{ name: 'collection1', date: '2/11/1978' }} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <h3>Item 2</h3>
+            <CollectionCard collection={{ name: 'collection2', date: '2/11/1998' }} />
           </Grid>
         </Grid>
         <Fab
