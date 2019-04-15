@@ -5,6 +5,7 @@ import { MdAdd } from 'react-icons/md';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CollectionDialog from './collection-dialog';
 import CollectionCard from './collection-card';
+import Context from '../../app-context';
 
 const styles = theme => ({
   gridStyle: {
@@ -39,34 +40,38 @@ class Collections extends React.Component {
     const { classes } = this.props;
     const { open } = this.state;
     return (
-      <div className={classes.gridStyle}>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item xs={12} sm={6} md={4}>
-            <CollectionCard collection={{ name: 'collection1', date: '2/11/1978' }} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <CollectionCard collection={{ name: 'collection2', date: '2/11/1998' }} />
-          </Grid>
-        </Grid>
-        <Fab
-          aria-label="Add"
-          color="primary"
-          size="small"
-          className={classes.fab}
-          onClick={this.handleOpen}
-        >
-          <MdAdd />
-        </Fab>
-        <CollectionDialog
-          handleClose={this.handleClose}
-          open={open}
-        />
-      </div>
+      <Context.Consumer>
+        {context => (
+          <div className={classes.gridStyle}>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              {context.state.Collections.length > 0
+                && context.state.Collections.map(collection => (
+                  <Grid item xs={12} sm={6} md={4} key={collection.id}>
+                    <CollectionCard collection={collection} />
+                  </Grid>
+                ))}
+            </Grid>
+            <Fab
+              aria-label="Add"
+              color="primary"
+              size="small"
+              className={classes.fab}
+              onClick={this.handleOpen}
+            >
+              <MdAdd />
+            </Fab>
+            <CollectionDialog
+              handleClose={this.handleClose}
+              open={open}
+            />
+          </div>
+        )}
+      </Context.Consumer>
     );
   }
 }

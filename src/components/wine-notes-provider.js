@@ -12,6 +12,12 @@ class WineNotesProvider extends React.Component {
 
     this.state = {
       WineNotes: repository.filteredNotes(),
+      Collections: [{
+        name: 'collection one', description: 'description', date: '2/11/2012', id: '1',
+      },
+      {
+        name: 'collection two', description: 'description', date: '2/11/2014', id: '2',
+      }],
       settings: {
         autoInsertOn: false,
         wineMaker: '',
@@ -48,6 +54,14 @@ class WineNotesProvider extends React.Component {
         const settings = JSON.parse(value);
         this.setState({
           settings,
+        });
+      }
+    });
+    localForage.getItem('collections').then(value => {
+      if (value) {
+        const collections = JSON.parse(value);
+        this.setState({
+          collections,
         });
       }
     });
