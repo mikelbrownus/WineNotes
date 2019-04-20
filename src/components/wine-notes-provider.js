@@ -1,10 +1,12 @@
 import React from 'react';
 import localForage from 'localforage';
 import WineNoteRepository from '../model/wine-note-repository';
+import CollectionRepository from '../model/collection-repository';
 import Context from '../app-context';
 import initialState from '../initialState.json';
 
 const repository = WineNoteRepository();
+const collectionsRepository = CollectionRepository();
 
 class WineNotesProvider extends React.Component {
   constructor(props) {
@@ -59,9 +61,9 @@ class WineNotesProvider extends React.Component {
     });
     localForage.getItem('collections').then(value => {
       if (value) {
-        const collections = JSON.parse(value);
+        const Collections = JSON.parse(value);
         this.setState({
-          collections,
+          Collections,
         });
       }
     });
@@ -133,6 +135,28 @@ class WineNotesProvider extends React.Component {
     }));
     localForage.setItem('wineNotes', JSON.stringify(repository.getNotes()));
   };
+
+  addCollection = collection => {
+    collectionsRepository.addCollection(collection);
+    this.updateCollectionState();
+  }
+
+  deleteCollection = collection => {
+    collectionsRepository.deleteCollection(collection);
+    this.updateCollectionState();
+  }
+
+  updateCollection = collection => {
+    collectionsRepository.updateCollection(collection);
+    this.updateCollectionState();
+  }
+
+  updateCollectionState = () => {
+    this.setState(() => ({
+      Collections: collectionsRepository.getCollections(),
+    }));
+    localForage.setItem('collections', JSON.stringify(collectionsRepository.getCollections()));
+  }
 
   render() {
     const { children } = this.props;
