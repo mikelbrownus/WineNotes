@@ -35,4 +35,10 @@ describe('CollectionRepository tests', () => {
     collectionRepo.addCollection({ name: 'name', description: 'description' });
     expect(collectionRepo.getCollections()[0].date).not.toBeUndefined();
   });
+
+  it('Remove item after adding should be zero', () => {
+    const newItem = collectionRepo.addCollection({ name: 'name', description: 'description' });
+    collectionRepo.deleteCollection(newItem.id);
+    expect(collectionRepo.getCollections().length).toEqual(0);
+  });
 });
