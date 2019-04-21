@@ -22,7 +22,10 @@ const WineNoteRepository = () => {
     wineNotes.push(newNote);
   };
 
-  const getNote = id => wineNotes.filter(note => id === note.id)[0];
+  const getNote = (id) => {
+    const one = wineNotes.filter(note => id === note.id);
+    return clone(one[0]);
+  };
 
   const update = (id, newProperties) => {
     const updatedNote = Object.assign(clone(getNote(id)), newProperties);

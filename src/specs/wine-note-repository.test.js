@@ -56,10 +56,12 @@ describe('WineNoteRepository tests', () => {
     );
   });
 
-  it('repository should get correct note from id', () => {
+  it('repository should get correct note from id--should be equal value not reference', () => {
     const note = repository.getNotes()[3];
     expect(repository.getNote(note.id).maker).toEqual(note.maker);
     expect(repository.getNote(note.id).id).toEqual(note.id);
+    expect(repository.getNote(note.id)).not.toBe(note);
+    expect(repository.getNote(note.id)).not.toEqual(note);
   });
 
   it('repository update should change properties of note', () => {
