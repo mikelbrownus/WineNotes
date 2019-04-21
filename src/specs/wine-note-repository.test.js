@@ -61,7 +61,7 @@ describe('WineNoteRepository tests', () => {
     expect(repository.getNote(note.id).maker).toEqual(note.maker);
     expect(repository.getNote(note.id).id).toEqual(note.id);
     expect(repository.getNote(note.id)).not.toBe(note);
-    expect(repository.getNote(note.id)).not.toEqual(note);
+    expect(repository.getNote(note.id)).toEqual(note);
   });
 
   it('repository update should change properties of note', () => {
