@@ -54,9 +54,10 @@ describe('CollectionRepository tests', () => {
     expect(getItem).toBeUndefined();
   });
 
-  xit('Remove item after adding should be zero', () => {
+  it('Remove item after adding should be zero', () => {
     const newItem = collectionRepo.addCollection({ name: 'name', description: 'description' });
-    collectionRepo.deleteCollection(newItem.id);
-    expect(collectionRepo.getCollections().length).toEqual(0);
+    collectionRepo.updateCollection(newItem.id, { name: 'new name', description: 'new description' });
+    expect(collectionRepo.get(newItem.id).name).toEqual('new name');
+    expect(collectionRepo.get(newItem.id).description).toEqual('new description');
   });
 });

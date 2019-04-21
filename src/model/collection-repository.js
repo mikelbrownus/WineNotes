@@ -15,10 +15,18 @@ const CollectionRepository = () => {
     const one = collections.filter((item) => item.id === id);
     return clone(one[0]);
   };
+
+  const update = (id, newProperties) => {
+    const updatedCollection = Object.assign(getItem(id), newProperties);
+    collections = collections.map(collection => (
+      collection.id === updatedCollection.id ? updatedCollection : collection
+    ));
+  };
+
   return {
     addCollection,
     deleteCollection: (id) => { collections = collections.filter((item) => item.id !== id); },
-    updateCollection: () => {},
+    updateCollection: update,
     getCollections: () => collections,
     get: getItem,
   };
