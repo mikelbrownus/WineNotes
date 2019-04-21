@@ -10,11 +10,17 @@ const CollectionRepository = () => {
     collections.push(newCollection);
     return newCollection;
   };
+
+  const getItem = (id) => {
+    const one = collections.filter((item) => item.id === id);
+    return clone(one[0]);
+  };
   return {
     addCollection,
     deleteCollection: (id) => { collections = collections.filter((item) => item.id !== id); },
     updateCollection: () => {},
     getCollections: () => collections,
+    get: getItem,
   };
 };
 

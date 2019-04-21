@@ -41,4 +41,22 @@ describe('CollectionRepository tests', () => {
     collectionRepo.deleteCollection(newItem.id);
     expect(collectionRepo.getCollections().length).toEqual(0);
   });
+
+  it('Get item by id should equal old but not be reference', () => {
+    const newItem = collectionRepo.addCollection({ name: 'name', description: 'description' });
+    const getItem = collectionRepo.get(newItem.id);
+    expect(getItem).not.toBe(newItem);
+    expect(getItem).toEqual(newItem);
+  });
+
+  it('Bad id returns undefined', () => {
+    const getItem = collectionRepo.get('badid');
+    expect(getItem).toBeUndefined();
+  });
+
+  xit('Remove item after adding should be zero', () => {
+    const newItem = collectionRepo.addCollection({ name: 'name', description: 'description' });
+    collectionRepo.deleteCollection(newItem.id);
+    expect(collectionRepo.getCollections().length).toEqual(0);
+  });
 });
