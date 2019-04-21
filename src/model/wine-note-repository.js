@@ -28,7 +28,7 @@ const WineNoteRepository = () => {
   };
 
   const update = (id, newProperties) => {
-    const updatedNote = Object.assign(clone(getNote(id)), newProperties);
+    const updatedNote = Object.assign(getNote(id), newProperties);
     wineNotes = wineNotes.map(note => (note.id === updatedNote.id ? updatedNote : note));
   };
 
