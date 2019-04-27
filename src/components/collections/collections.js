@@ -23,7 +23,7 @@ const styles = theme => ({
     right: '20px',
   },
   noNoteMessage: {
-    margin: 'calc(20%) auto',
+    margin: 'calc(45%) auto',
     display: 'block',
     position: 'position',
     height: '25px',
@@ -64,7 +64,7 @@ class Collections extends React.Component {
                 ))}
               {context.state.Collections.length < 1 && (
                 <Typography
-                  variant="h4"
+                  variant="h5"
                   component="p"
                   className={classes.noNoteMessage}
                 >

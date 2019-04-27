@@ -23,7 +23,7 @@ const styles = theme => ({
     right: '20px',
   },
   noNoteMessage: {
-    margin: 'calc(20%) auto',
+    margin: 'calc(45%) auto',
     display: 'block',
     position: 'position',
     height: '25px',
@@ -63,7 +63,7 @@ class WineNotes extends React.Component {
                 ))}
               {context.state.WineNotes.length < 1 && (
                 <Typography
-                  variant="h4"
+                  variant="h5"
                   component="p"
                   className={classes.noNoteMessage}
                 >
