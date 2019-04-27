@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import { MdAdd } from 'react-icons/md';
+import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CollectionDialog from './collection-dialog';
 import CollectionCard from './collection-card';
@@ -20,6 +21,12 @@ const styles = theme => ({
     position: 'absolute',
     bottom: '64px',
     right: '20px',
+  },
+  noNoteMessage: {
+    margin: 'calc(20%) auto',
+    display: 'block',
+    position: 'position',
+    height: '25px',
   },
 });
 
@@ -55,6 +62,15 @@ class Collections extends React.Component {
                     <CollectionCard collection={collection} />
                   </Grid>
                 ))}
+              {context.state.Collections.length < 1 && (
+                <Typography
+                  variant="h4"
+                  component="p"
+                  className={classes.noNoteMessage}
+                >
+                  Press + to add a collection
+                </Typography>
+              )}
             </Grid>
             <Fab
               aria-label="Add"
