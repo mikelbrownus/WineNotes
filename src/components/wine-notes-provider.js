@@ -59,6 +59,7 @@ class WineNotesProvider extends React.Component {
     localForage.getItem('collections').then(value => {
       if (value) {
         const Collections = JSON.parse(value);
+        collectionsRepository.setCollections(Collections);
         this.setState({
           Collections,
         });

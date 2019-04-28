@@ -45,7 +45,6 @@ class CollectionDialog extends React.Component {
     const {
       open, handleClose, updateCollection,
     } = this.props;
-    const id = this.wineNote && this.wineNote.id ? this.wineNote.id : '0';
     const {
       name,
       description,
@@ -94,9 +93,8 @@ class CollectionDialog extends React.Component {
               </Button>
               <Button
                 onClick={
-                  this.wineNote
+                  this.collection
                     ? () => {
-                      context.state.updateNote(id, this.state);
                       updateCollection(this.state);
                       handleClose();
                     }

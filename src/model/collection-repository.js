@@ -29,6 +29,7 @@ const CollectionRepository = () => {
     updateCollection: update,
     getCollections: () => collections,
     get: getItem,
+    setCollections: (loadedCollections) => { collections = loadedCollections; },
   };
 };
 
