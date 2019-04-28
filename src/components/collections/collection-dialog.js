@@ -95,6 +95,7 @@ class CollectionDialog extends React.Component {
                 onClick={
                   this.collection
                     ? () => {
+                      // context.state.updateCollection
                       updateCollection(this.state);
                       handleClose();
                     }
