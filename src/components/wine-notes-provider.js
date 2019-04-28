@@ -33,6 +33,8 @@ class WineNotesProvider extends React.Component {
       saveSettings: this.saveSettings,
       saveSettingsCheckbox: this.saveSettingsCheckbox,
       saveSettingsSelect: this.saveSettingsSelect,
+      addCollection: this.addCollection,
+      deleteCollection: this.deleteCollection,
     };
   }
 

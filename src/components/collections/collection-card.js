@@ -62,7 +62,7 @@ function CollectionCard(props) {
           <Typography className={classes.pos} color="textSecondary">
             Date:
             {' '}
-            {collection.date}
+            {new Date(collection.date).toLocaleDateString()}
           </Typography>
         </CardContent>
       </CardActionArea>

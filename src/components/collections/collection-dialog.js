@@ -101,7 +101,7 @@ class CollectionDialog extends React.Component {
                       handleClose();
                     }
                     : () => {
-                      context.state.addNote(this.state);
+                      context.state.addCollection(this.state);
                       this.clearForm();
                       handleClose();
                     }
