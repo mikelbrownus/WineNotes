@@ -23,7 +23,7 @@ const styles = theme => ({
     right: '20px',
   },
   noNoteMessage: {
-    margin: 'calc(20%) auto',
+    margin: 'calc(15%) auto',
     display: 'block',
     position: 'position',
   },
