@@ -42,7 +42,7 @@ class CollectionDialog extends React.Component {
 
   render() {
     const {
-      open, handleClose, updateCollection,
+      open, handleClose,
     } = this.props;
     const {
       name,
@@ -91,24 +91,26 @@ class CollectionDialog extends React.Component {
               </Button>
               <Button
                 onClick={
-
-                    this.collection
-                      ? () => {
-                        if (name) {
-                          // context.state.updateCollection
-                          updateCollection(this.state);
-                          handleClose();
-                        }
+                  this.collection
+                    ? () => {
+                      if (!name) {
+                        context.state.addCollection({ name: 'collection', description });
+                      } else {
+                        context.state.addCollection(this.state);
                       }
-                      : () => {
-                        if (name) {
-                          context.state.addCollection(this.state);
-                          this.clearForm();
-                          handleClose();
-                        }
+                      // context.state.updateCollection
+                      this.clearForm();
+                      handleClose();
+                    }
+                    : () => {
+                      if (!name) {
+                        context.state.addCollection({ name: 'collection', description });
+                      } else {
+                        context.state.addCollection(this.state);
                       }
-
-
+                      this.clearForm();
+                      handleClose();
+                    }
                 }
                 color="primary"
               >
