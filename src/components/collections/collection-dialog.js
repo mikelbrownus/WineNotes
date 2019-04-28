@@ -12,7 +12,6 @@ class CollectionDialog extends React.Component {
   constructor(props) {
     super(props);
     const { collection } = this.props;
-
     if (collection) {
       const {
         name,
@@ -49,7 +48,6 @@ class CollectionDialog extends React.Component {
       name,
       description,
     } = this.state;
-
     return (
       <Context.Consumer>
         {context => (
@@ -93,17 +91,24 @@ class CollectionDialog extends React.Component {
               </Button>
               <Button
                 onClick={
-                  this.collection
-                    ? () => {
-                      // context.state.updateCollection
-                      updateCollection(this.state);
-                      handleClose();
-                    }
-                    : () => {
-                      context.state.addCollection(this.state);
-                      this.clearForm();
-                      handleClose();
-                    }
+
+                    this.collection
+                      ? () => {
+                        if (name) {
+                          // context.state.updateCollection
+                          updateCollection(this.state);
+                          handleClose();
+                        }
+                      }
+                      : () => {
+                        if (name) {
+                          context.state.addCollection(this.state);
+                          this.clearForm();
+                          handleClose();
+                        }
+                      }
+
+
                 }
                 color="primary"
               >
