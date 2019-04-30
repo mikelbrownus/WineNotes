@@ -23,10 +23,12 @@ class WineNotesProvider extends React.Component {
         nameOrder: 0,
       },
       editDialogOpen: false,
+      editCollectionDialogOpen: false,
       addTestData: this.addTestData,
       deleteNote: this.deleteNote,
       filterNotes: this.filterNotes,
       editNoteDialogToggle: this.editNoteDialogToggle,
+      editCollectionDialogToggle: this.editCollectionDialogToggle,
       setNoteDialog: this.setNoteDialog,
       updateNote: this.updateNote,
       addNote: this.addNote,
@@ -109,6 +111,12 @@ class WineNotesProvider extends React.Component {
   editNoteDialogToggle = () => {
     this.setState(prevState => ({
       editDialogOpen: !prevState.editDialogOpen,
+    }));
+  };
+
+  editCollectionDialogToggle = () => {
+    this.setState(prevState => ({
+      editCollectionDialogOpen: !prevState.editCollectionDialogOpen,
     }));
   };
 

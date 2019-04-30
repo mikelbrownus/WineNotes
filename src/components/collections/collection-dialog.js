@@ -94,11 +94,10 @@ class CollectionDialog extends React.Component {
                   this.collection
                     ? () => {
                       if (!name) {
-                        context.state.addCollection({ name: 'collection', description });
+                        context.state.updateCollection({ name: 'collection', description });
                       } else {
-                        context.state.addCollection(this.state);
+                        context.state.updateCollection(this.state);
                       }
-                      // context.state.updateCollection
                       this.clearForm();
                       handleClose();
                     }
