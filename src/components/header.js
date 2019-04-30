@@ -106,7 +106,6 @@ class Header extends React.Component {
     const { filter, alert } = this.state;
     const hasSearch = location.pathname === '/';
     const isView = location.pathname === '/view';
-    const isCollections = location.pathname === '/collections';
     const wineNote = location && location.state ? location.state.wineNote : {};
     return (
       <Context.Consumer>
@@ -224,27 +223,7 @@ class Header extends React.Component {
                   </IconButton>
                 </Fragment>
               )}
-              {isCollections && (
-                <Fragment>
-                  <div className={classes.grow} />
-                  <IconButton
-                    color="inherit"
-                    onClick={() => {
-                      // context.state.editNoteDialogToggle();
-                    }}
-                  >
-                    <MdEdit />
-                  </IconButton>
-                  <IconButton
-                    color="inherit"
-                    onClick={() => {
-                      // this.toggleAlert(true);
-                    }}
-                  >
-                    <MdDeleteForever />
-                  </IconButton>
-                </Fragment>
-              )}
+
             </Toolbar>
           </AppBar>
         )}
