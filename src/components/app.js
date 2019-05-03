@@ -21,7 +21,7 @@ const App = () => (
       <Route path="/settings" component={Settings} />
       <Route path="/help" component={Help} />
       <Route path="/collections" component={Collections} />
-      <Route exact path="/collectionView" component={CollectionView} />
+      <Route exact path="/collectionsView" component={CollectionView} />
       <Footer />
     </Fragment>
   </BrowserRouter>
