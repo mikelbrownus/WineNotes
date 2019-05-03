@@ -28,7 +28,7 @@ class Footer extends React.Component {
       item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
     );
     const { index } = this.state;
-    const shouldUpdate = index !== foundIndex;
+    const shouldUpdate = index !== foundIndex && foundIndex !== -1;
     if (shouldUpdate) {
       this.setState({ index: foundIndex });
     }
@@ -40,7 +40,7 @@ class Footer extends React.Component {
       item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
     );
     const { index } = this.state;
-    return index !== foundIndex;
+    return index !== foundIndex && foundIndex !== -1;
   }
 
   changeIndex = i => {
