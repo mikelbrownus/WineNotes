@@ -9,6 +9,7 @@ import Help from './help/help';
 import Collections from './collections/collections';
 import Settings from './settings/settings';
 import WineNoteView from './wine-notes/wine-note-view';
+import CollectionView from './collections/collection-view';
 
 const App = () => (
   <BrowserRouter basename="/WineNotes">
@@ -20,6 +21,7 @@ const App = () => (
       <Route path="/settings" component={Settings} />
       <Route path="/help" component={Help} />
       <Route path="/collections" component={Collections} />
+      <Route exact path="/collectionView" component={CollectionView} />
       <Footer />
     </Fragment>
   </BrowserRouter>
