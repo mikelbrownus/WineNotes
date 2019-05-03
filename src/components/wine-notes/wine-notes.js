@@ -25,7 +25,6 @@ const styles = theme => ({
   noNoteMessage: {
     margin: 'calc(15%) auto',
     display: 'block',
-    position: 'position',
   },
 });
 class WineNotes extends React.Component {
