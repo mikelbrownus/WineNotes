@@ -1,6 +1,8 @@
 import React from 'react';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { MdAdd } from 'react-icons/md';
@@ -25,10 +27,20 @@ const styles = theme => ({
   noNoteMessage: {
     margin: 'calc(15%) auto',
     display: 'block',
-    position: 'position',
+  },
+  card: {
+    margin: '10px auto',
+    width: '300px',
+    padding: '10px',
   },
 });
 class CollectionView extends React.Component {
+  constructor(props) {
+    super(props);
+    const { location } = props;
+    this.state.collection = location && location.state ? location.state.collection : {};
+  }
+
   state = {
     open: false,
   };
@@ -43,11 +55,26 @@ class CollectionView extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
+    const { open, collection } = this.state;
     return (
       <Context.Consumer>
         {context => (
           <div className={classes.gridSize}>
+            {collection.description && (
+              <Card
+                raised="true"
+                className={classes.card}
+              >
+                <CardContent>
+                  <Typography
+                    variant="subtitle1"
+                    align="center"
+                  >
+                    {collection.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
             <Grid
               container
               direction="row"
