@@ -17,7 +17,8 @@ class Footer extends React.Component {
           ? 0
           : sections.findIndex(
             item => location.pathname.substring(1).toLowerCase()
-                === item.toLowerCase(),
+                === item.toLowerCase()
+                || (item === 'Wine notes' && location.pathname.substring(1) === '/'),
           ),
     };
   }
@@ -25,7 +26,8 @@ class Footer extends React.Component {
   componentWillReceiveProps(newProps) {
     const { location } = newProps;
     const foundIndex = sections.findIndex(
-      item => location.pathname.substring(1).toLowerCase() === item.toLowerCase(),
+      item => location.pathname.substring(1).toLowerCase() === item.toLowerCase()
+      || (item === 'Wine notes' && location.pathname.substring(1) === '/'),
     );
     const { index } = this.state;
     const shouldUpdate = index !== foundIndex && foundIndex !== -1;
