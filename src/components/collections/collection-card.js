@@ -49,7 +49,7 @@ function CollectionCard(props) {
     <Card className={classes.card}>
       <CardActionArea
         className={classes.actionArea}
-        // onClick={() => props.history.push('/view', { collection: collection })}
+        onClick={() => props.history.push('/collectionView', { collection })}
       >
         <CardContent>
           <Typography
