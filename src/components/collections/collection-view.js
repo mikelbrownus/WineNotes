@@ -66,7 +66,7 @@ class CollectionView extends React.Component {
                   component="p"
                   className={classes.noNoteMessage}
                 >
-                  Press + to add a note
+                  Press + to add note to collection
                 </Typography>
               )}
             </Grid>
