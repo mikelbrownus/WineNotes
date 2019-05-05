@@ -175,7 +175,8 @@ class Header extends React.Component {
                 color="inherit"
                 className={classes.title}
               >
-                Wine Notes
+                {(isCollectionsView && context.state.CurrentCollection.name)
+                  ? context.state.CurrentCollection.name : 'Wine Notes' }
               </Typography>
               {hasSearch && (
                 <Fragment>

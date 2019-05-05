@@ -15,6 +15,7 @@ class WineNotesProvider extends React.Component {
     this.state = {
       WineNotes: repository.filteredNotes(),
       Collections: [],
+      CurrentCollection: '',
       settings: {
         autoInsertOn: false,
         wineMaker: '',
@@ -37,6 +38,11 @@ class WineNotesProvider extends React.Component {
       saveSettingsSelect: this.saveSettingsSelect,
       addCollection: this.addCollection,
       deleteCollection: this.deleteCollection,
+      setCurrentCollection: (collection) => {
+        this.setState({
+          CurrentCollection: collection,
+        });
+      },
     };
   }
 

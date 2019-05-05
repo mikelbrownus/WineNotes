@@ -5,6 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Context from '../../app-context';
 
 
 const isIEorFF = navigator.userAgent.indexOf('Firefox') !== -1
@@ -46,27 +47,31 @@ function CollectionCard(props) {
 
 
   return (
-    <Card className={classes.card}>
-      <CardActionArea
-        className={classes.actionArea}
-        onClick={() => props.history.push('/collectionsView', { collection })}
-      >
-        <CardContent>
-          <Typography
-            variant="subtitle1"
-            component="p"
-            className={classes.nameLength}
+    <Context.Consumer>
+      {context => (
+        <Card className={classes.card}>
+          <CardActionArea
+            className={classes.actionArea}
+            onClick={() => { context.state.setCurrentCollection(collection); props.history.push('/collectionsView', { collection }); }}
           >
-            {collection.name}
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
+            <CardContent>
+              <Typography
+                variant="subtitle1"
+                component="p"
+                className={classes.nameLength}
+              >
+                {collection.name}
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
             Date:
-            {' '}
-            {new Date(collection.date).toLocaleDateString()}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+                {' '}
+                {new Date(collection.date).toLocaleDateString()}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      )}
+    </Context.Consumer>
   );
 }
 
