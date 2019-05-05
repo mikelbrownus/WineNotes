@@ -148,17 +148,16 @@ class Header extends React.Component {
               </DialogActions>
             </Dialog>
             <Toolbar>
-              {isView ? (
-                <Link to="/">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    aria-label="back"
-                    className={classes.home}
-                  >
-                    <MdKeyboardBackspace fontSize="x-large" />
-                  </Button>
-                </Link>
+              { (isView || isCollectionsView) ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  aria-label="back"
+                  className={classes.home}
+                  onClick={() => history.goBack()}
+                >
+                  <MdKeyboardBackspace fontSize="x-large" />
+                </Button>
               ) : (
                 <Link to="/help">
                   <IconButton
