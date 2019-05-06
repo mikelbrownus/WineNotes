@@ -8,6 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { MdAdd } from 'react-icons/md';
 import WineNoteCard from '../wine-notes/wine-note-card';
 import WineNoteDialog from '../wine-notes/wine-note-dialog';
+import CollectionDialog from './collection-dialog';
 import Context from '../../app-context';
 
 const styles = theme => ({
@@ -62,7 +63,7 @@ class CollectionView extends React.Component {
           <div className={classes.gridSize}>
             {collection.description && (
               <Card
-                raised="true"
+                raised
                 className={classes.card}
               >
                 <CardContent>
@@ -106,6 +107,14 @@ class CollectionView extends React.Component {
             >
               <MdAdd />
             </Fab>
+            <CollectionDialog
+              handleClose={() => {
+                context.state.editCollectionDialogToggle();
+              }}
+              open={context.state.editCollectionDialogOpen}
+              collection={context.state.CurrentCollection}
+              updateNote={this.changeNote}
+            />
             <WineNoteDialog
               handleClose={this.handleClose}
               open={open}
