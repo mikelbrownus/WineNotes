@@ -230,7 +230,7 @@ class Header extends React.Component {
                   <IconButton
                     color="inherit"
                     onClick={() => {
-                      // context.state.editNoteDialogToggle();
+                      context.state.editCollectionDialogToggle();
                     }}
                   >
                     <MdEdit />
