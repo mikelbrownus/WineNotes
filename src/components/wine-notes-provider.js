@@ -38,6 +38,7 @@ class WineNotesProvider extends React.Component {
       saveSettingsSelect: this.saveSettingsSelect,
       addCollection: this.addCollection,
       deleteCollection: this.deleteCollection,
+      updateCollection: this.updateCollection,
       setCurrentCollection: (collection) => {
         this.setState({
           CurrentCollection: collection,
@@ -159,7 +160,7 @@ class WineNotesProvider extends React.Component {
   }
 
   updateCollection = collection => {
-    collectionsRepository.updateCollection(collection);
+    collectionsRepository.updateCollection(collection.id, collection);
     this.updateCollectionState();
   }
 
