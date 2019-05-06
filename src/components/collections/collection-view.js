@@ -36,12 +36,6 @@ const styles = theme => ({
   },
 });
 class CollectionView extends React.Component {
-  constructor(props) {
-    super(props);
-    const { location } = props;
-    this.state.collection = location && location.state ? location.state.collection : {};
-  }
-
   state = {
     open: false,
   };
@@ -56,12 +50,12 @@ class CollectionView extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { open, collection } = this.state;
+    const { open } = this.state;
     return (
       <Context.Consumer>
         {context => (
           <div className={classes.gridSize}>
-            {collection.description && (
+            {context.state.CurrentCollection.description && (
               <Card
                 raised
                 className={classes.card}
@@ -71,7 +65,7 @@ class CollectionView extends React.Component {
                     variant="subtitle1"
                     align="center"
                   >
-                    {collection.description}
+                    {context.state.CurrentCollection.description}
                   </Typography>
                 </CardContent>
               </Card>
@@ -113,7 +107,6 @@ class CollectionView extends React.Component {
               }}
               open={context.state.editCollectionDialogOpen}
               collection={context.state.CurrentCollection}
-              updateNote={this.changeNote}
             />
             <WineNoteDialog
               handleClose={this.handleClose}

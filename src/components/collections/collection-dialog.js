@@ -16,15 +16,18 @@ class CollectionDialog extends React.Component {
       const {
         name,
         description,
+        id,
       } = collection;
       this.state = {
         name,
         description,
+        id,
       };
     } else {
       this.state = {
         name: '',
         description: '',
+        id: '',
       };
     }
   }
@@ -47,6 +50,7 @@ class CollectionDialog extends React.Component {
     const {
       name,
       description,
+      id,
     } = this.state;
     return (
       <Context.Consumer>
@@ -91,7 +95,7 @@ class CollectionDialog extends React.Component {
               </Button>
               <Button
                 onClick={
-                  this.collection
+                  id
                     ? () => {
                       if (!name) {
                         context.state.updateCollection({ name: 'collection', description });
@@ -113,7 +117,7 @@ class CollectionDialog extends React.Component {
                 }
                 color="primary"
               >
-                {this.collection ? 'Update' : 'Add'}
+                {id ? 'Update' : 'Add'}
               </Button>
             </DialogActions>
           </Dialog>

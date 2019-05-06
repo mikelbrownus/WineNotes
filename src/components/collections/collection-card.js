@@ -52,7 +52,7 @@ function CollectionCard(props) {
         <Card className={classes.card}>
           <CardActionArea
             className={classes.actionArea}
-            onClick={() => { context.state.setCurrentCollection(collection); props.history.push('/collectionsView', { collection }); }}
+            onClick={() => { context.state.setCurrentCollection(collection); props.history.push('/collectionsView'); }}
           >
             <CardContent>
               <Typography
