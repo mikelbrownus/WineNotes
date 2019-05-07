@@ -118,7 +118,8 @@ class Header extends React.Component {
               aria-labelledby="responsive-dialog-title"
             >
               <DialogTitle id="responsive-dialog-title">
-                Delete wine note?
+                {isView && 'Delete wine note?'}
+                {isCollectionsView && 'Delete this collection?'}
               </DialogTitle>
               <DialogContent>
                 <DialogContentText>
@@ -129,8 +130,13 @@ class Header extends React.Component {
                 <Button
                   onClick={() => {
                     this.toggleAlert(false);
-                    context.state.deleteNote(wineNote.id);
-                    history.push('/');
+                    if (isView) {
+                      context.state.deleteNote(wineNote.id);
+                    }
+                    if (isCollectionsView) {
+                      context.state.deleteCollection(context.state.CurrentCollection);
+                    }
+                    history.goBack();
                   }}
                   color="primary"
                 >
@@ -238,7 +244,7 @@ class Header extends React.Component {
                   <IconButton
                     color="inherit"
                     onClick={() => {
-                      // this.toggleAlert(true);
+                      this.toggleAlert(true);
                     }}
                   >
                     <MdDeleteForever />
