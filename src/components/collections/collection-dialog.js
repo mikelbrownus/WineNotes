@@ -90,7 +90,15 @@ class CollectionDialog extends React.Component {
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => { this.clearForm(); handleClose(); }} color="primary">
+              <Button
+                onClick={() => {
+                  if (!id) {
+                    this.clearForm();
+                  }
+                  handleClose();
+                }}
+                color="primary"
+              >
                 Cancel
               </Button>
               <Button
