@@ -161,6 +161,9 @@ class WineNotesProvider extends React.Component {
 
   updateCollection = collection => {
     collectionsRepository.updateCollection(collection.id, collection);
+    this.setState({
+      CurrentCollection: collection,
+    });
     this.updateCollectionState();
   }
 
