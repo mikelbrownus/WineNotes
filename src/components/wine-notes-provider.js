@@ -15,7 +15,7 @@ class WineNotesProvider extends React.Component {
     this.state = {
       WineNotes: repository.filteredNotes(),
       Collections: [],
-      CurrentCollection: '',
+      CurrentCollection: {},
       settings: {
         autoInsertOn: false,
         wineMaker: '',
@@ -154,8 +154,11 @@ class WineNotesProvider extends React.Component {
     this.updateCollectionState();
   }
 
-  deleteCollection = collection => {
-    collectionsRepository.deleteCollection(collection);
+  deleteCollection = id => {
+    this.setState({
+      CurrentCollection: {},
+    });
+    collectionsRepository.deleteCollection(id);
     this.updateCollectionState();
   }
 

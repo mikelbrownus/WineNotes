@@ -134,7 +134,7 @@ class Header extends React.Component {
                       context.state.deleteNote(wineNote.id);
                     }
                     if (isCollectionsView) {
-                      context.state.deleteCollection(context.state.CurrentCollection);
+                      context.state.deleteCollection(context.state.CurrentCollection.id);
                     }
                     history.goBack();
                   }}
