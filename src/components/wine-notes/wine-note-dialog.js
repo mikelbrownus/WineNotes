@@ -41,6 +41,7 @@ class WineNoteDialog extends React.Component {
         region,
         tastingNote,
         technicalNote,
+        collection,
       } = wineNote;
       this.state = {
         varietal,
@@ -52,6 +53,7 @@ class WineNoteDialog extends React.Component {
         region,
         tastingNote,
         technicalNote,
+        collection,
       };
     } else {
       this.state = {
@@ -64,6 +66,7 @@ class WineNoteDialog extends React.Component {
         wineName: '',
         tastingNote: (settings.autoInsertOn) ? settings.tastingNotes : '',
         technicalNote: (settings.autoInsertOn) ? settings.technicalNotes : '',
+        collection: '',
       };
     }
   }
@@ -79,6 +82,7 @@ class WineNoteDialog extends React.Component {
       wineName: '',
       tastingNote: '',
       technicalNote: '',
+      collection: '',
     });
   };
 
@@ -109,6 +113,7 @@ class WineNoteDialog extends React.Component {
       wineName,
       tastingNote,
       technicalNote,
+      // collection = '',
     } = this.state;
 
     return (
@@ -238,7 +243,9 @@ class WineNoteDialog extends React.Component {
                       handleClose();
                     }
                     : () => {
-                      context.state.addNote(this.state);
+                      context.state.addNote(
+                        { ...this.state, collection: context.state.CurrentCollection.id },
+                      );
                       this.clearForm();
                       handleClose();
                     }

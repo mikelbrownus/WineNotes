@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { TiWine } from 'react-icons/ti';
 import NoteMapper from '../../model/note-mapper';
+import Context from '../../app-context';
 
 const isIEorFF = navigator.userAgent.indexOf('Firefox') !== -1
   || navigator.userAgent.indexOf('MSIE') !== -1
@@ -60,36 +61,43 @@ function WineNoteCard(props) {
   const mapper = NoteMapper(note);
 
   return (
-    <Card className={classes.card}>
-      {note.image ? (
-        <img
-          src={note.image}
-          alt={mapper.getName(order)}
-          className={classes.externalImage}
-        />
-      ) : (
-        <TiWine className={classes.photo} />
-      )}
-      <CardActionArea
-        className={classes.actionArea}
-        onClick={() => props.history.push('/view', { wineNote: note, order })}
-      >
-        <CardContent>
-          <Typography
-            variant="subtitle1"
-            component="p"
-            className={classes.nameLength}
+    <Context.Consumer>
+      {context => (
+        <Card className={classes.card}>
+          {note.image ? (
+            <img
+              src={note.image}
+              alt={mapper.getName(order)}
+              className={classes.externalImage}
+            />
+          ) : (
+            <TiWine className={classes.photo} />
+          )}
+          <CardActionArea
+            className={classes.actionArea}
+            onClick={() => {
+              context.state.setCurrentCollection('');
+              props.history.push('/view', { wineNote: note, order });
+            }}
           >
-            {mapper.getName(order)}
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
+            <CardContent>
+              <Typography
+                variant="subtitle1"
+                component="p"
+                className={classes.nameLength}
+              >
+                {mapper.getName(order)}
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
             Date:
-            {' '}
-            {mapper.getDate()}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+                {' '}
+                {mapper.getDate()}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      )}
+    </Context.Consumer>
   );
 }
 
