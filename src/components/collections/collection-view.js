@@ -76,13 +76,20 @@ class CollectionView extends React.Component {
               justify="center"
               alignItems="center"
             >
-              {context.state.WineNotes.length > 0
-                && context.state.WineNotes.map(note => (
-                  <Grid item xs={12} sm={6} md={4} key={note.id}>
-                    <WineNoteCard note={note} order={context.state.settings.nameOrder} />
-                  </Grid>
-                ))}
-              {context.state.WineNotes.length < 1 && (
+              {context.state.WineNotes.filter(
+                (item) => item.collection === context.state.CurrentCollection.id,
+              ).length > 0
+                && context.state.WineNotes.filter(
+                  (item) => item.collection === context.state.CurrentCollection.id,
+                )
+                  .map(note => (
+                    <Grid item xs={12} sm={6} md={4} key={note.id}>
+                      <WineNoteCard note={note} order={context.state.settings.nameOrder} />
+                    </Grid>
+                  ))}
+              {context.state.WineNotes.filter(
+                (item) => item.collection === context.state.CurrentCollection.id,
+              ).length < 1 && (
                 <Typography
                   variant="h5"
                   component="p"
