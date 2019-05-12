@@ -159,6 +159,12 @@ class WineNotesProvider extends React.Component {
       CurrentCollection: {},
     });
     collectionsRepository.deleteCollection(id);
+    const notes = repository.getNotes();
+    notes.forEach((note) => {
+      if (note.collection === id) {
+        this.deleteNote(note.id);
+      }
+    });
     this.updateCollectionState();
   }
 
