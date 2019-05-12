@@ -119,7 +119,7 @@ class Header extends React.Component {
             >
               <DialogTitle id="responsive-dialog-title">
                 {isView && 'Delete wine note?'}
-                {isCollectionsView && 'Delete this collection?'}
+                {isCollectionsView && 'Delete this collection and all wine notes in it?'}
               </DialogTitle>
               <DialogContent>
                 <DialogContentText>
