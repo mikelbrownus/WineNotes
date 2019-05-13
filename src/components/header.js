@@ -106,6 +106,7 @@ class Header extends React.Component {
     const { filter, alert } = this.state;
     const hasSearch = location.pathname === '/';
     const isView = location.pathname === '/view';
+    const isCollections = location.pathname === '/collections';
     const isCollectionsView = location.pathname === '/collectionsView';
     const wineNote = location && location.state ? location.state.wineNote : {};
     return (
@@ -181,8 +182,10 @@ class Header extends React.Component {
                 color="inherit"
                 className={classes.title}
               >
-                {(isCollectionsView && context.state.CurrentCollection.name)
-                  ? context.state.CurrentCollection.name : 'Wine Notes' }
+                { isCollections ? 'Collections'
+                  : (isCollectionsView && context.state.CurrentCollection.name)
+                    ? context.state.CurrentCollection.name : 'Wine Notes'
+                  }
               </Typography>
               {hasSearch && (
                 <Fragment>
