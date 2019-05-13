@@ -113,7 +113,7 @@ class WineNoteDialog extends React.Component {
       wineName,
       tastingNote,
       technicalNote,
-      // collection = '',
+      collection = '',
     } = this.state;
 
     return (
@@ -229,6 +229,27 @@ class WineNoteDialog extends React.Component {
                 onChange={this.handleChange}
                 fullWidth
               />
+              {this.wineNote && (
+              <FormControl
+                variant="filled"
+                className={classes.formControl}
+                fullWidth
+              >
+                <InputLabel htmlFor="collection">Collection</InputLabel>
+                <Select
+                  value={collection}
+                  onChange={this.handleChange}
+                  input={<FilledInput name="collection" id="collection" />}
+                >
+                  {context.state.Collections.map(v => (
+                    <MenuItem value={v.id} key={v.id}>
+                      {v.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              )
+              }
             </DialogContent>
             <DialogActions>
               <Button onClick={() => { this.clearForm(); handleClose(); }} color="primary">
