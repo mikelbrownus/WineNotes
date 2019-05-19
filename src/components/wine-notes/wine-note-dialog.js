@@ -19,11 +19,14 @@ import Context from '../../app-context';
 
 const vintages = Vintages().getVintages();
 
-const styles = {
+const styles = theme => ({
   formControl: {
     margin: '8px 0',
   },
-};
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2,
+  },
+});
 
 class WineNoteDialog extends React.Component {
   constructor(props) {
@@ -239,8 +242,13 @@ class WineNoteDialog extends React.Component {
                 <Select
                   value={collection}
                   onChange={this.handleChange}
-                  input={<FilledInput name="collection" id="collection" />}
+                  input={<FilledInput name="collection" />}
+                  displayEmpty
+                  className={classes.selectEmpty}
                 >
+                  <MenuItem value="">
+                      None
+                  </MenuItem>
                   {context.state.Collections.map(v => (
                     <MenuItem value={v.id} key={v.id}>
                       {v.name}
