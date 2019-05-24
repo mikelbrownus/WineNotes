@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import Slider from '@material-ui/lab/Slider';
+import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
@@ -24,7 +26,10 @@ const styles = theme => ({
     margin: '8px 0',
   },
   selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
+  },
+  slider: {
+    padding: '22px 10px',
   },
 });
 
@@ -45,6 +50,7 @@ class WineNoteDialog extends React.Component {
         tastingNote,
         technicalNote,
         collection,
+        rating,
       } = wineNote;
       this.state = {
         varietal,
@@ -57,6 +63,7 @@ class WineNoteDialog extends React.Component {
         tastingNote,
         technicalNote,
         collection,
+        rating,
       };
     } else {
       this.state = {
@@ -70,6 +77,7 @@ class WineNoteDialog extends React.Component {
         tastingNote: (settings.autoInsertOn) ? settings.tastingNotes : '',
         technicalNote: (settings.autoInsertOn) ? settings.technicalNotes : '',
         collection: '',
+        rating: 0,
       };
     }
   }
@@ -86,6 +94,7 @@ class WineNoteDialog extends React.Component {
       tastingNote: '',
       technicalNote: '',
       collection: '',
+      rating: 0,
     });
   };
 
@@ -99,6 +108,10 @@ class WineNoteDialog extends React.Component {
 
   handleChangeCB = event => {
     this.setState({ [event.target.name]: event.target.checked });
+  };
+
+  handleRatingChange = (event, value) => {
+    this.setState({ rating: value });
   };
 
   render() {
@@ -117,6 +130,7 @@ class WineNoteDialog extends React.Component {
       tastingNote,
       technicalNote,
       collection = '',
+      rating = 0,
     } = this.state;
 
     return (
@@ -231,6 +245,21 @@ class WineNoteDialog extends React.Component {
                 variant="outlined"
                 onChange={this.handleChange}
                 fullWidth
+              />
+              <Typography id="label">
+Rating:
+                {rating}
+              </Typography>
+              <Slider
+                id="rating"
+                name="rating"
+                className={classes.slider}
+                value={rating}
+                min={0}
+                max={100}
+                step={1}
+                aria-labelledby="label"
+                onChange={this.handleRatingChange}
               />
               {this.wineNote && (
               <FormControl
