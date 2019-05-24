@@ -49,7 +49,9 @@ class WineNoteView extends React.Component {
   };
 
   render() {
-    const { tastingNote, technicalNote, image } = this.state;
+    const {
+      tastingNote, technicalNote, image, rating,
+    } = this.state;
     const { classes } = this.props;
     return (
       <div className={classes.body}>
@@ -93,6 +95,14 @@ class WineNoteView extends React.Component {
                           ))}
                         </Typography>
                       </Fragment>
+                    )}
+
+                    {rating && (
+                    <Typography variant="h6" component="h3">
+                      Rating:
+                      {' '}
+                      {rating}
+                    </Typography>
                     )}
                   </CardContent>
                 </div>
