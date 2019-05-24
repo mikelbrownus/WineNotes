@@ -18,13 +18,13 @@ const App = () => (
       <CssBaseline />
       <Header />
       <Switch>
-        <Route exact path="/" component={WineNotes} />
-        <Route exact path="/view" component={WineNoteView} />
-        <Route exact path="/settings" component={Settings} />
-        <Route exact path="/help" component={Help} />
-        <Route exact path="/collections" component={Collections} />
-        <Route exact path="/collectionsView" component={CollectionView} />
-        <Route component={PageNotFound} />
+        <Route exact path="/" render={(props) => <WineNotes {...props} />} />
+        <Route exact path="/view" render={(props) => <WineNoteView {...props} />} />
+        <Route exact path="/settings" render={(props) => <Settings {...props} />} />
+        <Route exact path="/help" render={() => <Help />} />
+        <Route exact path="/collections" render={(props) => <Collections {...props} />} />
+        <Route exact path="/collectionsView" render={(props) => <CollectionView {...props} />} />
+        <Route render={() => <PageNotFound />} />
       </Switch>
       <Footer />
     </Fragment>
