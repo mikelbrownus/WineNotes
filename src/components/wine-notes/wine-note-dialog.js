@@ -247,7 +247,8 @@ class WineNoteDialog extends React.Component {
                 fullWidth
               />
               <Typography id="label">
-Rating:
+                Rating:
+                {' '}
                 {rating}
               </Typography>
               <Slider

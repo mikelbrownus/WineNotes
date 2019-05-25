@@ -46,11 +46,22 @@ const styles = {
     width: '40px',
     marginLeft: '18px',
   },
-  pos: {
-    marginBottom: 12,
+  date: {
+    // marginBottom: 12,
+    padding: '2px 4px',
+  },
+  rating: {
+    border: '1px orange solid',
+    marginBottom: '12px',
+    marginRight: '12px',
+    padding: '2px 4px',
   },
   actionArea: {
     width: '100%',
+  },
+  secondLine: {
+    display: 'flex',
+    alignItems: 'left',
   },
   nameLength,
 };
@@ -84,11 +95,28 @@ function WineNoteCard(props) {
           >
             {mapper.getName(order)}
           </Typography>
-          <Typography className={classes.pos} color="textSecondary">
+          <div className={classes.secondLine}>
+
+            <Typography
+              className={classes.rating}
+              color="textSecondary"
+              variant="subtitle2"
+              component="span"
+            >
+              {note.rating}
+            </Typography>
+            <Typography
+              className={classes.date}
+              color="textSecondary"
+              variant="subtitle2"
+              component="span"
+            >
             Date:
-            {' '}
-            {mapper.getDate()}
-          </Typography>
+              {' '}
+              {mapper.getDate()}
+            </Typography>
+
+          </div>
         </CardContent>
       </CardActionArea>
     </Card>
