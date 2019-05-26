@@ -97,13 +97,13 @@ class WineNoteView extends React.Component {
                       </Fragment>
                     )}
 
-                    {rating && (
-                    <Typography variant="h6" component="h3">
+                    {rating ? (
+                      <Typography variant="h6" component="h3">
                       Rating:
-                      {' '}
-                      {rating}
-                    </Typography>
-                    )}
+                        {' '}
+                        {rating}
+                      </Typography>
+                    ) : ''}
                   </CardContent>
                 </div>
               </Card>

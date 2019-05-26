@@ -96,15 +96,16 @@ function WineNoteCard(props) {
             {mapper.getName(order)}
           </Typography>
           <div className={classes.secondLine}>
-
-            <Typography
-              className={classes.rating}
-              color="textSecondary"
-              variant="subtitle2"
-              component="span"
-            >
-              {note.rating}
-            </Typography>
+            {(note.rating) ? (
+              <Typography
+                className={classes.rating}
+                color="textSecondary"
+                variant="subtitle2"
+                component="span"
+              >
+                {note.rating}
+              </Typography>
+            ) : ''}
             <Typography
               className={classes.date}
               color="textSecondary"
