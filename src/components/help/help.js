@@ -12,6 +12,7 @@ const Help = () => (
   <div style={divStyle}>
     <h1>
       Wine Notes -- Version
+      {' '}
       {version}
     </h1>
     <h2>Warning!</h2>
