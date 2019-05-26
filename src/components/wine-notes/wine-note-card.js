@@ -51,7 +51,7 @@ const styles = {
     padding: '2px 4px',
   },
   rating: {
-    border: '1px orange solid',
+    border: '1px #E0A838 solid',
     marginBottom: '12px',
     marginRight: '12px',
     padding: '2px 4px',
