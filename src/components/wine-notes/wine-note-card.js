@@ -47,8 +47,7 @@ const styles = {
     marginLeft: '18px',
   },
   date: {
-    // marginBottom: 12,
-    padding: '2px 4px',
+    padding: '2px 0px',
   },
   rating: {
     border: '1px #E0A838 solid',
