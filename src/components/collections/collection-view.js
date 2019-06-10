@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -35,96 +35,93 @@ const styles = theme => ({
     padding: '10px',
   },
 });
-class CollectionView extends React.Component {
-  state = {
-    open: false,
+
+const CollectionView = (props) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
   };
 
-  handleOpen = () => {
-    this.setState({ open: true });
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  const { classes } = props;
 
-  render() {
-    const { classes } = this.props;
-    const { open } = this.state;
-    return (
-      <Context.Consumer>
-        {context => (
-          <div className={classes.gridSize}>
-            {context.state.CurrentCollection.description && (
-              <Card
-                raised
-                className={classes.card}
-              >
-                <CardContent>
-                  <Typography
-                    variant="subtitle1"
-                    align="center"
-                  >
-                    {context.state.CurrentCollection.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            )}
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
+  return (
+    <Context.Consumer>
+      {context => (
+        <div className={classes.gridSize}>
+          {context.state.CurrentCollection.description && (
+            <Card
+              raised
+              className={classes.card}
             >
-              {context.state.WineNotes.filter(
-                (item) => item.collection === context.state.CurrentCollection.id,
-              ).length > 0
-                && context.state.WineNotes.filter(
-                  (item) => item.collection === context.state.CurrentCollection.id,
-                )
-                  .map(note => (
-                    <Grid item xs={12} sm={6} md={4} key={note.id}>
-                      <WineNoteCard note={note} order={context.state.settings.nameOrder} />
-                    </Grid>
-                  ))}
-              {context.state.WineNotes.filter(
-                (item) => item.collection === context.state.CurrentCollection.id,
-              ).length < 1 && (
+              <CardContent>
                 <Typography
-                  variant="h5"
-                  component="p"
-                  className={classes.noNoteMessage}
+                  variant="subtitle1"
+                  align="center"
                 >
-                  Press + to add note to collection
+                  {context.state.CurrentCollection.description}
                 </Typography>
-              )}
-            </Grid>
-            <Fab
-              aria-label="Add"
-              color="primary"
-              size="small"
-              onClick={this.handleOpen}
-              className={classes.fab}
+              </CardContent>
+            </Card>
+          )}
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            {context.state.WineNotes.filter(
+              (item) => item.collection === context.state.CurrentCollection.id,
+            ).length > 0
+              && context.state.WineNotes.filter(
+                (item) => item.collection === context.state.CurrentCollection.id,
+              )
+                .map(note => (
+                  <Grid item xs={12} sm={6} md={4} key={note.id}>
+                    <WineNoteCard note={note} order={context.state.settings.nameOrder} />
+                  </Grid>
+                ))}
+            {context.state.WineNotes.filter(
+              (item) => item.collection === context.state.CurrentCollection.id,
+            ).length < 1 && (
+            <Typography
+              variant="h5"
+              component="p"
+              className={classes.noNoteMessage}
             >
-              <MdAdd />
-            </Fab>
-            <CollectionDialog
-              handleClose={() => {
-                context.state.editCollectionDialogToggle();
-              }}
-              open={context.state.editCollectionDialogOpen}
-              collection={context.state.CurrentCollection}
-            />
-            <WineNoteDialog
-              handleClose={this.handleClose}
-              open={open}
-              settings={context.state.settings}
-            />
-          </div>
-        )}
-      </Context.Consumer>
-    );
-  }
-}
+                  Press + to add note to collection
+            </Typography>
+            )}
+          </Grid>
+          <Fab
+            aria-label="Add"
+            color="primary"
+            size="small"
+            onClick={handleOpen}
+            className={classes.fab}
+          >
+            <MdAdd />
+          </Fab>
+          <CollectionDialog
+            handleClose={() => {
+              context.state.editCollectionDialogToggle();
+            }}
+            open={context.state.editCollectionDialogOpen}
+            collection={context.state.CurrentCollection}
+          />
+          <WineNoteDialog
+            handleClose={handleClose}
+            open={open}
+            settings={context.state.settings}
+          />
+        </div>
+      )}
+    </Context.Consumer>
+  );
+};
 
 export default withStyles(styles)(CollectionView);
