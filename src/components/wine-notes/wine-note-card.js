@@ -65,7 +65,7 @@ const styles = {
   nameLength,
 };
 
-function WineNoteCard(props) {
+const WineNoteCard = (props) => {
   const { classes, note, order } = props;
   const mapper = NoteMapper(note);
 
@@ -121,7 +121,7 @@ function WineNoteCard(props) {
       </CardActionArea>
     </Card>
   );
-}
+};
 
 const it = withStyles(styles)(WineNoteCard);
 export default withRouter(it);
