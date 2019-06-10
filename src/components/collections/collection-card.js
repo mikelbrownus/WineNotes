@@ -42,7 +42,7 @@ const styles = {
   nameLength,
 };
 
-function CollectionCard(props) {
+const CollectionCard = (props) => {
   const { classes, collection } = props;
 
 
@@ -76,7 +76,7 @@ function CollectionCard(props) {
       )}
     </Context.Consumer>
   );
-}
+};
 
 const it = withStyles(styles)(CollectionCard);
 export default withRouter(it);
