@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
 import AppBar from '@material-ui/core/AppBar';
@@ -87,181 +87,182 @@ const styles = theme => ({
   },
 });
 
-class Header extends React.Component {
-  state = {
-    filter: '',
-    alert: false,
+const Header = (props) => {
+  const [filter, setFilter] = useState('');
+  const [alert, setAlert] = useState(false);
+
+  const changeFilter = filterNow => {
+    setFilter(filterNow);
   };
 
-  changeFilter = filter => {
-    this.setState({ filter });
+  const toggleAlert = on => {
+    setAlert(on);
   };
 
-  toggleAlert = on => {
-    this.setState({ alert: on });
+  const handleClose = () => {
+    toggleAlert(false);
   };
 
-  render() {
-    const { classes, location, history } = this.props;
-    const { filter, alert } = this.state;
-    const hasSearch = location.pathname === '/';
-    const isView = location.pathname === '/view';
-    const isCollections = location.pathname === '/collections';
-    const isCollectionsView = location.pathname === '/collectionsView';
-    const wineNote = location && location.state ? location.state.wineNote : {};
-    return (
-      <Context.Consumer>
-        {context => (
-          <AppBar position="static">
-            <Dialog
-              open={alert}
-              onClose={this.handleClose}
-              aria-labelledby="responsive-dialog-title"
-            >
-              <DialogTitle id="responsive-dialog-title">
-                {isView && 'Delete wine note?'}
-                {isCollectionsView && 'Delete this collection and all wine notes in it?'}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  No going back after this. Shall I delete?
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  onClick={() => {
-                    this.toggleAlert(false);
-                    if (isView) {
-                      context.state.deleteNote(wineNote.id);
-                    }
-                    if (isCollectionsView) {
-                      context.state.deleteCollection(context.state.CurrentCollection.id);
-                    }
-                    history.goBack();
-                  }}
-                  color="primary"
-                >
-                  Delete
-                </Button>
-                <Button
-                  onClick={() => {
-                    this.toggleAlert(false);
-                  }}
-                  color="primary"
-                  autoFocus
-                >
-                  Cancel
-                </Button>
-              </DialogActions>
-            </Dialog>
-            <Toolbar>
-              { (isView || isCollectionsView) ? (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  aria-label="back"
-                  className={classes.home}
-                  onClick={() => history.goBack()}
-                >
-                  <MdKeyboardBackspace fontSize="x-large" />
-                </Button>
-              ) : (
-                <Link to="/help">
-                  <IconButton
-                    variant="contained"
-                    aria-label="home"
-                    className={classes.home}
-                  >
-                    <MdHome />
-                  </IconButton>
-                </Link>
-              )}
 
-              <Typography
-                variant="h6"
-                color="inherit"
-                className={classes.title}
-              >
-                { isCollections ? 'Collections'
-                  : (isCollectionsView && context.state.CurrentCollection.name)
-                    ? context.state.CurrentCollection.name : 'Wine Notes'
+  const { classes, location, history } = props;
+  const hasSearch = location.pathname === '/';
+  const isView = location.pathname === '/view';
+  const isCollections = location.pathname === '/collections';
+  const isCollectionsView = location.pathname === '/collectionsView';
+  const wineNote = location && location.state ? location.state.wineNote : {};
+  return (
+    <Context.Consumer>
+      {context => (
+        <AppBar position="static">
+          <Dialog
+            open={alert}
+            onClose={handleClose}
+            aria-labelledby="responsive-dialog-title"
+          >
+            <DialogTitle id="responsive-dialog-title">
+              {isView && 'Delete wine note?'}
+              {isCollectionsView && 'Delete this collection and all wine notes in it?'}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                No going back after this. Shall I delete?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => {
+                  toggleAlert(false);
+                  if (isView) {
+                    context.state.deleteNote(wineNote.id);
                   }
-              </Typography>
-              {hasSearch && (
-                <Fragment>
-                  <div className={classes.grow} />
-                  <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                      <MdSearch />
-                    </div>
-                    <InputBase
-                      placeholder="Search…"
-                      value={filter}
-                      onChange={event => {
-                        this.changeFilter(event.target.value);
-                        context.state.filterNotes(event.target.value);
-                      }}
-                      classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                      }}
-                    />
-                  </div>
-                  <Button color="inherit" onClick={context.state.addTestData}>
-                    Reset Test Data
-                  </Button>
-                </Fragment>
-              )}
-              {isView && (
-                <Fragment>
-                  <div className={classes.grow} />
-                  <IconButton
-                    color="inherit"
-                    onClick={() => {
-                      context.state.editNoteDialogToggle();
-                    }}
-                  >
-                    <MdEdit />
-                  </IconButton>
-                  <IconButton
-                    color="inherit"
-                    onClick={() => {
-                      this.toggleAlert(true);
-                    }}
-                  >
-                    <MdDeleteForever />
-                  </IconButton>
-                </Fragment>
-              )}
-              {isCollectionsView && (
-                <Fragment>
-                  <div className={classes.grow} />
-                  <IconButton
-                    color="inherit"
-                    onClick={() => {
-                      context.state.editCollectionDialogToggle();
-                    }}
-                  >
-                    <MdEdit />
-                  </IconButton>
-                  <IconButton
-                    color="inherit"
-                    onClick={() => {
-                      this.toggleAlert(true);
-                    }}
-                  >
-                    <MdDeleteForever />
-                  </IconButton>
-                </Fragment>
-              )}
+                  if (isCollectionsView) {
+                    context.state.deleteCollection(context.state.CurrentCollection.id);
+                  }
+                  history.goBack();
+                }}
+                color="primary"
+              >
+                Delete
+              </Button>
+              <Button
+                onClick={() => {
+                  toggleAlert(false);
+                }}
+                color="primary"
+                autoFocus
+              >
+                Cancel
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Toolbar>
+            {(isView || isCollectionsView) ? (
+              <Button
+                variant="contained"
+                color="primary"
+                aria-label="back"
+                className={classes.home}
+                onClick={() => history.goBack()}
+              >
+                <MdKeyboardBackspace fontSize="x-large" />
+              </Button>
+            ) : (
+              <Link to="/help">
+                <IconButton
+                  variant="contained"
+                  aria-label="home"
+                  className={classes.home}
+                >
+                  <MdHome />
+                </IconButton>
+              </Link>
+            )}
 
-            </Toolbar>
-          </AppBar>
-        )}
-      </Context.Consumer>
-    );
-  }
-}
+            <Typography
+              variant="h6"
+              color="inherit"
+              className={classes.title}
+            >
+              {isCollections ? 'Collections'
+                : (isCollectionsView && context.state.CurrentCollection.name)
+                  ? context.state.CurrentCollection.name : 'Wine Notes'
+              }
+            </Typography>
+            {hasSearch && (
+              <Fragment>
+                <div className={classes.grow} />
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <MdSearch />
+                  </div>
+                  <InputBase
+                    placeholder="Search…"
+                    value={filter}
+                    onChange={event => {
+                      changeFilter(event.target.value);
+                      context.state.filterNotes(event.target.value);
+                    }}
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                  />
+                </div>
+                <Button color="inherit" onClick={context.state.addTestData}>
+                  Reset Test Data
+                </Button>
+              </Fragment>
+            )}
+            {isView && (
+              <Fragment>
+                <div className={classes.grow} />
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    context.state.editNoteDialogToggle();
+                  }}
+                >
+                  <MdEdit />
+                </IconButton>
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    toggleAlert(true);
+                  }}
+                >
+                  <MdDeleteForever />
+                </IconButton>
+              </Fragment>
+            )}
+            {isCollectionsView && (
+              <Fragment>
+                <div className={classes.grow} />
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    context.state.editCollectionDialogToggle();
+                  }}
+                >
+                  <MdEdit />
+                </IconButton>
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    toggleAlert(true);
+                  }}
+                >
+                  <MdDeleteForever />
+                </IconButton>
+              </Fragment>
+            )}
+
+          </Toolbar>
+        </AppBar>
+      )}
+    </Context.Consumer>
+  );
+};
+
 
 const it = withStyles(styles)(Header);
 export default withRouter(it);

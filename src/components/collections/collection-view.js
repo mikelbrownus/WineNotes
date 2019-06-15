@@ -35,7 +35,6 @@ const styles = theme => ({
     padding: '10px',
   },
 });
-
 const CollectionView = (props) => {
   const [open, setOpen] = useState(false);
 
