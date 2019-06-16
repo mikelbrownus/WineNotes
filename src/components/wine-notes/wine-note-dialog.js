@@ -150,7 +150,7 @@ class WineNoteDialog extends React.Component {
                 margin="dense"
                 id="maker"
                 name="maker"
-                value={maker}
+                value={maker || ''}
                 label="Wine Maker"
                 type="text"
                 onChange={this.handleChange}
@@ -160,7 +160,7 @@ class WineNoteDialog extends React.Component {
                 margin="dense"
                 id="name"
                 name="wineName"
-                value={wineName}
+                value={wineName || ''}
                 label="Wine Name (or other designation)"
                 type="text"
                 onChange={this.handleChange}
@@ -170,14 +170,14 @@ class WineNoteDialog extends React.Component {
                 margin="dense"
                 id="image"
                 name="image"
-                value={image}
+                value={image || ''}
                 label="URL to image"
                 type="text"
                 onChange={this.handleChange}
                 fullWidth
               />
               <VarietalsAutosuggest
-                varietal={varietal}
+                varietal={varietal || ''}
                 changeParentState={this.changeVarietalState}
               />
               <FormControl
@@ -188,7 +188,7 @@ class WineNoteDialog extends React.Component {
               >
                 <InputLabel htmlFor="vintage">Vintage</InputLabel>
                 <Select
-                  value={vintage}
+                  value={vintage || ''}
                   onChange={this.handleChange}
                   input={<FilledInput name="vintage" id="vintage" />}
                 >
@@ -214,7 +214,7 @@ class WineNoteDialog extends React.Component {
                 margin="dense"
                 id="region"
                 name="region"
-                value={region}
+                value={region || ''}
                 label="Region/terroir"
                 type="text"
                 onChange={this.handleChange}
@@ -225,7 +225,7 @@ class WineNoteDialog extends React.Component {
                 id="tastingNote"
                 name="tastingNote"
                 label="Wine Notes"
-                value={tastingNote}
+                value={tastingNote || ''}
                 multiline
                 rowsMax="4"
                 margin="normal"
@@ -238,7 +238,7 @@ class WineNoteDialog extends React.Component {
                 id="technicalNote"
                 name="technicalNote"
                 label="Technical Notes"
-                value={technicalNote}
+                value={technicalNote || ''}
                 multiline
                 rowsMax="4"
                 margin="normal"
@@ -270,7 +270,7 @@ class WineNoteDialog extends React.Component {
               >
                 <InputLabel htmlFor="collection">Collection</InputLabel>
                 <Select
-                  value={collection}
+                  value={collection || ''}
                   onChange={this.handleChange}
                   input={<FilledInput name="collection" />}
                   displayEmpty
