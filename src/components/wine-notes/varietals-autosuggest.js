@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
@@ -12,9 +12,9 @@ const varietalSuggestions = Varietals()
   .getVarietals()
   .map(x => ({ label: x }));
 
-function renderInputComponent(inputProps) {
+const renderInputComponent = (inputProps) => {
   const {
-    classes, inputRef = () => {}, ref, ...other
+    classes, inputRef = () => { }, ref, ...other
   } = inputProps;
 
   return (
@@ -33,9 +33,9 @@ function renderInputComponent(inputProps) {
       {...other}
     />
   );
-}
+};
 
-function renderSuggestion(suggestion, { query, isHighlighted }) {
+const renderSuggestion = (suggestion, { query, isHighlighted }) => {
   const matches = match(suggestion.label, query);
   const parts = parse(suggestion.label, matches);
 
@@ -55,9 +55,9 @@ function renderSuggestion(suggestion, { query, isHighlighted }) {
       </div>
     </MenuItem>
   );
-}
+};
 
-function getSuggestions(value) {
+const getSuggestions = (value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   let count = 0;
@@ -66,7 +66,7 @@ function getSuggestions(value) {
     ? []
     : varietalSuggestions.filter(suggestion => {
       const keep = count < 10
-          && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
+        && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
 
       if (keep) {
         count += 1;
@@ -74,11 +74,9 @@ function getSuggestions(value) {
 
       return keep;
     });
-}
+};
 
-function getSuggestionValue(suggestion) {
-  return suggestion.label;
-}
+const getSuggestionValue = (suggestion) => suggestion.label;
 
 const styles = theme => ({
   root: {
@@ -108,76 +106,62 @@ const styles = theme => ({
   },
 });
 
-class VarietalsAutosuggest extends React.Component {
-  constructor(props) {
-    super(props);
-    const { varietal } = this.props;
-    this.state = {
-      varietal: varietal || '',
-      popper: '',
-      suggestions: [],
-    };
-  }
+const VarietalsAutosuggest = (props) => {
+  const { varietal } = props;
+  const [theVarietal, setVarietal] = useState(varietal || '');
+  const [suggestions, setSuggestions] = useState([]);
 
-  handleSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value),
-    });
+  const handleSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value));
   };
 
-  handleSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: [],
-    });
+  const handleSuggestionsClearRequested = () => {
+    setSuggestions([]);
   };
 
-  handleChange = name => (event, { newValue }) => {
-    const { changeParentState } = this.props;
-    this.setState({
-      [name]: newValue,
-    });
+  const handleChange = name => (event, { newValue }) => {
+    const { changeParentState } = props;
     if (name === 'varietal') {
       changeParentState(newValue);
+      setVarietal(newValue);
     }
   };
 
-  render() {
-    const { classes } = this.props;
-    const { varietal, suggestions } = this.state;
-    const autosuggestProps = {
-      renderInputComponent,
-      suggestions,
-      onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
-      onSuggestionsClearRequested: this.handleSuggestionsClearRequested,
-      getSuggestionValue,
-      renderSuggestion,
-    };
+  const { classes } = props;
+  const autosuggestProps = {
+    renderInputComponent,
+    suggestions,
+    onSuggestionsFetchRequested: handleSuggestionsFetchRequested,
+    onSuggestionsClearRequested: handleSuggestionsClearRequested,
+    getSuggestionValue,
+    renderSuggestion,
+  };
 
-    return (
-      <div className={classes.root}>
-        <Autosuggest
-          {...autosuggestProps}
-          inputProps={{
-            classes,
-            placeholder: "Start typing and we'll try to help.",
-            value: varietal,
-            onChange: this.handleChange('varietal'),
-          }}
-          theme={{
-            container: classes.container,
-            suggestionsContainerOpen: classes.suggestionsContainerOpen,
-            suggestionsList: classes.suggestionsList,
-            suggestion: classes.suggestion,
-          }}
-          renderSuggestionsContainer={options => (
-            <Paper {...options.containerProps} square>
-              {options.children}
-            </Paper>
-          )}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={classes.root}>
+      <Autosuggest
+        {...autosuggestProps}
+        inputProps={{
+          classes,
+          placeholder: "Start typing and we'll try to help.",
+          value: theVarietal,
+          onChange: handleChange('varietal'),
+        }}
+        theme={{
+          container: classes.container,
+          suggestionsContainerOpen: classes.suggestionsContainerOpen,
+          suggestionsList: classes.suggestionsList,
+          suggestion: classes.suggestion,
+        }}
+        renderSuggestionsContainer={options => (
+          <Paper {...options.containerProps} square>
+            {options.children}
+          </Paper>
+        )}
+      />
+    </div>
+  );
+};
+
 
 export default withStyles(styles)(VarietalsAutosuggest);
