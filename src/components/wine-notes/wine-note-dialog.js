@@ -262,7 +262,15 @@ const WineNoteDialog = (props) => {
             }
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => { clearForm(); handleClose(); }} color="primary">
+            <Button
+              onClick={() => {
+                if (!wn.id) {
+                  clearForm();
+                }
+                handleClose();
+              }}
+              color="primary"
+            >
               Cancel
             </Button>
             <Button
