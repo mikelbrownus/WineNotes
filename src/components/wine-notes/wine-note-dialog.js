@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -33,57 +33,34 @@ const styles = theme => ({
   },
 });
 
-class WineNoteDialog extends React.Component {
-  constructor(props) {
-    super(props);
-    const { wineNote, settings } = this.props;
-    this.wineNote = wineNote;
-    if (wineNote) {
-      const {
-        varietal,
-        vintage,
-        nonvintage,
-        maker,
-        wineName,
-        image,
-        region,
-        tastingNote,
-        technicalNote,
-        collection,
-        rating,
-      } = wineNote;
-      this.state = {
-        varietal,
-        maker,
-        vintage,
-        nonvintage,
-        wineName,
-        image,
-        region,
-        tastingNote,
-        technicalNote,
-        collection,
-        rating,
-      };
-    } else {
-      this.state = {
-        varietal: '',
-        vintage: new Date().getFullYear().toString(),
-        nonvintage: false,
-        maker: (settings.autoInsertOn) ? settings.wineMaker : '',
-        image: '',
-        region: '',
-        wineName: '',
-        tastingNote: (settings.autoInsertOn) ? settings.tastingNotes : '',
-        technicalNote: (settings.autoInsertOn) ? settings.technicalNotes : '',
-        collection: '',
-        rating: 0,
-      };
-    }
-  }
+const WineNoteDialog = (props) => {
+  const {
+    wineNote, settings, open, handleClose, classes, updateNote,
+  } = props;
+  const theWineNote = wineNote || {
+    varietal: '',
+    vintage: new Date().getFullYear().toString(),
+    nonvintage: false,
+    maker: (settings.autoInsertOn) ? settings.wineMaker : '',
+    image: '',
+    region: '',
+    wineName: '',
+    tastingNote: (settings.autoInsertOn) ? settings.tastingNotes : '',
+    technicalNote: (settings.autoInsertOn) ? settings.technicalNotes : '',
+    collection: '',
+    rating: 0,
+  };
+  const [wn, setWineNote] = useState(theWineNote);
 
-  clearForm = () => {
-    this.setState({
+  useEffect(() => {
+    if (wineNote) {
+      setWineNote(wineNote);
+    }
+  }, [wineNote, settings]);
+
+
+  const clearForm = () => {
+    setWineNote({
       varietal: '',
       vintage: new Date().getFullYear().toString(),
       nonvintage: false,
@@ -98,171 +75,166 @@ class WineNoteDialog extends React.Component {
     });
   };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  const handleChange = event => {
+    setWineNote({ ...wn, [event.target.name]: event.target.value });
   };
 
-  changeVarietalState = value => {
-    this.setState({ varietal: value });
+  const changeVarietalState = value => {
+    setWineNote({ ...wn, varietal: value });
   };
 
-  handleChangeCB = event => {
-    this.setState({ [event.target.name]: event.target.checked });
+  const handleChangeCB = event => {
+    setWineNote({ ...wn, [event.target.name]: event.target.checked });
   };
 
-  handleRatingChange = (event, value) => {
-    this.setState({ rating: value });
+  const handleRatingChange = (event, value) => {
+    setWineNote({ ...wn, rating: value });
   };
+  const id = wineNote && wineNote.id ? wineNote.id : '0';
+  const {
+    vintage,
+    varietal,
+    nonvintage,
+    maker,
+    image,
+    region,
+    wineName,
+    tastingNote,
+    technicalNote,
+    collection = '',
+    rating = 0,
+  } = wn;
 
-  render() {
-    const {
-      open, handleClose, classes, updateNote,
-    } = this.props;
-    const id = this.wineNote && this.wineNote.id ? this.wineNote.id : '0';
-    const {
-      vintage,
-      varietal,
-      nonvintage,
-      maker,
-      image,
-      region,
-      wineName,
-      tastingNote,
-      technicalNote,
-      collection = '',
-      rating = 0,
-    } = this.state;
-
-    return (
-      <Context.Consumer>
-        {context => (
-          <Dialog
-            disableBackdropClick
-            disableEscapeKeyDown
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Wine Note</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="maker"
-                name="maker"
-                value={maker || ''}
-                label="Wine Maker"
-                type="text"
-                onChange={this.handleChange}
-                fullWidth
-              />
-              <TextField
-                margin="dense"
-                id="name"
-                name="wineName"
-                value={wineName || ''}
-                label="Wine Name (or other designation)"
-                type="text"
-                onChange={this.handleChange}
-                fullWidth
-              />
-              <TextField
-                margin="dense"
-                id="image"
-                name="image"
-                value={image || ''}
-                label="URL to image"
-                type="text"
-                onChange={this.handleChange}
-                fullWidth
-              />
-              <VarietalsAutosuggest
-                varietal={varietal || ''}
-                changeParentState={this.changeVarietalState}
-              />
-              <FormControl
-                variant="filled"
-                className={classes.formControl}
-                disabled={nonvintage}
-                fullWidth
+  return (
+    <Context.Consumer>
+      {context => (
+        <Dialog
+          disableBackdropClick
+          disableEscapeKeyDown
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Wine Note</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="maker"
+              name="maker"
+              value={maker || ''}
+              label="Wine Maker"
+              type="text"
+              onChange={handleChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="name"
+              name="wineName"
+              value={wineName || ''}
+              label="Wine Name (or other designation)"
+              type="text"
+              onChange={handleChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="image"
+              name="image"
+              value={image || ''}
+              label="URL to image"
+              type="text"
+              onChange={handleChange}
+              fullWidth
+            />
+            <VarietalsAutosuggest
+              varietal={varietal || ''}
+              changeParentState={changeVarietalState}
+            />
+            <FormControl
+              variant="filled"
+              className={classes.formControl}
+              disabled={nonvintage}
+              fullWidth
+            >
+              <InputLabel htmlFor="vintage">Vintage</InputLabel>
+              <Select
+                value={vintage || ''}
+                onChange={handleChange}
+                input={<FilledInput name="vintage" id="vintage" />}
               >
-                <InputLabel htmlFor="vintage">Vintage</InputLabel>
-                <Select
-                  value={vintage || ''}
-                  onChange={this.handleChange}
-                  input={<FilledInput name="vintage" id="vintage" />}
-                >
-                  {vintages.map(v => (
-                    <MenuItem value={v} key={v}>
-                      {v}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControlLabel
-                control={(
-                  <Checkbox
-                    checked={nonvintage}
-                    onChange={this.handleChangeCB}
-                    name="nonvintage"
-                    value="nonvintage"
-                  />
-                )}
-                label="Non Vintage Wine"
-              />
-              <TextField
-                margin="dense"
-                id="region"
-                name="region"
-                value={region || ''}
-                label="Region/terroir"
-                type="text"
-                onChange={this.handleChange}
-                fullWidth
-              />
+                {vintages.map(v => (
+                  <MenuItem value={v} key={v}>
+                    {v}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  checked={nonvintage}
+                  onChange={handleChangeCB}
+                  name="nonvintage"
+                  value="nonvintage"
+                />
+              )}
+              label="Non Vintage Wine"
+            />
+            <TextField
+              margin="dense"
+              id="region"
+              name="region"
+              value={region || ''}
+              label="Region/terroir"
+              type="text"
+              onChange={handleChange}
+              fullWidth
+            />
 
-              <TextField
-                id="tastingNote"
-                name="tastingNote"
-                label="Wine Notes"
-                value={tastingNote || ''}
-                multiline
-                rowsMax="4"
-                margin="normal"
-                onChange={this.handleChange}
-                variant="outlined"
-                fullWidth
-              />
+            <TextField
+              id="tastingNote"
+              name="tastingNote"
+              label="Wine Notes"
+              value={tastingNote || ''}
+              multiline
+              rowsMax="4"
+              margin="normal"
+              onChange={handleChange}
+              variant="outlined"
+              fullWidth
+            />
 
-              <TextField
-                id="technicalNote"
-                name="technicalNote"
-                label="Technical Notes"
-                value={technicalNote || ''}
-                multiline
-                rowsMax="4"
-                margin="normal"
-                variant="outlined"
-                onChange={this.handleChange}
-                fullWidth
-              />
-              <Typography id="label">
-                Rating:
-                {' '}
-                {rating}
-              </Typography>
-              <Slider
-                id="rating"
-                name="rating"
-                className={classes.slider}
-                value={rating}
-                min={0}
-                max={100}
-                step={1}
-                aria-labelledby="label"
-                onChange={this.handleRatingChange}
-              />
-              {this.wineNote && (
+            <TextField
+              id="technicalNote"
+              name="technicalNote"
+              label="Technical Notes"
+              value={technicalNote || ''}
+              multiline
+              rowsMax="4"
+              margin="normal"
+              variant="outlined"
+              onChange={handleChange}
+              fullWidth
+            />
+            <Typography id="label">
+              Rating:
+              {' '}
+              {rating}
+            </Typography>
+            <Slider
+              id="rating"
+              name="rating"
+              className={classes.slider}
+              value={rating}
+              min={0}
+              max={100}
+              step={1}
+              aria-labelledby="label"
+              onChange={handleRatingChange}
+            />
+            {wineNote && (
               <FormControl
                 variant="filled"
                 className={classes.formControl}
@@ -271,13 +243,13 @@ class WineNoteDialog extends React.Component {
                 <InputLabel htmlFor="collection">Collection</InputLabel>
                 <Select
                   value={collection || ''}
-                  onChange={this.handleChange}
+                  onChange={handleChange}
                   input={<FilledInput name="collection" />}
                   displayEmpty
                   className={classes.selectEmpty}
                 >
                   <MenuItem value="">
-                      None
+                    None
                   </MenuItem>
                   {context.state.Collections.map(v => (
                     <MenuItem value={v.id} key={v.id}>
@@ -286,39 +258,39 @@ class WineNoteDialog extends React.Component {
                   ))}
                 </Select>
               </FormControl>
-              )
+            )
+            }
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => { clearForm(); handleClose(); }} color="primary">
+              Cancel
+            </Button>
+            <Button
+              onClick={
+                wineNote
+                  ? () => {
+                    context.state.updateNote(id, wn);
+                    updateNote(wn);
+                    handleClose();
+                  }
+                  : () => {
+                    context.state.addNote(
+                      { ...wn, collection: context.state.CurrentCollection.id },
+                    );
+                    clearForm();
+                    handleClose();
+                  }
               }
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => { this.clearForm(); handleClose(); }} color="primary">
-                Cancel
-              </Button>
-              <Button
-                onClick={
-                  this.wineNote
-                    ? () => {
-                      context.state.updateNote(id, this.state);
-                      updateNote(this.state);
-                      handleClose();
-                    }
-                    : () => {
-                      context.state.addNote(
-                        { ...this.state, collection: context.state.CurrentCollection.id },
-                      );
-                      this.clearForm();
-                      handleClose();
-                    }
-                }
-                color="primary"
-              >
-                {this.wineNote ? 'Update' : 'Add'}
-              </Button>
-            </DialogActions>
-          </Dialog>
-        )}
-      </Context.Consumer>
-    );
-  }
-}
+              color="primary"
+            >
+              {wineNote ? 'Update' : 'Add'}
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+    </Context.Consumer>
+  );
+};
+
 
 export default withStyles(styles)(WineNoteDialog);
