@@ -4,7 +4,7 @@ import localForage from 'localforage';
 
 const SettingsContext = React.createContext();
 
-let initialState = {
+const initialState = {
   autoInsertOn: false,
   wineMaker: '',
   tastingNotes: '',
@@ -12,10 +12,11 @@ let initialState = {
   nameOrder: 0,
 };
 
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'reset':
-      return initialState;
+      return action.payload || initialState;
     case 'update-auto-insert':
       return { ...state, autoInsertOn: action.payload };
     case 'update-winemaker':
@@ -32,14 +33,14 @@ const reducer = (state, action) => {
 };
 
 function SettingsContextProvider(props) {
-  localForage.getItem('settings').then(value => {
-    if (value) {
-      const settings = JSON.parse(value);
-      initialState = settings;
-    }
-  });
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const value = { state, dispatch };
+  localForage.getItem('settings').then(saved => {
+    if (saved) {
+      const settings = JSON.parse(saved);
+      dispatch({ type: 'reset', payload: settings });
+    }
+  });
 
   useEffect(
     () => {
