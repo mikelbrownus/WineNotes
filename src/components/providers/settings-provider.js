@@ -48,16 +48,16 @@ const reducer = (state, action) => {
 
 
 function SettingsContextProvider(props) {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
-  const value = { state, dispatch };
+  const [settings, dispatch] = React.useReducer(reducer, initialState);
+  const value = { settings, dispatch };
 
 
   useEffect(
     () => {
       localForage.getItem('settings').then(saved => {
         if (saved) {
-          const settings = JSON.parse(saved);
-          dispatch({ type: 'reset', payload: settings });
+          const foundSettings = JSON.parse(saved);
+          dispatch({ type: 'reset', payload: foundSettings });
         }
       });
     },
