@@ -16,13 +16,6 @@ class WineNotesProvider extends React.Component {
       WineNotes: repository.filteredNotes(),
       Collections: [],
       CurrentCollection: {},
-      settings: {
-        autoInsertOn: false,
-        wineMaker: '',
-        tastingNotes: '',
-        technicalNotes: '',
-        nameOrder: 0,
-      },
       editDialogOpen: false,
       editCollectionDialogOpen: false,
       addTestData: this.addTestData,
@@ -33,9 +26,6 @@ class WineNotesProvider extends React.Component {
       setNoteDialog: this.setNoteDialog,
       updateNote: this.updateNote,
       addNote: this.addNote,
-      saveSettings: this.saveSettings,
-      saveSettingsCheckbox: this.saveSettingsCheckbox,
-      saveSettingsSelect: this.saveSettingsSelect,
       addCollection: this.addCollection,
       deleteCollection: this.deleteCollection,
       updateCollection: this.updateCollection,
@@ -57,14 +47,6 @@ class WineNotesProvider extends React.Component {
         });
       }
     });
-    localForage.getItem('settings').then(value => {
-      if (value) {
-        const settings = JSON.parse(value);
-        this.setState({
-          settings,
-        });
-      }
-    });
     localForage.getItem('collections').then(value => {
       if (value) {
         const Collections = JSON.parse(value);
@@ -74,18 +56,6 @@ class WineNotesProvider extends React.Component {
         });
       }
     });
-  }
-
-  saveSettings = (name, value) => {
-    this.setState(prevState => ({
-      ...prevState,
-      settings: {
-        ...prevState.settings,
-        [name]: value,
-      },
-    }));
-    const { settings } = this.state;
-    localForage.setItem('settings', JSON.stringify(settings));
   }
 
   addTestData = () => {

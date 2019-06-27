@@ -61,7 +61,7 @@ const otherOrders = ['Vintage, Maker, Name, Varietal, Region',
 
 const Settings = (props) => {
   const { classes } = props;
-  const { state, dispatch } = React.useContext(SettingsContext);
+  const { settings, dispatch } = React.useContext(SettingsContext);
 
   const updateWineMaker = (event) => {
     dispatch({ type: 'update-winemaker', payload: event.target.value });
@@ -103,7 +103,7 @@ const Settings = (props) => {
               margin="dense"
               id="wineMaker"
               name="wineMaker"
-              value={state.wineMaker}
+              value={settings.wineMaker}
               label="Wine Maker"
               type="text"
               onChange={updateWineMaker}
@@ -113,7 +113,7 @@ const Settings = (props) => {
               id="tastingNotes"
               name="tastingNotes"
               label="Wine Notes"
-              value={state.tastingNotes}
+              value={settings.tastingNotes}
               multiline
               rowsMax="4"
               margin="normal"
@@ -126,7 +126,7 @@ const Settings = (props) => {
               id="technicalNotes"
               name="technicalNotes"
               label="Technical Notes"
-              value={state.technicalNotes}
+              value={settings.technicalNotes}
               multiline
               rowsMax="4"
               margin="normal"
@@ -140,7 +140,7 @@ const Settings = (props) => {
                   name="autoInsertOn"
                   value="autoInsertOn"
                   color="primary"
-                  checked={state.autoInsertOn}
+                  checked={settings.autoInsertOn}
                   onChange={updateAutoInsert}
                 />
               )}
@@ -149,7 +149,7 @@ const Settings = (props) => {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="nameOrder">Order</InputLabel>
               <Select
-                value={state.nameOrder}
+                value={settings.nameOrder}
                 onChange={updateNameOrder}
                 fullWidth
                 name="nameOrder"

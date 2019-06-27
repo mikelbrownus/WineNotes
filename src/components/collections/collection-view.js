@@ -38,7 +38,7 @@ const styles = theme => ({
 });
 const CollectionView = (props) => {
   const [open, setOpen] = useState(false);
-  const { state } = React.useContext(SettingsContext);
+  const { settings } = React.useContext(SettingsContext);
 
   const handleOpen = () => {
     setOpen(true);
@@ -83,7 +83,7 @@ const CollectionView = (props) => {
               )
                 .map(note => (
                   <Grid item xs={12} sm={6} md={4} key={note.id}>
-                    <WineNoteCard note={note} order={state.nameOrder} />
+                    <WineNoteCard note={note} order={settings.nameOrder} />
                   </Grid>
                 ))}
             {context.state.WineNotes.filter(
@@ -117,7 +117,7 @@ const CollectionView = (props) => {
           <WineNoteDialog
             handleClose={handleClose}
             open={open}
-            settings={state}
+            settings={settings}
           />
         </div>
       )}
