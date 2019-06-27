@@ -12,7 +12,7 @@ import { MdSettings } from 'react-icons/md';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Context from '../../app-context';
+import { SettingsContext } from '../providers/settings-provider';
 
 
 const styles = theme => ({
@@ -61,101 +61,112 @@ const otherOrders = ['Vintage, Maker, Name, Varietal, Region',
 
 const Settings = (props) => {
   const { classes } = props;
+  const { state, dispatch } = React.useContext(SettingsContext);
+
+  const updateWineMaker = (event) => {
+    dispatch({ type: 'update-winemaker', payload: event.target.value });
+  };
+
+  const updateTasteNote = (event) => {
+    dispatch({ type: 'update-tastingnotes', payload: event.target.value });
+  };
+
+  const updateTechNote = (event) => {
+    dispatch({ type: 'update-technicalnotes', payload: event.target.value });
+  };
+
+  const updateAutoInsert = (event) => {
+    dispatch({ type: 'update-auto-insert', payload: event.target.checked });
+  };
+
+  const updateNameOrder = (event) => {
+    dispatch({ type: 'update-nameorder', payload: Number(event.target.value) });
+  };
+
 
   return (
     <div className={classes.divStyle}>
-      <Context.Consumer>
-        {context => (
-          <main className={classes.main}>
-            <CssBaseline />
-            <Paper className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <MdSettings />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-              Settings
-              </Typography>
-              <div className={classes.form}>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="wineMaker"
-                  name="wineMaker"
-                  value={context.state.settings.wineMaker}
-                  label="Wine Maker"
-                  type="text"
-                  onChange={(event) => {
-                    context.state.saveSettings(event.target.name, event.target.value);
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  id="tastingNotes"
-                  name="tastingNotes"
-                  label="Wine Notes"
-                  value={context.state.settings.tastingNotes}
-                  multiline
-                  rowsMax="4"
-                  margin="normal"
-                  onChange={(event) => {
-                    context.state.saveSettings(event.target.name, event.target.value);
-                  }}
-                  variant="outlined"
-                  fullWidth
-                />
 
-                <TextField
-                  id="technicalNotes"
-                  name="technicalNotes"
-                  label="Technical Notes"
-                  value={context.state.settings.technicalNotes}
-                  multiline
-                  rowsMax="4"
-                  margin="normal"
-                  variant="outlined"
-                  onChange={(event) => {
-                    context.state.saveSettings(event.target.name, event.target.value);
-                  }}
-                  fullWidth
+
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <MdSettings />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Settings
+          </Typography>
+          <div className={classes.form}>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="wineMaker"
+              name="wineMaker"
+              value={state.wineMaker}
+              label="Wine Maker"
+              type="text"
+              onChange={updateWineMaker}
+              fullWidth
+            />
+            <TextField
+              id="tastingNotes"
+              name="tastingNotes"
+              label="Wine Notes"
+              value={state.tastingNotes}
+              multiline
+              rowsMax="4"
+              margin="normal"
+              onChange={updateTasteNote}
+              variant="outlined"
+              fullWidth
+            />
+
+            <TextField
+              id="technicalNotes"
+              name="technicalNotes"
+              label="Technical Notes"
+              value={state.technicalNotes}
+              multiline
+              rowsMax="4"
+              margin="normal"
+              variant="outlined"
+              onChange={updateTechNote}
+              fullWidth
+            />
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  name="autoInsertOn"
+                  value="autoInsertOn"
+                  color="primary"
+                  checked={state.autoInsertOn}
+                  onChange={updateAutoInsert}
                 />
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      name="autoInsertOn"
-                      value="autoInsertOn"
-                      color="primary"
-                      checked={context.state.settings.autoInsertOn}
-                      onChange={(event) => {
-                        context.state.saveSettings(event.target.name, event.target.checked);
-                      }}
-                    />
-)}
-                  label="Use auto insert"
-                />
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="nameOrder">Order</InputLabel>
-                  <Select
-                    value={context.state.settings.nameOrder}
-                    onChange={(event) => {
-                      context.state.saveSettings(event.target.name, Number(event.target.value));
-                    }}
-                    fullWidth
-                    name="nameOrder"
-                    id="nameOrder"
-                  >
-                    <MenuItem value={0}>
-                      <em>Default</em>
-                    </MenuItem>
-                    {otherOrders.map((order, i) => (
-                      <MenuItem value={i + 1} key={order}>{order}</MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </div>
-            </Paper>
-          </main>
-        )}
-      </Context.Consumer>
+              )}
+              label="Use auto insert"
+            />
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="nameOrder">Order</InputLabel>
+              <Select
+                value={state.nameOrder}
+                onChange={updateNameOrder}
+                fullWidth
+                name="nameOrder"
+                id="nameOrder"
+              >
+                <MenuItem value={0}>
+                  <em>Default</em>
+                </MenuItem>
+                {otherOrders.map((order, i) => (
+                  <MenuItem value={i + 1} key={order}>{order}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </Paper>
+      </main>
+
     </div>
   );
 };

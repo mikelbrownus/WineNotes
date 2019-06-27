@@ -12,41 +12,56 @@ const initialState = {
   nameOrder: 0,
 };
 
+const saveState = (settings) => {
+  localForage.setItem('settings', JSON.stringify(settings));
+};
 
 const reducer = (state, action) => {
+  let newState;
   switch (action.type) {
     case 'reset':
       return action.payload || initialState;
     case 'update-auto-insert':
-      return { ...state, autoInsertOn: action.payload };
+      newState = { ...state, autoInsertOn: action.payload };
+      saveState(newState);
+      return newState;
     case 'update-winemaker':
-      return { ...state, wineMaker: action.payload };
+      newState = { ...state, wineMaker: action.payload };
+      saveState(newState);
+      return newState;
     case 'update-tastingnotes':
-      return { ...state, tastingNotes: action.payload };
+      newState = { ...state, tastingNotes: action.payload };
+      saveState(newState);
+      return newState;
     case 'update-technicalnotes':
-      return { ...state, technicalNotes: action.payload };
+      newState = { ...state, technicalNotes: action.payload };
+      saveState(newState);
+      return newState;
     case 'update-nameorder':
-      return { ...state, nameOrder: action.payload };
+      newState = { ...state, nameOrder: action.payload };
+      saveState(newState);
+      return newState;
     default:
       return state;
   }
 };
 
+
 function SettingsContextProvider(props) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const value = { state, dispatch };
-  localForage.getItem('settings').then(saved => {
-    if (saved) {
-      const settings = JSON.parse(saved);
-      dispatch({ type: 'reset', payload: settings });
-    }
-  });
+
 
   useEffect(
     () => {
-      localForage.setItem('settings', JSON.stringify(state));
+      localForage.getItem('settings').then(saved => {
+        if (saved) {
+          const settings = JSON.parse(saved);
+          dispatch({ type: 'reset', payload: settings });
+        }
+      });
     },
-    [state],
+    [],
   );
   const { children } = props;
   return (

@@ -4,6 +4,7 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import App from './components/app';
 import WineNotesProvider from './components/wine-notes-provider';
+import { SettingsContextProvider } from './components/providers/settings-provider';
 
 const theme = createMuiTheme({
   palette: {
@@ -23,7 +24,9 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <WineNotesProvider>
-      <App />
+      <SettingsContextProvider>
+        <App />
+      </SettingsContextProvider>
     </WineNotesProvider>
   </MuiThemeProvider>,
   document.getElementById('root'),

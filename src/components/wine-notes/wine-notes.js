@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,7 @@ import { MdAdd } from 'react-icons/md';
 import WineNoteCard from './wine-note-card';
 import WineNoteDialog from './wine-note-dialog';
 import Context from '../../app-context';
+import { SettingsContext } from '../providers/settings-provider';
 
 const styles = theme => ({
   gridSize: {
@@ -30,6 +31,7 @@ const styles = theme => ({
 
 const WineNotes = (props) => {
   const [open, setOpen] = useState(false);
+  const state = useContext(SettingsContext);
 
   const handleOpen = () => {
     setOpen(true);
@@ -58,7 +60,7 @@ const WineNotes = (props) => {
                 (item) => !item.collection,
               ).map(note => (
                 <Grid item xs={12} sm={6} md={4} key={note.id}>
-                  <WineNoteCard note={note} order={context.state.settings.nameOrder} />
+                  <WineNoteCard note={note} order={state.nameOrder} />
                 </Grid>
               ))}
             {context.state.WineNotes.filter(
@@ -86,7 +88,7 @@ const WineNotes = (props) => {
           <WineNoteDialog
             handleClose={handleClose}
             open={open}
-            settings={context.state.settings}
+            settings={state}
           />
         </div>
       )}
