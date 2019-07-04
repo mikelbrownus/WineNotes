@@ -1,4 +1,3 @@
-// https://dev.to/oieduardorabelo/react-hooks-how-to-create-and-update-contextprovider-1f68
 import React, { useEffect } from 'react';
 import localForage from 'localforage';
 
