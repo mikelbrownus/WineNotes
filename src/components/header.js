@@ -143,7 +143,7 @@ const Header = (props) => {
                     context.state.deleteNote(wineNote.id);
                   }
                   if (isCollectionsView) {
-                    deleteCollection(context.state.CurrentCollection.id);
+                    deleteCollection(collections.CurrentCollection.id);
                   }
                   history.goBack();
                 }}
