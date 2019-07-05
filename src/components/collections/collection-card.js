@@ -5,8 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Context from '../../app-context';
-
+import { CollectionContext } from '../providers/collection-provider';
 
 const isIEorFF = navigator.userAgent.indexOf('Firefox') !== -1
   || navigator.userAgent.indexOf('MSIE') !== -1
@@ -44,37 +43,37 @@ const styles = {
 
 const CollectionCard = (props) => {
   const { classes, collection } = props;
+  const { dispatchCollection } = React.useContext(CollectionContext);
 
+  const setCurrentCollection = (c) => {
+    dispatchCollection({ type: 'update-currentCollection', payload: c });
+  };
 
   return (
-    <Context.Consumer>
-      {context => (
-        <Card className={classes.card}>
-          <CardActionArea
-            className={classes.actionArea}
-            onClick={() => {
-              context.state.setCurrentCollection(collection);
-              props.history.push('/collectionsView');
-            }}
+    <Card className={classes.card}>
+      <CardActionArea
+        className={classes.actionArea}
+        onClick={() => {
+          setCurrentCollection(collection);
+          props.history.push('/collectionsView');
+        }}
+      >
+        <CardContent>
+          <Typography
+            variant="subtitle1"
+            component="p"
+            className={classes.nameLength}
           >
-            <CardContent>
-              <Typography
-                variant="subtitle1"
-                component="p"
-                className={classes.nameLength}
-              >
-                {collection.name}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
+            {collection.name}
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
             Date:
-                {' '}
-                {new Date(collection.date).toLocaleDateString()}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      )}
-    </Context.Consumer>
+            {' '}
+            {new Date(collection.date).toLocaleDateString()}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 

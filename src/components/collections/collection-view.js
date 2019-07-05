@@ -11,6 +11,7 @@ import WineNoteDialog from '../wine-notes/wine-note-dialog';
 import CollectionDialog from './collection-dialog';
 import Context from '../../app-context';
 import { SettingsContext } from '../providers/settings-provider';
+import { CollectionContext } from '../providers/collection-provider';
 
 const styles = theme => ({
   gridSize: {
@@ -39,6 +40,7 @@ const styles = theme => ({
 const CollectionView = (props) => {
   const [open, setOpen] = useState(false);
   const { settings } = React.useContext(SettingsContext);
+  const { collections } = React.useContext(CollectionContext);
 
   const handleOpen = () => {
     setOpen(true);
@@ -54,7 +56,7 @@ const CollectionView = (props) => {
     <Context.Consumer>
       {context => (
         <div className={classes.gridSize}>
-          {context.state.CurrentCollection.description && (
+          {collections.CurrentCollection.description && (
             <Card
               raised
               className={classes.card}
@@ -64,7 +66,7 @@ const CollectionView = (props) => {
                   variant="subtitle1"
                   align="center"
                 >
-                  {context.state.CurrentCollection.description}
+                  {collections.CurrentCollection.description}
                 </Typography>
               </CardContent>
             </Card>
@@ -76,10 +78,10 @@ const CollectionView = (props) => {
             alignItems="center"
           >
             {context.state.WineNotes.filter(
-              (item) => item.collection === context.state.CurrentCollection.id,
+              (item) => item.collection === collections.CurrentCollection.id,
             ).length > 0
               && context.state.WineNotes.filter(
-                (item) => item.collection === context.state.CurrentCollection.id,
+                (item) => item.collection === collections.CurrentCollection.id,
               )
                 .map(note => (
                   <Grid item xs={12} sm={6} md={4} key={note.id}>
@@ -87,7 +89,7 @@ const CollectionView = (props) => {
                   </Grid>
                 ))}
             {context.state.WineNotes.filter(
-              (item) => item.collection === context.state.CurrentCollection.id,
+              (item) => item.collection === collections.CurrentCollection.id,
             ).length < 1 && (
             <Typography
               variant="h5"
@@ -112,7 +114,7 @@ const CollectionView = (props) => {
               context.state.editCollectionDialogToggle();
             }}
             open={context.state.editCollectionDialogOpen}
-            collection={context.state.CurrentCollection}
+            collection={collections.CurrentCollection}
           />
           <WineNoteDialog
             handleClose={handleClose}

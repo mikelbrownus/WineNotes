@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import { MdAdd } from 'react-icons/md';
@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CollectionDialog from './collection-dialog';
 import CollectionCard from './collection-card';
-import Context from '../../app-context';
+import { CollectionContext } from '../providers/collection-provider';
 
 const styles = theme => ({
   gridStyle: {
@@ -31,6 +31,7 @@ const styles = theme => ({
 
 const Collections = (props) => {
   const [open, setOpen] = useState(false);
+  const { collections } = useContext(CollectionContext);
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,47 +44,43 @@ const Collections = (props) => {
   const { classes } = props;
 
   return (
-    <Context.Consumer>
-      {context => (
-        <div className={classes.gridStyle}>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
+    <div className={classes.gridStyle}>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        {collections.Collections.length > 0
+          && collections.Collections.map(collection => (
+            <Grid item xs={12} sm={6} md={4} key={collection.id}>
+              <CollectionCard collection={collection} />
+            </Grid>
+          ))}
+        {collections.Collections.length < 1 && (
+          <Typography
+            variant="h5"
+            component="p"
+            className={classes.noNoteMessage}
           >
-            {context.state.Collections.length > 0
-              && context.state.Collections.map(collection => (
-                <Grid item xs={12} sm={6} md={4} key={collection.id}>
-                  <CollectionCard collection={collection} />
-                </Grid>
-              ))}
-            {context.state.Collections.length < 1 && (
-              <Typography
-                variant="h5"
-                component="p"
-                className={classes.noNoteMessage}
-              >
-                Press + to add a collection
-              </Typography>
-            )}
-          </Grid>
-          <Fab
-            aria-label="Add"
-            color="primary"
-            size="small"
-            className={classes.fab}
-            onClick={handleOpen}
-          >
-            <MdAdd />
-          </Fab>
-          <CollectionDialog
-            handleClose={handleClose}
-            open={open}
-          />
-        </div>
-      )}
-    </Context.Consumer>
+            Press + to add a collection
+          </Typography>
+        )}
+      </Grid>
+      <Fab
+        aria-label="Add"
+        color="primary"
+        size="small"
+        className={classes.fab}
+        onClick={handleOpen}
+      >
+        <MdAdd />
+      </Fab>
+      <CollectionDialog
+        handleClose={handleClose}
+        open={open}
+      />
+    </div>
   );
 };
 

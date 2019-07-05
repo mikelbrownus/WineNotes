@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
 import AppBar from '@material-ui/core/AppBar';
@@ -22,6 +22,7 @@ import {
 import withStyles from '@material-ui/core/styles/withStyles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import Context from '../app-context';
+import { CollectionContext } from './providers/collection-provider';
 
 const styles = theme => ({
   root: {
@@ -90,6 +91,12 @@ const styles = theme => ({
 const Header = (props) => {
   const [filter, setFilter] = useState('');
   const [alert, setAlert] = useState(false);
+  const { collections, dispatchCollection } = useContext(CollectionContext);
+
+
+  const deleteCollection = (id) => {
+    dispatchCollection({ type: 'delete-collection', payload: id });
+  };
 
   const changeFilter = filterNow => {
     setFilter(filterNow);
@@ -136,7 +143,7 @@ const Header = (props) => {
                     context.state.deleteNote(wineNote.id);
                   }
                   if (isCollectionsView) {
-                    context.state.deleteCollection(context.state.CurrentCollection.id);
+                    deleteCollection(context.state.CurrentCollection.id);
                   }
                   history.goBack();
                 }}
@@ -184,8 +191,8 @@ const Header = (props) => {
               className={classes.title}
             >
               {isCollections ? 'Collections'
-                : (isCollectionsView && context.state.CurrentCollection.name)
-                  ? context.state.CurrentCollection.name : 'Wine Notes'
+                : (isCollectionsView && collections.CurrentCollection.name)
+                  ? collections.CurrentCollection.name : 'Wine Notes'
               }
             </Typography>
             {hasSearch && (
