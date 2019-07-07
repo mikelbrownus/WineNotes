@@ -215,9 +215,6 @@ const Header = (props) => {
                     }}
                   />
                 </div>
-                <Button color="inherit" onClick={context.state.addTestData}>
-                  Reset Test Data
-                </Button>
               </Fragment>
             )}
             {isView && (
