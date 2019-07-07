@@ -3,6 +3,7 @@ import clone from 'ramda/src/clone';
 
 const WineNoteRepository = () => {
   let wineNotes = [];
+
   // this is for testing purposes only
   const setNotes = notes => {
     notes.forEach(note => {
@@ -19,7 +20,7 @@ const WineNoteRepository = () => {
     const newNote = clone(note);
     newNote.date = new Date();
     newNote.id = uuidv1();
-    wineNotes.push(newNote);
+    wineNotes = [...wineNotes, newNote];
   };
 
   const getNote = (id) => {
