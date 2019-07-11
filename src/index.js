@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import App from './components/app';
-import WineNotesProvider from './components/wine-notes-provider';
+import { WineNoteContextProvider } from './components/providers/wine-note-provider';
 import { SettingsContextProvider } from './components/providers/settings-provider';
 import { CollectionContextProvider } from './components/providers/collection-provider';
 
@@ -24,13 +24,13 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <WineNotesProvider>
+    <WineNoteContextProvider>
       <CollectionContextProvider>
         <SettingsContextProvider>
           <App />
         </SettingsContextProvider>
       </CollectionContextProvider>
-    </WineNotesProvider>
+    </WineNoteContextProvider>
   </MuiThemeProvider>,
   document.getElementById('root'),
 );

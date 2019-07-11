@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -9,7 +9,7 @@ import { MdAdd } from 'react-icons/md';
 import WineNoteCard from '../wine-notes/wine-note-card';
 import WineNoteDialog from '../wine-notes/wine-note-dialog';
 import CollectionDialog from './collection-dialog';
-import Context from '../../app-context';
+import { WineNoteContext } from '../providers/wine-note-provider';
 import { SettingsContext } from '../providers/settings-provider';
 import { CollectionContext } from '../providers/collection-provider';
 
@@ -39,8 +39,9 @@ const styles = theme => ({
 });
 const CollectionView = (props) => {
   const [open, setOpen] = useState(false);
-  const { settings } = React.useContext(SettingsContext);
-  const { collections } = React.useContext(CollectionContext);
+  const { settings } = useContext(SettingsContext);
+  const { collections } = useContext(CollectionContext);
+  const { wineNotes, dispatchWineNotes } = useContext(WineNoteContext);
 
   const handleOpen = () => {
     setOpen(true);
@@ -53,77 +54,73 @@ const CollectionView = (props) => {
   const { classes } = props;
 
   return (
-    <Context.Consumer>
-      {context => (
-        <div className={classes.gridSize}>
-          {collections.CurrentCollection.description && (
-            <Card
-              raised
-              className={classes.card}
-            >
-              <CardContent>
-                <Typography
-                  variant="subtitle1"
-                  align="center"
-                >
-                  {collections.CurrentCollection.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          )}
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
-            {context.state.WineNotes.filter(
-              (item) => item.collection === collections.CurrentCollection.id,
-            ).length > 0
-              && context.state.WineNotes.filter(
-                (item) => item.collection === collections.CurrentCollection.id,
-              )
-                .map(note => (
-                  <Grid item xs={12} sm={6} md={4} key={note.id}>
-                    <WineNoteCard note={note} order={settings.nameOrder} />
-                  </Grid>
-                ))}
-            {context.state.WineNotes.filter(
-              (item) => item.collection === collections.CurrentCollection.id,
-            ).length < 1 && (
+    <div className={classes.gridSize}>
+      {collections.CurrentCollection.description && (
+        <Card
+          raised
+          className={classes.card}
+        >
+          <CardContent>
             <Typography
-              variant="h5"
-              component="p"
-              className={classes.noNoteMessage}
+              variant="subtitle1"
+              align="center"
             >
-                  Press + to add note to collection
+              {collections.CurrentCollection.description}
             </Typography>
-            )}
-          </Grid>
-          <Fab
-            aria-label="Add"
-            color="primary"
-            size="small"
-            onClick={handleOpen}
-            className={classes.fab}
-          >
-            <MdAdd />
-          </Fab>
-          <CollectionDialog
-            handleClose={() => {
-              context.state.editCollectionDialogToggle();
-            }}
-            open={context.state.editCollectionDialogOpen}
-            collection={collections.CurrentCollection}
-          />
-          <WineNoteDialog
-            handleClose={handleClose}
-            open={open}
-            settings={settings}
-          />
-        </div>
+          </CardContent>
+        </Card>
       )}
-    </Context.Consumer>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        {wineNotes.WineNotes.filter(
+          (item) => item.collection === collections.CurrentCollection.id,
+        ).length > 0
+          && wineNotes.WineNotes.filter(
+            (item) => item.collection === collections.CurrentCollection.id,
+          )
+            .map(note => (
+              <Grid item xs={12} sm={6} md={4} key={note.id}>
+                <WineNoteCard note={note} order={settings.nameOrder} />
+              </Grid>
+            ))}
+        {wineNotes.WineNotes.filter(
+          (item) => item.collection === collections.CurrentCollection.id,
+        ).length < 1 && (
+        <Typography
+          variant="h5"
+          component="p"
+          className={classes.noNoteMessage}
+        >
+              Press + to add note to collection
+        </Typography>
+        )}
+      </Grid>
+      <Fab
+        aria-label="Add"
+        color="primary"
+        size="small"
+        onClick={handleOpen}
+        className={classes.fab}
+      >
+        <MdAdd />
+      </Fab>
+      <CollectionDialog
+        handleClose={() => {
+          dispatchWineNotes({ type: 'collection-dialog-toggle', payload: false });
+        }}
+        open={wineNotes.editCollectionDialogOpen}
+        collection={collections.CurrentCollection}
+      />
+      <WineNoteDialog
+        handleClose={handleClose}
+        open={open}
+        settings={settings}
+      />
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { MdAdd } from 'react-icons/md';
 import WineNoteCard from './wine-note-card';
 import WineNoteDialog from './wine-note-dialog';
-import Context from '../../app-context';
+import { WineNoteContext } from '../providers/wine-note-provider';
 import { SettingsContext } from '../providers/settings-provider';
 
 const styles = theme => ({
@@ -32,6 +32,7 @@ const styles = theme => ({
 const WineNotes = (props) => {
   const [open, setOpen] = useState(false);
   const { settings } = useContext(SettingsContext);
+  const { wineNotes } = useContext(WineNoteContext);
 
   const handleOpen = () => {
     setOpen(true);
@@ -44,55 +45,51 @@ const WineNotes = (props) => {
   const { classes } = props;
 
   return (
-    <Context.Consumer>
-      {context => (
-        <div className={classes.gridSize}>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
-            {context.state.WineNotes.filter(
-              (item) => !item.collection,
-            ).length > 0
-              && context.state.WineNotes.filter(
-                (item) => !item.collection,
-              ).map(note => (
-                <Grid item xs={12} sm={6} md={4} key={note.id}>
-                  <WineNoteCard note={note} order={settings.nameOrder} />
-                </Grid>
-              ))}
-            {context.state.WineNotes.filter(
-              (item) => !item.collection,
-            ).length < 1
-              && (
-                <Typography
-                  variant="h5"
-                  component="p"
-                  className={classes.noNoteMessage}
-                >
-                  Press + to add a note
-                </Typography>
-              )}
-          </Grid>
-          <Fab
-            aria-label="Add"
-            color="primary"
-            size="small"
-            onClick={handleOpen}
-            className={classes.fab}
-          >
-            <MdAdd />
-          </Fab>
-          <WineNoteDialog
-            handleClose={handleClose}
-            open={open}
-            settings={settings}
-          />
-        </div>
-      )}
-    </Context.Consumer>
+    <div className={classes.gridSize}>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        {wineNotes.WineNotes.filter(
+          (item) => !item.collection,
+        ).length > 0
+          && wineNotes.WineNotes.filter(
+            (item) => !item.collection,
+          ).map(note => (
+            <Grid item xs={12} sm={6} md={4} key={note.id}>
+              <WineNoteCard note={note} order={settings.nameOrder} />
+            </Grid>
+          ))}
+        {wineNotes.WineNotes.filter(
+          (item) => !item.collection,
+        ).length < 1
+          && (
+            <Typography
+              variant="h5"
+              component="p"
+              className={classes.noNoteMessage}
+            >
+              Press + to add a note
+            </Typography>
+          )}
+      </Grid>
+      <Fab
+        aria-label="Add"
+        color="primary"
+        size="small"
+        onClick={handleOpen}
+        className={classes.fab}
+      >
+        <MdAdd />
+      </Fab>
+      <WineNoteDialog
+        handleClose={handleClose}
+        open={open}
+        settings={settings}
+      />
+    </div>
   );
 };
 

@@ -20,10 +20,10 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'reset':
       return { ...state, WineNotes: repository.filteredNotes() };
-    case 'update-note-dialog':
+    case 'note-dialog-toggle':
       newState = { ...state, editDialogOpen: action.payload };
       return newState;
-    case 'update-collection-dialog':
+    case 'collection-dialog-toggle':
       newState = { ...state, editCollectionDialogOpen: action.payload };
       return newState;
     case 'update-notes':
@@ -51,8 +51,8 @@ const reducer = (state, action) => {
 
 
 function WineNoteContextProvider(props) {
-  const [wineNotes, dispatchwineNotes] = useReducer(reducer, initialState);
-  const value = { wineNotes, dispatchwineNotes };
+  const [wineNotes, dispatchWineNotes] = useReducer(reducer, initialState);
+  const value = { wineNotes, dispatchWineNotes };
 
 
   useEffect(
@@ -61,7 +61,7 @@ function WineNoteContextProvider(props) {
         if (saved) {
           const found = JSON.parse(saved);
           repository.setWineNotes(found);
-          dispatchwineNotes({ type: 'reset', payload: '' });
+          dispatchWineNotes({ type: 'reset', payload: '' });
         }
       });
     },

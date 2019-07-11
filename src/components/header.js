@@ -21,7 +21,7 @@ import {
 } from 'react-icons/md';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import Context from '../app-context';
+import { WineNoteContext } from './providers/wine-note-provider';
 import { CollectionContext } from './providers/collection-provider';
 
 const styles = theme => ({
@@ -92,6 +92,7 @@ const Header = (props) => {
   const [filter, setFilter] = useState('');
   const [alert, setAlert] = useState(false);
   const { collections, dispatchCollection } = useContext(CollectionContext);
+  const { wineNotes, dispatchWineNotes } = useContext(WineNoteContext);
 
 
   const deleteCollection = (id) => {
@@ -118,152 +119,148 @@ const Header = (props) => {
   const isCollectionsView = location.pathname === '/collectionsView';
   const wineNote = location && location.state ? location.state.wineNote : {};
   return (
-    <Context.Consumer>
-      {context => (
-        <AppBar position="static">
-          <Dialog
-            open={alert}
-            onClose={handleClose}
-            aria-labelledby="responsive-dialog-title"
-          >
-            <DialogTitle id="responsive-dialog-title">
-              {isView && 'Delete wine note?'}
-              {isCollectionsView && 'Delete this collection and all wine notes in it?'}
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                No going back after this. Shall I delete?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={() => {
-                  toggleAlert(false);
-                  if (isView) {
-                    context.state.deleteNote(wineNote.id);
-                  }
-                  if (isCollectionsView) {
-                    deleteCollection(collections.CurrentCollection.id);
-                  }
-                  history.goBack();
-                }}
-                color="primary"
-              >
-                Delete
-              </Button>
-              <Button
-                onClick={() => {
-                  toggleAlert(false);
-                }}
-                color="primary"
-                autoFocus
-              >
-                Cancel
-              </Button>
-            </DialogActions>
-          </Dialog>
-          <Toolbar>
-            {(isView || isCollectionsView) ? (
-              <Button
-                variant="contained"
-                color="primary"
-                aria-label="back"
-                className={classes.home}
-                onClick={() => history.goBack()}
-              >
-                <MdKeyboardBackspace fontSize="x-large" />
-              </Button>
-            ) : (
-              <Link to="/help">
-                <IconButton
-                  variant="contained"
-                  aria-label="home"
-                  className={classes.home}
-                >
-                  <MdHome />
-                </IconButton>
-              </Link>
-            )}
-
-            <Typography
-              variant="h6"
-              color="inherit"
-              className={classes.title}
-            >
-              {isCollections ? 'Collections'
-                : (isCollectionsView && collections.CurrentCollection.name)
-                  ? collections.CurrentCollection.name : 'Wine Notes'
+    <AppBar position="static">
+      <Dialog
+        open={alert}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">
+          {isView && 'Delete wine note?'}
+          {isCollectionsView && 'Delete this collection and all wine notes in it?'}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            No going back after this. Shall I delete?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              toggleAlert(false);
+              if (isView) {
+                dispatchWineNotes({ type: 'delete-note', payload: wineNote.id });
               }
-            </Typography>
-            {hasSearch && (
-              <Fragment>
-                <div className={classes.grow} />
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <MdSearch />
-                  </div>
-                  <InputBase
-                    placeholder="Search…"
-                    value={filter}
-                    onChange={event => {
-                      changeFilter(event.target.value);
-                      context.state.filterNotes(event.target.value);
-                    }}
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                  />
-                </div>
-              </Fragment>
-            )}
-            {isView && (
-              <Fragment>
-                <div className={classes.grow} />
-                <IconButton
-                  color="inherit"
-                  onClick={() => {
-                    context.state.editNoteDialogToggle();
-                  }}
-                >
-                  <MdEdit />
-                </IconButton>
-                <IconButton
-                  color="inherit"
-                  onClick={() => {
-                    toggleAlert(true);
-                  }}
-                >
-                  <MdDeleteForever />
-                </IconButton>
-              </Fragment>
-            )}
-            {isCollectionsView && (
-              <Fragment>
-                <div className={classes.grow} />
-                <IconButton
-                  color="inherit"
-                  onClick={() => {
-                    context.state.editCollectionDialogToggle();
-                  }}
-                >
-                  <MdEdit />
-                </IconButton>
-                <IconButton
-                  color="inherit"
-                  onClick={() => {
-                    toggleAlert(true);
-                  }}
-                >
-                  <MdDeleteForever />
-                </IconButton>
-              </Fragment>
-            )}
+              if (isCollectionsView) {
+                deleteCollection(collections.CurrentCollection.id);
+              }
+              history.goBack();
+            }}
+            color="primary"
+          >
+            Delete
+          </Button>
+          <Button
+            onClick={() => {
+              toggleAlert(false);
+            }}
+            color="primary"
+            autoFocus
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Toolbar>
+        {(isView || isCollectionsView) ? (
+          <Button
+            variant="contained"
+            color="primary"
+            aria-label="back"
+            className={classes.home}
+            onClick={() => history.goBack()}
+          >
+            <MdKeyboardBackspace fontSize="x-large" />
+          </Button>
+        ) : (
+          <Link to="/help">
+            <IconButton
+              variant="contained"
+              aria-label="home"
+              className={classes.home}
+            >
+              <MdHome />
+            </IconButton>
+          </Link>
+        )}
 
-          </Toolbar>
-        </AppBar>
-      )}
-    </Context.Consumer>
+        <Typography
+          variant="h6"
+          color="inherit"
+          className={classes.title}
+        >
+          {isCollections ? 'Collections'
+            : (isCollectionsView && collections.CurrentCollection.name)
+              ? collections.CurrentCollection.name : 'Wine Notes'
+          }
+        </Typography>
+        {hasSearch && (
+          <Fragment>
+            <div className={classes.grow} />
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <MdSearch />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                value={filter}
+                onChange={event => {
+                  changeFilter(event.target.value);
+                  dispatchWineNotes({ type: 'filtered-notes', payload: event.target.value });
+                }}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+              />
+            </div>
+          </Fragment>
+        )}
+        {isView && (
+          <Fragment>
+            <div className={classes.grow} />
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                dispatchWineNotes({ type: 'note-dialog-toggle', payload: !wineNotes.editDialogOpen });
+              }}
+            >
+              <MdEdit />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                toggleAlert(true);
+              }}
+            >
+              <MdDeleteForever />
+            </IconButton>
+          </Fragment>
+        )}
+        {isCollectionsView && (
+          <Fragment>
+            <div className={classes.grow} />
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                dispatchWineNotes({ type: 'collection-dialog-toggle', payload: !wineNotes.editCollectionDialogOpen });
+              }}
+            >
+              <MdEdit />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                toggleAlert(true);
+              }}
+            >
+              <MdDeleteForever />
+            </IconButton>
+          </Fragment>
+        )}
+
+      </Toolbar>
+    </AppBar>
   );
 };
 
