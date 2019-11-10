@@ -1,16 +1,16 @@
 {
     "env": {
         "testing": {
-            "presets": ["env", "stage-2", "react"]
+            "presets": ["@babel/env", "@babel/react"]
         },
         "production": {
             "presets": [ 
-                { "env": {"modules": false}}, "stage-2", "react"
+                "@babel/env", "@babel/react"
             ]
         },
         "development": {
             "presets": [ 
-                { "env": {"modules": false}}, "stage-2", "react"
+                 "@babel/env", "@babel/react"
             ]
         }
     }

@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
@@ -21,7 +21,7 @@ module.exports = {
         ]
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
               template: './index.html',
               baseUrl: process.env.NODE_ENV == 'development' ? '/' : 'https://mikelbrownus.github.io/WineNotes/'
