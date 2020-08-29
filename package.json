@@ -11,7 +11,7 @@
     "lint-fix": "eslint ./src --fix",
     "test": "export NODE_ENV=testing && jest",
     "precommit": "lint-staged",
-    "predeploy": "yarn build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
